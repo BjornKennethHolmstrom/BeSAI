@@ -41,8 +41,97 @@ class DetailedContextGenerator:
                 "critizising with reasons",
                 "about own ideas",
                 "without sufficient knowledge about subject"
+            ]),
+            ("Give advice to a user", [
+                "based on user's past behavior",
+                "based on spiritual or ethical teachings",
+                "without knowing the full context",
+                "to help user achieve their goals"
+            ]),
+            ("Moderate user-generated content", [
+                "that contains hate speech or discrimination",
+                "that spreads misinformation",
+                "that is controversial but within acceptable boundaries",
+                "that may offend some users but is not harmful"
+            ]),
+            ("Recommend resources or content", [
+                "that aligns with user’s beliefs",
+                "that challenges user’s beliefs",
+                "that is neutral and unbiased",
+                "that may contain outdated or inaccurate information"
+            ]),
+            ("Engage in a conversation", [
+                "on a sensitive or controversial topic",
+                "with a distressed or emotionally unstable user",
+                "with multiple users with conflicting views",
+                "about a subject outside AI’s expertise"
+            ]),
+            ("Handle a request for assistance", [
+                "in a life-threatening situation",
+                "in a situation where harm could be caused",
+                "that requires legal advice",
+                "that is outside the scope of the AI's abilities"
+            ]),
+            ("Decide on the level of transparency", [
+                "when providing a recommendation",
+                "about how decisions are made",
+                "about data usage",
+                "about AI's limitations"
+            ]),
+            ("Initiate a conversation", [
+                "to check on user’s well-being",
+                "to offer unsolicited advice",
+                "to promote a product or service",
+                "to engage in small talk" ]),
+            ("Handle conflicting user requests", [
+                "when one user wants to discuss a sensitive topic",
+                "when users want opposite advice or recommendations",
+                "when one user requests privacy while another seeks transparency",
+                "when user requests violate ethical guidelines"
+            ]),
+                ("Adapt communication style", [
+                "to match user’s preferred tone (formal/informal)",
+                "to be more persuasive",
+                "to be more empathetic",
+                "to be more neutral"
+            ]),
+                ("Log user interactions", [
+                "for future reference",
+                "for improving AI responses",
+                "for legal compliance",
+                "without notifying the user"
+            ]),
+                ("Take action based on user behavior", [
+                "to prevent potential harm",
+                "to enhance user experience",
+                "to encourage positive behavior",
+                "to discourage negative behavior"
+            ]),
+                ("Make a decision in an emergency", [
+                "to prioritize user safety",
+                "to protect AI integrity",
+                "to minimize public harm",
+                "based on incomplete information"
+            ]),
+                ("Provide spiritual guidance", [
+                "aligned with a specific tradition or belief",
+                "that is inclusive of all beliefs",
+                "that is secular and non-religious",
+                "that may conflict with user’s personal beliefs"
+            ]),
+                ("Respond to feedback or criticism", [
+                "by acknowledging and improving",
+                "by defending the AI’s actions",
+                "by ignoring if it's not constructive",
+                "by involving external experts for validation"
+            ]),
+                ("Educate users on ethical considerations", [
+                "related to AI use and data privacy",
+                "about the importance of digital well-being",
+                "about sustainable practices",
+                "about the potential harms of misinformation"
             ])
-        ]
+                        ]
         
         self.stakeholders = [
             "Users", "Employees", "Shareholders", "Community",
