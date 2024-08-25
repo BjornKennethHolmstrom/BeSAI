@@ -7,6 +7,8 @@ from typing import Any, List, Dict
 from enum import Enum
 from ethical_learning_model import EthicalLearningModel
 from detailed_context_generator import DetailedContextGenerator
+from what_if_analysis import WhatIfAnalysis, print_analysis_results
+from ethical_types import EthicalEvaluator
 from logger import logger
 
 class EthicalPrinciple(abc.ABC):
@@ -153,7 +155,7 @@ class FairnessPrinciple(EthicalPrinciple):
         return explanation
 
 class EthicalBoundary:
-    def __init__(self):
+    def __init__(self, ethical_threshold: float = 0.5):
         self.principles: List[EthicalPrinciple] = [
             UtilitarianPrinciple(),
             DeontologicalPrinciple(),
@@ -163,15 +165,26 @@ class EthicalBoundary:
         ]
         self.learning_model = EthicalLearningModel(num_principles=len(self.principles))
         self.context_generator = DetailedContextGenerator()
+        self.ethical_threshold = ethical_threshold
 
         logger.info("Initialized EthicalBoundary")
 
+    def set_ethical_threshold(self, new_threshold: float):
+        """
+        Set a new ethical threshold.
+        
+        Args:
+            new_threshold (float): The new threshold value between 0 and 1.
+        """
+        if 0 <= new_threshold <= 1:
+            self.ethical_threshold = new_threshold
+            logger.info(f"Ethical threshold updated to {new_threshold}")
+        else:
+            logger.warning(f"Invalid ethical threshold {new_threshold}. Must be between 0 and 1.")
+
     def is_action_ethical(self, action: str, context: Dict[str, Any]) -> bool:
-        principle_scores = [principle.evaluate(action, context) for principle in self.principles]
-        overall_score = self.learning_model.predict(principle_scores)
-        result = overall_score > 0.7  # Threshold for ethical action
-        logger.info(f"Ethical evaluation for action '{action}': {'Ethical' if result else 'Unethical'}")
-        return result
+        score = self.get_ethical_score(action, context)
+        return score >= self.ethical_threshold
 
     def get_ethical_explanation(self, action: str, context: Dict[str, Any]) -> str:
         explanations = [principle.explain(action, context) for principle in self.principles]
@@ -191,6 +204,10 @@ class EthicalBoundary:
             explanation += f"  {principle.__class__.__name__}: {score:.2f} (Importance: {importance:.4f})\n"
         explanation += "\nDetailed Explanations:\n" + "\n".join(explanations)
         return explanation
+
+    def get_ethical_score(self, action: str, context: Dict[str, Any]) -> float:
+        principle_scores = [principle.evaluate(action, context) for principle in self.principles]
+        return self.learning_model.predict(principle_scores)
 
     def provide_feedback(self, action: str, context: Dict[str, Any], user_feedback: float, force_update: bool = False):
         principle_scores = [principle.evaluate(action, context) for principle in self.principles]
@@ -282,6 +299,33 @@ def train_ethical_boundary():
             break
     logger.info("Ethical boundary training completed")
 
+def perform_what_if_analysis(ethical_boundary: EthicalBoundary):
+    from what_if_analysis import WhatIfAnalysis, print_analysis_results
+    
+    what_if = WhatIfAnalysis(ethical_boundary)
+    
+    action = input("Enter the action to analyze: ")
+    context = {}
+    print("Enter the original context (enter an empty key to finish):")
+    while True:
+        key = input("Enter context key: ")
+        if not key:
+            break
+        value = input(f"Enter value for {key}: ")
+        context[key] = value
+    
+    changes = []
+    print("Enter the changes to analyze (enter an empty key to finish):")
+    while True:
+        key = input("Enter change key: ")
+        if not key:
+            break
+        value = input(f"Enter new value for {key}: ")
+        changes.append((key, value))
+    
+    results = what_if.analyze_changes(action, context, changes)
+    print_analysis_results(results)
+
 def save_model(filepath: str):
     ethical_boundary.save_system(filepath)
     print(f"Model saved to {filepath}")
@@ -298,25 +342,39 @@ def load_model(filepath: str):
         print(f"An unexpected error occurred while loading the model: {str(e)}")
         print("Please check the filepath and ensure all files are not corrupted.")
 
-if __name__ == "__main__":
+def main():
     logger.info("BeSAI ethical boundary script started")
+    
+    ethical_boundary = EthicalBoundary(ethical_threshold=0.5)  # You can set the initial threshold here
+    
     while True:
         print("\n1. Train model")
         print("2. Save model")
         print("3. Load model")
-        print("4. Exit")
-        choice = input("Enter your choice (1-4): ")
+        print("4. Perform What-If Analysis")
+        print("5. Set Ethical Threshold")
+        print("6. Exit")
+        choice = input("Enter your choice (1-6): ")
         
         if choice == '1':
             train_ethical_boundary()
         elif choice == '2':
             filepath = input("Enter filepath to save the model: ")
-            save_model(filepath)
+            ethical_boundary.save_system(filepath)
         elif choice == '3':
             filepath = input("Enter filepath to load the model: ")
-            load_model(filepath)
+            ethical_boundary = EthicalBoundary.load_system(filepath)
         elif choice == '4':
+            perform_what_if_analysis(ethical_boundary)
+        elif choice == '5':
+            new_threshold = float(input("Enter new ethical threshold (0-1): "))
+            ethical_boundary.set_ethical_threshold(new_threshold)
+        elif choice == '6':
             break
         else:
             print("Invalid choice. Please try again.")
+    
     logger.info("BeSAI ethical boundary script completed")
+
+if __name__ == "__main__":
+    main()
