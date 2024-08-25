@@ -8,3 +8,6 @@ env/
 .env
 venv/
 .vscode/
+
+# Ignore log files
+/src/ethics_safety/logs/*.log
