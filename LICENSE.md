@@ -17,9 +17,9 @@ Permission is hereby granted, free of charge, to any person or organization obta
 5. Users are encouraged to share their experiences, modifications, and improvements with the community, preferably through the project's official channels or repositories.
 
 6. This license explicitly allows and encourages:
-   a. Streaming gameplay of the Software on platforms like Twitch, YouTube, or similar services.
-   b. Creating and sharing educational content about the Software, including tutorials, guides, and courses.
-   c. Using the Software in game jams, hackathons, or similar non-commercial events.
+   a. Streaming of the Software on platforms like Twitch, YouTube, or similar services.
+   b. Creating and sharing educational content about the Software.
+   c. Using the Software in hackathons or similar non-commercial events.
 
 7. Any use of the Software that is not explicitly permitted by this license requires written permission from the copyright holder.
 
