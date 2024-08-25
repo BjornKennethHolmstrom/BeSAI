@@ -63,11 +63,13 @@ class EthicalLearningModel:
         return self.model.predict(np.array([principle_scores]), verbose=0)[0][0]
 
     def update(self, principle_scores: List[float], user_feedback: float, force_update: bool = False):
-        if self._is_update_ethical(principle_scores, user_feedback) or force_update:
+        is_ethical = self._is_update_ethical(principle_scores, user_feedback)
+        if is_ethical or force_update:
             self._perform_update(principle_scores, user_feedback)
-            logger.info(f"Model updated with user feedback: {user_feedback}")
+            if not is_ethical:
+                logger.warning("Update performed despite ethical concerns due to force_update flag.")
         else:
-            logger.warning("Update rejected due to ethical safeguards")
+            logger.warning("Update rejected due to ethical safeguards. Use force_update=True to override.")
 
     def _perform_update(self, principle_scores: List[float], user_feedback: float):
         principle_scores = np.array([principle_scores])
@@ -107,28 +109,30 @@ class EthicalLearningModel:
             print(f"Warning: Unable to update learning rate. Current type: {type(self.model.optimizer.learning_rate)}")
 
     def _is_update_ethical(self, principle_scores: List[float], user_feedback: float) -> bool:
-        ethical = True
+        reasons = []
+
         # Check if the user feedback is above the ethical threshold
         if user_feedback < self.ethical_threshold:
-            print(f"User feedback ({user_feedback}) is below the ethical threshold ({self.ethical_threshold}).")
-            ethical = False
-        
+            reasons.append(f"User feedback ({user_feedback}) is below the ethical threshold ({self.ethical_threshold}).")
+
         # Check if any principle is being weighted too heavily
         importances = self.get_principle_importances()
         if max(importances) > self.max_principle_weight:
-            print(f"A principle importance ({max(importances)}) exceeds the maximum allowed weight ({self.max_principle_weight}).")
-            ethical = False
-        
+            reasons.append(f"A principle importance ({max(importances)}) exceeds the maximum allowed weight ({self.max_principle_weight}).")
+
         # Check for sudden large changes in ethical evaluation
         if self.history:
             last_prediction = self.history[-1]['predicted_score']
             current_prediction = self.predict(principle_scores)
             if abs(current_prediction - last_prediction) > 0.5:  # Threshold for sudden change
-                print(f"Sudden large change in ethical evaluation detected ({abs(current_prediction - last_prediction)}).")
-                ethical = False
-        if not ethical:
-            logger.warning(f"Unethical update detected: {reason}")
-        return ethical
+                reasons.append(f"Sudden large change in ethical evaluation detected ({abs(current_prediction - last_prediction)}).")
+
+        if reasons:
+            for reason in reasons:
+                logger.warning(f"Unethical update detected: {reason}")
+            return False
+        
+        return True
 
     def get_principle_importances(self) -> List[float]:
         # Use permutation importance to estimate feature importance

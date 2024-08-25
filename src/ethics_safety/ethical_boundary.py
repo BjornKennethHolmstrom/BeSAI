@@ -170,12 +170,6 @@ class EthicalBoundary:
         logger.info("Initialized EthicalBoundary")
 
     def set_ethical_threshold(self, new_threshold: float):
-        """
-        Set a new ethical threshold.
-        
-        Args:
-            new_threshold (float): The new threshold value between 0 and 1.
-        """
         if 0 <= new_threshold <= 1:
             self.ethical_threshold = new_threshold
             logger.info(f"Ethical threshold updated to {new_threshold}")
@@ -221,12 +215,13 @@ class EthicalBoundary:
         filepath = os.path.expanduser(filepath)
         self.learning_model.save_model(f"{filepath}_learning_model")
         
-        # Save principles and context generator separately
-        with open(f"{filepath}_principles.pkl", 'wb') as f:
-            pickle.dump(self.principles, f)
-        
-        with open(f"{filepath}_context_generator.pkl", 'wb') as f:
-            pickle.dump(self.context_generator, f)
+        # Save principles, context generator, and ethical threshold
+        with open(f"{filepath}_ethical_boundary.pkl", 'wb') as f:
+            pickle.dump({
+                'principles': self.principles,
+                'context_generator': self.context_generator,
+                'ethical_threshold': self.ethical_threshold
+            }, f)
         logger.info(f"Ethical system saved to {filepath}")
 
     @classmethod
@@ -238,8 +233,7 @@ class EthicalBoundary:
         required_files = [
             f"{filepath}_learning_model_keras_model.keras",
             f"{filepath}_learning_model_attributes.pkl",
-            f"{filepath}_principles.pkl",
-            f"{filepath}_context_generator.pkl"
+            f"{filepath}_ethical_boundary.pkl"
         ]
         
         missing_files = [f for f in required_files if not os.path.exists(f)]
@@ -250,13 +244,14 @@ class EthicalBoundary:
         # If all files exist, proceed with loading
         instance.learning_model = EthicalLearningModel.load_model(f"{filepath}_learning_model")
         
-        with open(f"{filepath}_principles.pkl", 'rb') as f:
-            instance.principles = pickle.load(f)
-        
-        with open(f"{filepath}_context_generator.pkl", 'rb') as f:
-            instance.context_generator = pickle.load(f)
+        with open(f"{filepath}_ethical_boundary.pkl", 'rb') as f:
+            data = pickle.load(f)
+            instance.principles = data['principles']
+            instance.context_generator = data['context_generator']
+            instance.ethical_threshold = data.get('ethical_threshold', 0.5)  # Default to 0.5 if not found
 
-        logger.info(f"Ethical system loaded from {filepath}")        
+        logger.info(f"Ethical system loaded from {filepath}")
+        logger.info(f"Loaded ethical threshold: {instance.ethical_threshold}")
         return instance
 
 # Usage example
@@ -364,6 +359,7 @@ def main():
         elif choice == '3':
             filepath = input("Enter filepath to load the model: ")
             ethical_boundary = EthicalBoundary.load_system(filepath)
+            print(f"Loaded ethical threshold: {ethical_boundary.ethical_threshold}")
         elif choice == '4':
             perform_what_if_analysis(ethical_boundary)
         elif choice == '5':
