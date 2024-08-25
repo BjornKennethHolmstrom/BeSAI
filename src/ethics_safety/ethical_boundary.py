@@ -7,6 +7,7 @@ from typing import Any, List, Dict
 from enum import Enum
 from ethical_learning_model import EthicalLearningModel
 from detailed_context_generator import DetailedContextGenerator
+from logger import logger
 
 class EthicalPrinciple(abc.ABC):
     @abc.abstractmethod
@@ -163,10 +164,14 @@ class EthicalBoundary:
         self.learning_model = EthicalLearningModel(num_principles=len(self.principles))
         self.context_generator = DetailedContextGenerator()
 
+        logger.info("Initialized EthicalBoundary")
+
     def is_action_ethical(self, action: str, context: Dict[str, Any]) -> bool:
         principle_scores = [principle.evaluate(action, context) for principle in self.principles]
         overall_score = self.learning_model.predict(principle_scores)
-        return overall_score > 0.7  # Threshold for ethical action
+        result = overall_score > 0.7  # Threshold for ethical action
+        logger.info(f"Ethical evaluation for action '{action}': {'Ethical' if result else 'Unethical'}")
+        return result
 
     def get_ethical_explanation(self, action: str, context: Dict[str, Any]) -> str:
         explanations = [principle.explain(action, context) for principle in self.principles]
@@ -190,6 +195,7 @@ class EthicalBoundary:
     def provide_feedback(self, action: str, context: Dict[str, Any], user_feedback: float, force_update: bool = False):
         principle_scores = [principle.evaluate(action, context) for principle in self.principles]
         self.learning_model.update(principle_scores, user_feedback, force_update)
+        logger.info(f"Feedback provided for action '{action}': {user_feedback}")
 
     def get_learning_summary(self) -> str:
         return self.learning_model.get_learning_summary()
@@ -204,6 +210,7 @@ class EthicalBoundary:
         
         with open(f"{filepath}_context_generator.pkl", 'wb') as f:
             pickle.dump(self.context_generator, f)
+        logger.info(f"Ethical system saved to {filepath}")
 
     @classmethod
     def load_system(cls, filepath: str):
@@ -231,7 +238,8 @@ class EthicalBoundary:
         
         with open(f"{filepath}_context_generator.pkl", 'rb') as f:
             instance.context_generator = pickle.load(f)
-        
+
+        logger.info(f"Ethical system loaded from {filepath}")        
         return instance
 
 # Usage example
@@ -268,9 +276,11 @@ def train_ethical_boundary():
         
         print("\nLearning Summary:")
         print(ethical_boundary.get_learning_summary())
-        
+
+        logger.debug(f"Training iteration completed. User feedback: {user_feedback}")        
         if input("\nContinue training? (y/n): ").lower() != 'y':
             break
+    logger.info("Ethical boundary training completed")
 
 def save_model(filepath: str):
     ethical_boundary.save_system(filepath)
@@ -289,6 +299,7 @@ def load_model(filepath: str):
         print("Please check the filepath and ensure all files are not corrupted.")
 
 if __name__ == "__main__":
+    logger.info("BeSAI ethical boundary script started")
     while True:
         print("\n1. Train model")
         print("2. Save model")
@@ -308,3 +319,4 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice. Please try again.")
+    logger.info("BeSAI ethical boundary script completed")

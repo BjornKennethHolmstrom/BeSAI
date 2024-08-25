@@ -9,6 +9,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers.schedules import LearningRateSchedule
 import pickle
 import os
+from logger import logger
 
 class CustomLearningRateSchedule(LearningRateSchedule):
     def __init__(self, initial_learning_rate):
@@ -46,6 +47,7 @@ class EthicalLearningModel:
         self.lr_schedule = CustomLearningRateSchedule(self.initial_learning_rate)
         self.history: List[Dict[str, Any]] = []
         self.model = self._build_model()
+        logger.info(f"Initialized EthicalLearningModel with {num_principles} principles")
 
     def _build_model(self):
         model = Sequential([
@@ -63,9 +65,9 @@ class EthicalLearningModel:
     def update(self, principle_scores: List[float], user_feedback: float, force_update: bool = False):
         if self._is_update_ethical(principle_scores, user_feedback) or force_update:
             self._perform_update(principle_scores, user_feedback)
+            logger.info(f"Model updated with user feedback: {user_feedback}")
         else:
-            print("Warning: Attempted update violates ethical safeguards. Update rejected.")
-            print("To override and force the update, set force_update=True")
+            logger.warning("Update rejected due to ethical safeguards")
 
     def _perform_update(self, principle_scores: List[float], user_feedback: float):
         principle_scores = np.array([principle_scores])
@@ -84,6 +86,7 @@ class EthicalLearningModel:
             'user_feedback': user_feedback[0],
             'learning_rate': self.lr_schedule.current_learning_rate,
         })
+        logger.debug(f"Learning rate decayed to {self.lr_schedule.current_learning_rate}")
 
     def update_learning_rate(self):
         self.current_learning_rate *= self.learning_rate_decay
@@ -104,16 +107,17 @@ class EthicalLearningModel:
             print(f"Warning: Unable to update learning rate. Current type: {type(self.model.optimizer.learning_rate)}")
 
     def _is_update_ethical(self, principle_scores: List[float], user_feedback: float) -> bool:
+        ethical = True
         # Check if the user feedback is above the ethical threshold
         if user_feedback < self.ethical_threshold:
             print(f"User feedback ({user_feedback}) is below the ethical threshold ({self.ethical_threshold}).")
-            return False
+            ethical = False
         
         # Check if any principle is being weighted too heavily
         importances = self.get_principle_importances()
         if max(importances) > self.max_principle_weight:
             print(f"A principle importance ({max(importances)}) exceeds the maximum allowed weight ({self.max_principle_weight}).")
-            return False
+            ethical = False
         
         # Check for sudden large changes in ethical evaluation
         if self.history:
@@ -121,9 +125,10 @@ class EthicalLearningModel:
             current_prediction = self.predict(principle_scores)
             if abs(current_prediction - last_prediction) > 0.5:  # Threshold for sudden change
                 print(f"Sudden large change in ethical evaluation detected ({abs(current_prediction - last_prediction)}).")
-                return False
-        
-        return True
+                ethical = False
+        if not ethical:
+            logger.warning(f"Unethical update detected: {reason}")
+        return ethical
 
     def get_principle_importances(self) -> List[float]:
         # Use permutation importance to estimate feature importance
@@ -171,6 +176,7 @@ class EthicalLearningModel:
                 'initial_learning_rate': self.initial_learning_rate,
                 'lr_schedule_config': self.lr_schedule.get_config(),
             }, f)
+        logger.info(f"Model saved to {filepath}")
 
     @classmethod
     def load_model(cls, filepath: str):
@@ -190,7 +196,8 @@ class EthicalLearningModel:
         instance.max_principle_weight = attributes['max_principle_weight']
         instance.initial_learning_rate = attributes['initial_learning_rate']
         instance.lr_schedule = CustomLearningRateSchedule.from_config(attributes['lr_schedule_config'])
-        
+
+        logger.info(f"Model loaded from {filepath}")        
         return instance
 
 def train_model_with_user_feedback(model: EthicalLearningModel, ethical_boundary):
