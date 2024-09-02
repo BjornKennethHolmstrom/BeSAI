@@ -242,8 +242,8 @@ Our development process is divided into five main phases:
 ### Installation Steps
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/benevolent-spiritual-ai.git
-   cd benevolent-spiritual-ai
+   git clone https://github.com/BjornKennethHolmstrom/BeSAI.git
+   cd BeSAI
    ```
 
 2. Create and activate a virtual environment:
