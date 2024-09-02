@@ -69,6 +69,18 @@ The AI system consists of several interconnected components:
    - Safety Constraints
    - Explainability Mechanisms
 
+## Current Status
+
+As of version 0.7.0, we have made significant progress in developing the core AI framework:
+
+- Implemented an advanced Natural Language Processing module that combines the strengths of NLTK and spaCy
+- Developed a graph-based Knowledge Base for flexible information storage and retrieval
+- Created a basic Reasoning Engine with inference and hypothesis generation capabilities
+- Integrated these core components to work together in processing and analyzing text
+- Continued development of code analysis and improvement functionalities
+
+We are currently in the "Foundation and Core Components" phase of our development process.
+
 ## Key Components
 
 ### 1. Core AI Framework
@@ -101,6 +113,8 @@ The AI system consists of several interconnected components:
 - Collaborative task execution capabilities for human-AI teamwork
 
 ### 2. Spiritual and Introspective Components
+
+(The components below are planned but not yet implemented)
 
 #### 2.1 Curiosity Engine
 - Autonomous question generation for knowledge exploration
@@ -172,6 +186,11 @@ Safety and Ethical Considerations:
 
 ### 3. Self-Improvement Capabilities
 
+- Code Generation and Optimization
+- Self-Testing capabilities
+
+(The components below are planned but not yet implemented)
+
 #### 3.1 Code Generation and Optimization
 - Self-modifying code generation with safety constraints
 - Automated bug detection and fixing
@@ -203,6 +222,11 @@ Safety and Ethical Considerations:
 - Transfer learning optimization for applying knowledge across domains
 
 ### 4. Ethical and Safety Measures
+
+- Basic ethical boundary implementation
+- Safe code execution environment
+
+(The components below are planned but not yet implemented)
 
 #### 4.1 Ethical Boundary Enforcement
 - Hard-coded ethical constraints for unbreakable rules
@@ -259,58 +283,87 @@ Our development process is divided into five main phases:
 
 ## File & folder structure
 
-BeSAI/
-│
-├── src/
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── natural_language_processing.py
-│   │   ├── knowledge_base.py
-│   │   ├── reasoning_engine.py
-│   │   └── task_specific_modules.py
-│   │
-│   ├── spiritual/
-│   │   ├── __init__.py
-│   │   ├── curiosity_engine.py
-│   │   ├── self_reflection.py
-│   │   ├── imagination_synthesizer.py
-│   │   ├── ethical_contemplation.py
-│   │   ├── memory_prioritization.py
-│   │   ├── action_evaluation.py
-│   │   └── psychedelic_simulator.py
-│   │
-│   ├── self_improvement/
-│   │   ├── __init__.py
-│   │   ├── code_generation.py
-│   │   ├── architecture_evolution.py
-│   │   ├── knowledge_synthesis.py
-│   │   ├── self_evaluation.py
-│   │   └── learning_optimization.py
-│   │
-│   ├── ethics_safety/
-│   │   ├── __init__.py
-│   │   ├── ethical_boundary.py
-│   │   ├── safety_constraints.py
-│   │   └── explainability.py
-│   │
-│   └── main.py
-│
-├── tests/
-│   ├── test_core.py
-│   ├── test_spiritual.py
-│   ├── test_self_improvement.py
-│   └── test_ethics_safety.py
-│
-├── docs/
-│   └── architecture.md
-│
-├── requirements.txt
+BeSAI
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE.md
+├── models
+│   ├── ethical_model_v1_ethical_boundary.pkl
+│   ├── ethical_model_v1_learning_model_attributes.pkl
+│   └── ethical_model_v1_learning_model_keras_model.keras
 ├── README.md
-└── .gitignore
+├── requirements.txt
+├── src
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── knowledge_base.py
+│   │   ├── knowledge_extractor.py
+│   │   ├── natural_language_processing.py
+│   │   ├── reasoning_engine.py
+│   │   └── task_specific_modules.py
+│   ├── ethics_safety
+│   │   ├── ~
+│   │   │   └── Code
+│   │   │       └── BeSAI
+│   │   │           └── models
+│   │   ├── detailed_context_generator.py
+│   │   ├── ethical_boundary.py
+│   │   ├── ethical_learning_model.py
+│   │   ├── ethical_types.py
+│   │   ├── explainability.py
+│   │   ├── __init__.py
+│   │   ├── logger.py
+│   │   ├── safety_constraints.py
+│   │   └── what_if_analysis.py
+│   ├── __init__.py
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── self_improvement
+│   │   ├── architecture_evolution.py
+│   │   ├── code_analyzer.py
+│   │   ├── code_generation.py
+│   │   ├── __init__.py
+│   │   ├── knowledge_synthesis.py
+│   │   ├── learning_optimization.py
+│   │   ├── pattern_learner (deprecated).py
+│   │   └── self_evaluation.py
+│   └── spiritual
+│       ├── action_evaluation.py
+│       ├── curiosity_engine.py
+│       ├── ethical_contemplation.py
+│       ├── imagination_synthesizer.py
+│       ├── __init__.py
+│       ├── memory_prioritization.py
+│       ├── psychedelic_simulator.py
+│       └── self_reflection.py
+└── tests
+    ├── test_core.py
+    ├── test_ethics_safety.py
+    ├── test_self_improvement.py
+    └── test_spiritual.py
+
 
 ## Usage
 
-Nothing yet
+To run the current version of BeSAI:
+
+1. Ensure you have completed the setup and installation steps.
+2. Navigate to the BeSAI directory.
+3. Run the following command:
+
+```
+python -m src.main
+```
+
+This will demonstrate the current capabilities of the system, including NLP analysis, knowledge extraction, and basic reasoning.
+
+## Next Steps
+
+1. Enhance the Reasoning Engine with more advanced inference techniques
+2. Implement the spiritual and introspective components
+3. Develop a user interface for easier interaction with the system
+4. Expand test coverage and improve code quality
+5. Begin integration of ethical decision-making components
 
 ## Contributing
 
@@ -340,6 +393,7 @@ For questions or collaborations, please contact Björn K. Holmström at [bjornke
 
 ## Acknowledgements
 
-Claude 3.5 Sonnet for invaluable assistance
-My family for providing infrastructure and support
+- Claude 3.5 Sonnet for invaluable assistance in development and documentation
+- Björn's family for providing infrastructure and support
+- The open-source community for the excellent tools and libraries used in this project
 

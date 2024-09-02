@@ -1,8 +1,8 @@
 # BeSAI/src/ethics_safety/what_if_analysis.py
 
 from typing import Dict, Any, List, Tuple
-from ethical_types import EthicalEvaluator
-from logger import logger
+from .ethical_types import EthicalEvaluator
+from .logger import logger
 
 class WhatIfAnalysis:
     def __init__(self, ethical_evaluator: EthicalEvaluator):

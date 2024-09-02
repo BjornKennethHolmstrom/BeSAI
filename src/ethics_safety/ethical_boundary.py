@@ -5,11 +5,11 @@ import pickle
 import abc
 from typing import Any, List, Dict
 from enum import Enum
-from ethical_learning_model import EthicalLearningModel
-from detailed_context_generator import DetailedContextGenerator
-from what_if_analysis import WhatIfAnalysis, print_analysis_results
-from ethical_types import EthicalEvaluator
-from logger import logger
+from .ethical_learning_model import EthicalLearningModel
+from .detailed_context_generator import DetailedContextGenerator
+from .what_if_analysis import WhatIfAnalysis, print_analysis_results
+from .ethical_types import EthicalEvaluator
+from .logger import logger
 
 class EthicalPrinciple(abc.ABC):
     @abc.abstractmethod

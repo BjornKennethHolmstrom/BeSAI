@@ -9,7 +9,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers.schedules import LearningRateSchedule
 import pickle
 import os
-from logger import logger
+from .logger import logger
 
 class CustomLearningRateSchedule(LearningRateSchedule):
     def __init__(self, initial_learning_rate):
