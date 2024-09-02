@@ -7,11 +7,15 @@ from typing import List, Dict, Any
 from collections import defaultdict
 
 # for CodeTester
-# import ast
 import copy
 from io import StringIO
 import sys
 import contextlib
+import random
+import string
+
+# Import CodeGeneration
+from .code_generation import CodeGeneration
 
 class CodeImprover(ast.NodeTransformer):
     def __init__(self):
@@ -168,12 +172,12 @@ class CodeAnalyzer:
     def __init__(self):
         self.pattern_learner = PatternLearner()
         self.code_tester = CodeTester()
+        self.code_generation = CodeGeneration()
 
         self.built_in_improvements = [
             (r'for (\w+) in range\(len\((\w+)\)\):\s*(\w+)\.append\(([^)]+)\)', 
              r'\3 = [\4 for \1 in range(len(\2))]'),
-            (r'return "([^"]+)"\s*%\s*(.+)', r"return f'\1'.format(\2)"),
-            (r'def (\w+)\(([^)]*)\):', r'def \1(\2) -> Any:')
+            (r'def (\w+)\(([^)]*)\):', r'def \1(\2):')
         ]
 
     def improve_code(self, code: str) -> str:
@@ -188,6 +192,9 @@ class CodeAnalyzer:
         print("Applying learned patterns:")
         code = self.pattern_learner.apply_learned_patterns(code)
         
+        print("Applying CodeGeneration improvements:")
+        code = self.apply_code_generation_improvements(code)
+        
         improved_code = code
         
         # Test the improvements
@@ -197,6 +204,39 @@ class CodeAnalyzer:
         # Learn from test results
         self.learn_from_test_results(test_results)
         
+        return improved_code
+
+    def apply_code_generation_improvements(self, code: str) -> str:
+        tree = ast.parse(code)
+        
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):
+                function_code = astunparse.unparse(node)
+                
+                # Generate specific improvement requests
+                improvements = [
+                    "use f-string",
+                    "use list comprehension",
+                    "optimize sum",
+                    "use enumerate"
+                ]
+                
+                for improvement in improvements:
+                    feature_request = f"Improve the following function ({improvement}): {node.name}"
+                    improved_function = self.code_generation.generate_code(feature_request, function_code)
+                    
+                    if improved_function != function_code:
+                        # Replace the original function with the improved version
+                        improved_node = ast.parse(improved_function).body[0]
+                        for i, existing_node in enumerate(tree.body):
+                            if isinstance(existing_node, ast.FunctionDef) and existing_node.name == node.name:
+                                tree.body[i] = improved_node
+                                print(f"Applied CodeGeneration improvement ({improvement}) to function: {node.name}")
+                                break
+                    
+                    function_code = improved_function  # Update function_code for the next improvement
+        
+        improved_code = astunparse.unparse(tree)
         return improved_code
 
     def learn_from_test_results(self, test_results):
@@ -234,11 +274,27 @@ class CodeTester:
         
         test_cases = []
         for i in range(3):  # Generate 3 test cases
-            args_values = [f"test_value_{j}_{i}" for j in range(len(args))]
-            test_case = f"{func_name}({', '.join(args_values)})"
+            args_values = [self.generate_test_value(arg) for arg in args]
+            test_case = f"{func_name}({', '.join(repr(val) for val in args_values)})"
             test_cases.append(test_case)
         
         return test_cases
+
+    def generate_test_value(self, arg_name):
+        """Generate a random test value based on the argument name."""
+        if arg_name in ['n', 'num', 'count']:
+            return random.randint(0, 10)
+        elif arg_name in ['name', 'string', 'text']:
+            return ''.join(random.choices(string.ascii_letters, k=5))
+        elif arg_name in ['numbers', 'data', 'items']:
+            return [random.randint(1, 10) for _ in range(5)]
+        else:
+            return random.choice([
+                random.randint(-100, 100),
+                random.uniform(-100, 100),
+                ''.join(random.choices(string.ascii_letters, k=5)),
+                [random.randint(1, 10) for _ in range(5)]
+            ])
 
     def execute_safely(self, code, globals_dict):
         try:
@@ -264,14 +320,19 @@ class CodeTester:
                 test_cases = self.generate_test_cases(func_def)
                 
                 for test_case in test_cases:
-                    with self.capture_stdout() as original_out:
-                        original_result = eval(test_case, original_globals)
-                    
-                    with self.capture_stdout() as improved_out:
-                        improved_result = eval(test_case, improved_globals)
-                    
-                    is_equal = (original_result == improved_result and 
-                                original_out.getvalue() == improved_out.getvalue())
+                    try:
+                        with self.capture_stdout() as original_out:
+                            original_result = eval(test_case, original_globals)
+                        
+                        with self.capture_stdout() as improved_out:
+                            improved_result = eval(test_case, improved_globals)
+                        
+                        is_equal = (original_result == improved_result and 
+                                    original_out.getvalue() == improved_out.getvalue())
+                    except Exception as e:
+                        is_equal = False
+                        original_result = str(e)
+                        improved_result = str(e)
                     
                     self.test_results.append({
                         'function': func_name,
