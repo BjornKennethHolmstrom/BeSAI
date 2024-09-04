@@ -7,39 +7,53 @@ import networkx as nx
 from typing import Any, List, Dict, Tuple, Optional
 from collections import defaultdict
 from collections import Counter
+import json
+from datetime import datetime
 
 class EnhancedKnowledgeBase:
     def __init__(self):
         self.graph = nx.MultiDiGraph()
         self.entity_types = {}
+        self.version = 1
+        self.metadata = {}
 
-    def add_entity(self, entity: str, attributes: Dict[str, Any] = None, entity_type: str = None, certainty: float = 1.0):
+    def add_entity(self, entity: str, attributes: Dict[str, Any] = None, entity_type: str = None, source: str = None, certainty: float = 1.0):
         if attributes is None:
             attributes = {}
-        certainty_dict = {attr: certainty for attr in attributes}
-        attributes['certainty'] = certainty_dict
+        
+        metadata = {
+            "source": source,
+            "acquisition_date": datetime.now().isoformat(),
+            "version": self.version,
+            "certainty": certainty
+        }
+        
+        attributes["metadata"] = metadata
         self.graph.add_node(entity, **attributes)
+        
         if entity_type:
+            if entity_type not in self.entity_types:
+                self.entity_types[entity_type] = set()
             self.entity_types[entity_type].add(entity)
 
-    def add_relationship(self, entity1: str, entity2: str, relationship: str, attributes: Dict[str, Any] = None, certainty: float = 1.0):
+    def add_relationship(self, entity1: str, entity2: str, relationship: str, attributes: Dict[str, Any] = None, source: str = None):
         if attributes is None:
             attributes = {}
-        attributes['certainty'] = certainty
+        
+        metadata = {
+            "source": source,
+            "acquisition_date": datetime.now().isoformat(),
+            "version": self.version
+        }
+        
+        attributes["metadata"] = metadata
         self.graph.add_edge(entity1, entity2, key=relationship, **attributes)
 
-    def get_entity(self, entity: str) -> Dict[str, Any]:
-        # This method should return the entity's data
-        # If it doesn't exist in the knowledge base, return an empty dict
-        return self.graph.nodes.get(entity, {})
-
     def get_relationships(self, entity: str) -> List[Tuple[str, str, Dict[str, Any]]]:
-            if entity not in self.graph.nodes:
-                return []
-            relationships = []
-            for _, related_entity, key, data in self.graph.edges(entity, data=True, keys=True):
-                relationships.append((related_entity, key, data))
-            return relationships
+        relationships = []
+        for _, related_entity, data in self.graph.edges(entity, data=True):
+            relationships.append((related_entity, data['key'], data))
+        return relationships
 
     def query(self, query: Dict[str, Any]) -> List[Dict[str, Any]]:
         results = []
@@ -66,12 +80,12 @@ class EnhancedKnowledgeBase:
     def get_entity_types(self) -> List[str]:
         return list(self.entity_types.keys())
 
+    def get_entity(self, entity: str) -> Dict[str, Any]:
+        if entity in self.graph.nodes:
+            return self.graph.nodes[entity]
+        return {}
+
     def get_all_entities(self) -> List[str]:
-        """
-        Get a list of all entities in the knowledge base.
-        
-        :return: A list of entity names
-        """
         return list(self.graph.nodes())
 
     def find_path(self, start_entity: str, end_entity: str) -> List[Tuple[str, str, str]]:
@@ -149,6 +163,36 @@ class EnhancedKnowledgeBase:
             for entity_type, entities in self.entity_types.items():
                 if entity in entities:
                     entities.remove(entity)
+
+    def save_to_file(self, filename: str):
+        data = {
+            "nodes": dict(self.graph.nodes(data=True)),
+            "edges": list(self.graph.edges(data=True)),
+            "entity_types": {k: list(v) for k, v in self.entity_types.items()},
+            "version": self.version,
+            "metadata": self.metadata
+        }
+        with open(filename, 'w') as f:
+            json.dump(data, f, indent=2)
+
+    def load_from_file(self, filename: str):
+        with open(filename, 'r') as f:
+            data = json.load(f)
+        
+        self.graph = nx.MultiDiGraph()
+        self.graph.add_nodes_from((n, d) for n, d in data["nodes"].items())
+        self.graph.add_edges_from((u, v, d) for u, v, d in data["edges"])
+        self.entity_types = {k: set(v) for k, v in data["entity_types"].items()}
+        self.version = data["version"]
+        self.metadata = data["metadata"]
+
+    def flag_improvement(self, topic: str, suggestion: str):
+        if "improvement_flags" not in self.metadata:
+            self.metadata["improvement_flags"] = {}
+        self.metadata["improvement_flags"][topic] = suggestion
+
+    def increment_version(self):
+        self.version += 1
 
 # Example usage
 if __name__ == "__main__":

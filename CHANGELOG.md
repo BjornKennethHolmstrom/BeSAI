@@ -1,6 +1,17 @@
 # CHANGELOG
 
-## Version 0.8.0 (Current)
+## Version 0.9.0 (Current)
+
+- Implemented Metacognition module for enhanced self-awareness and reflection
+- Improved hypothesis generation with cross-domain insights and creative connections
+- Added goal-directed learning capabilities to AutonomousLearning
+- Implemented bias detection and acknowledgment in knowledge acquisition
+- Developed BeSAIConsole for improved user interaction with the system
+- Added functionality for generating and tracking learning goals
+- Improved topic exploration with better cleaning and validation of topics
+- Enhanced error handling and logging throughout the system
+
+## Version 0.8.0
 
 - Significantly improved self-improvement capabilities:
   - Enhanced CodeGeneration class with more robust string formatting and enumerate transformations

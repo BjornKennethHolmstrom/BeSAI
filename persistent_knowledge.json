@@ -1,0 +1,177 @@
+{
+  "entities": {
+    "1": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353757",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "1][web 2": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353780",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "2": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353784",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Upanishads": {
+      "type": "GPE",
+      "metadata": {
+        "source": "Wikipedia and IEP",
+        "acquisition_date": "2024-09-04T21:34:25.579519",
+        "version": 1,
+        "certainty": 1.0
+      },
+      "content": "\n Divisions\n Sama vedic\n Yajur vedic\n Atharva vedic\n "
+    },
+    "Jainism, Buddhism and Hinduism.[5]": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353789",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "dharma dhyana": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353792",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Buddhist": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353795",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "anapanasati": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353797",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "vipassana": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353800",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hindu": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353802",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pata\u00f1jali's Yoga": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353805",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hatha Yoga": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353808",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "cun \u5b58": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353811",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Judaism": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353813",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Christianity": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353816",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Islam": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353818",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Asian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353821",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "pain,[6": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353823",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "perception,[7": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-04T21:34:18.353826",
+        "version": 1,
+        "certainty": 1.0
+      }
+    }
+  },
+  "relationships": []
+}

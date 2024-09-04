@@ -8,11 +8,15 @@ from .learning_system import LearningSystem
 from .reasoning_engine import ReasoningEngine
 from .knowledge_extractor import KnowledgeExtractor
 from .task_specific_modules import TaskSpecificModules
+from .meta_cognition import Metacognition
 
 __all__ = [
     'NaturalLanguageProcessing',
+    'EnhancedKnowledgeBase',
     'KnowledgeBase',
+    'LearningSystem',
     'ReasoningEngine',
     'KnowledgeExtractor',
-    'TaskSpecificModules'
+    'TaskSpecificModules',
+    'Metacognition'
 ]

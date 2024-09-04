@@ -7,14 +7,96 @@ from core.natural_language_processing import NaturalLanguageProcessing
 from core.reasoning_engine import ReasoningEngine
 from core.enhanced_knowledge_base import EnhancedKnowledgeBase
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 
 class LearningSystem:
-    def __init__(self, kb: EnhancedKnowledgeBase, nlp: NaturalLanguageProcessing, re: ReasoningEngine):
-        self.kb = kb
+    def __init__(self, knowledgebase, nlp, reasoning_engine, metacognition):
+        self.kb = knowledgebase
         self.nlp = nlp
-        self.re = re
+        self.re = reasoning_engine
+        self.metacognition = metacognition
         self.learning_history = []
+
+    def generate_hypothesis(self, topic: str) -> str:
+        # Get the entity and its relationships
+        entity = self.kb.get_entity(topic)
+        relationships = self.kb.get_relationships(topic)
+        
+        # Get metacognitive assessment
+        assessment = self.metacognition.assess_knowledge(topic)
+        
+        # Generate base hypothesis
+        base_hypothesis = self._generate_base_hypothesis(topic, entity, relationships)
+        
+        # Enhance hypothesis with cross-domain insights
+        enhanced_hypothesis = self._enhance_with_cross_domain_insights(base_hypothesis, topic)
+        
+        # Add metacognitive reflection
+        final_hypothesis = self._add_metacognitive_reflection(enhanced_hypothesis, assessment)
+        
+        return final_hypothesis
+
+    def _generate_base_hypothesis(self, topic: str, entity: Dict[str, Any], relationships: List[Tuple[str, str, Dict[str, Any]]]) -> str:
+        hypothesis = f"Based on the current understanding of {topic}, "
+        
+        # Add information about attributes
+        if entity:
+            attributes = [f"{key} is {value}" for key, value in entity.items() if key != 'metadata']
+            if attributes:
+                hypothesis += "it appears that " + ", ".join(attributes[:3]) + ". "
+        
+        # Add information about relationships
+        if relationships:
+            rel_info = [f"it {rel} {related_entity}" for related_entity, rel, _ in relationships[:3]]
+            hypothesis += "Furthermore, " + ", and ".join(rel_info) + ". "
+        
+        return hypothesis
+
+    def _enhance_with_cross_domain_insights(self, base_hypothesis: str, topic: str) -> str:
+        # Get related topics from different domains
+        related_topics = self.kb.get_related_topics(topic, max_distance=2, max_topics=5)
+        
+        if related_topics:
+            insight = "Interestingly, this topic might have connections to "
+            topic_insights = []
+            for related_topic in related_topics:
+                relationship = self.re.infer_relationship(topic, related_topic)
+                if relationship:
+                    topic_insights.append(f"{related_topic} ({relationship})")
+            
+            if topic_insights:
+                insight += ", ".join(topic_insights) + ". "
+                insight += "These cross-domain connections suggest that "
+                insight += self._generate_creative_insight(topic, related_topics)
+                return base_hypothesis + insight
+        
+        return base_hypothesis
+
+    def _generate_creative_insight(self, topic: str, related_topics: List[str]) -> str:
+        templates = [
+            f"there might be underlying principles connecting {topic} to diverse fields of study.",
+            f"the concepts in {topic} could potentially be applied to solve problems in {random.choice(related_topics)}.",
+            f"studying {topic} from the perspective of {random.choice(related_topics)} might yield novel insights.",
+            f"there could be a unifying theory that encompasses both {topic} and {random.choice(related_topics)}.",
+        ]
+        return random.choice(templates)
+
+    def _add_metacognitive_reflection(self, hypothesis: str, assessment: Dict[str, Any]) -> str:
+        reflection = f"\n\nReflecting on this hypothesis, "
+        if assessment['confidence'] < 0.5:
+            reflection += f"I acknowledge that my understanding of {assessment['topic']} is limited. "
+            reflection += "This hypothesis should be considered speculative and requires further investigation. "
+        elif assessment['confidence'] < 0.8:
+            reflection += f"I have a moderate level of confidence in my understanding of {assessment['topic']}. "
+            reflection += "While this hypothesis is grounded in my current knowledge, it may benefit from additional research and validation. "
+        else:
+            reflection += f"I have a high degree of confidence in my understanding of {assessment['topic']}. "
+            reflection += "This hypothesis is well-supported by my current knowledge, but as always, I remain open to new information that might refine or challenge these ideas. "
+
+        if assessment['gaps']:
+            reflection += f"Areas that could strengthen this hypothesis include: {', '.join(assessment['gaps'])}. "
+
+        return hypothesis + reflection
 
     def learn_from_text(self, text: str):
         # Extract knowledge from text
@@ -32,13 +114,6 @@ class LearningSystem:
             self.kb.update_entity(attribute['entity'], {attribute['attribute']: True}, certainty=0.6)
         
         self.learning_history.append(f"Learned from text: {text[:50]}...")
-
-    def generate_hypothesis(self, entity: str):
-        hypothesis = self.re.generate_hypothesis(entity)
-        if hypothesis:
-            self.learning_history.append(f"Generated hypothesis for: {entity}")
-            return hypothesis
-        return None
 
     def apply_inference(self, start_entity: str, relationship_type: str):
         inferred_relationships = self.re.infer_transitive_relationships(start_entity, relationship_type)
