@@ -1,107 +1,98 @@
 # benevolent_ai/src/main.py
 
-from src.core import NaturalLanguageProcessing, KnowledgeBase, ReasoningEngine, KnowledgeExtractor
-from src.ethics_safety import EthicalBoundary
-from src.self_improvement import CodeGeneration, CodeAnalyzer
+import traceback
+import logging
+from core import NaturalLanguageProcessing, KnowledgeBase, ReasoningEngine, KnowledgeExtractor
+from ethics_safety import EthicalBoundary
+from self_improvement import CodeGeneration, CodeAnalyzer
+from core.autonomous_learning import AutonomousLearning
+from core.enhanced_knowledge_base import EnhancedKnowledgeBase
+from core.reasoning_engine import ReasoningEngine
+from core.enhanced_natural_language_processing import EnhancedNaturalLanguageProcessing
+from core.learning_system import LearningSystem
 
 def main():
-    nlp = NaturalLanguageProcessing()
-    kb = KnowledgeBase()
-    re = ReasoningEngine(kb)
-    extractor = KnowledgeExtractor(nlp, kb)
-    ethical_boundary = EthicalBoundary()
-    code_gen = CodeGeneration()
-    code_analyzer = CodeAnalyzer()
+    try:
+        kb = EnhancedKnowledgeBase()
+        re = ReasoningEngine(kb)
+        nlp = EnhancedNaturalLanguageProcessing(kb, re)
+        ls = LearningSystem(kb, nlp, re)
+        al = AutonomousLearning(kb, nlp, ls, re)
 
-    print("BeSAI: Benevolent Spiritual AI system initialized.")
+        print("BeSAI: Benevolent Spiritual AI system initialized.")
 
-    # Demonstrate NLP and Knowledge Extraction capabilities
-    sample_text = """
-    BeSAI is an ambitious project aimed at creating a benevolent and spiritually aware artificial intelligence. 
-    It combines cutting-edge technology with ethical considerations and spiritual insights.
-    The goal is to develop an AI system that not only processes information efficiently but also exhibits wisdom and compassion.
-    BeSAI uses machine learning algorithms and incorporates ethical principles in its decision-making process.
-    """
+        al.load_knowledge()
 
-    print("Sample text:")
-    print(sample_text)
+        topics_to_explore = ["consciousness", "spirituality", "altered states of consciousness"]
 
-    analysis = nlp.analyze_text(sample_text)
+        for topic in topics_to_explore:
+            logging.info(f"Starting exploration of {topic}")
+            al.explore_topic(topic)
+            logging.info(f"Completed exploration of {topic}")
 
-    print("\nText Analysis:")
-    print(f"Sentence Count: {analysis['sentence_count']}")
-    print(f"Word Count: {analysis['word_count']}")
-    print(f"POS Distribution: {analysis['pos_distribution']}")
+            # Print a summary after each top-level topic exploration
+            summary = al.get_learning_summary()
+            logging.info(f"Exploration Summary for {topic}:")
+            logging.info(f"Total explored topics: {len(summary['explored_topics'])}")
+            logging.info(f"Total entities in knowledge base: {summary['entity_count']}")
+            logging.info(f"Total relationships: {summary['relationship_count']}")
+            logging.info("Top 5 Most Relevant Entities:")
+            for entity in summary['top_entities'][:5]:
+                logging.info(f"  {entity['entity']} (Relevance: {entity['relevance']:.2f})")
+            logging.info("--------------------")
 
-    print("\nExtracted Entities:")
-    for entity in analysis['entities']:
-        print(f"- {entity['text']} ({entity['label']})")
+        logging.info("Exploration of all topics complete.")
+        logging.info("Final Knowledge Base State:")
+        for entity in kb.get_all_entities():
+            relevance = kb.calculate_relevance(entity)
+            logging.info(f"Entity: {entity} (Relevance: {relevance:.2f})")
+            logging.info(f"Attributes: {kb.get_entity(entity)}")
+            logging.info(f"Relationships: {kb.get_relationships(entity)}")
 
-    print("\nExtracted Relationships:")
-    for rel in analysis['relationships']:
-        print(f"- {rel['subject']} {rel['predicate']} {rel['object']}")
+        logging.info("Demonstrating Reasoning:")
+        inferred_relationships = re.infer_transitive_relationships("consciousness", "related_to")
+        logging.info(f"Inferred Relationships: {inferred_relationships}")
 
-    print("\nExtracted Attributes:")
-    for attr in analysis['attributes']:
-        print(f"- {attr['entity']}: {attr['attribute']}")
+        #extractor = KnowledgeExtractor(nlp, kb)
+        #ethical_boundary = EthicalBoundary()
+        #code_gen = CodeGeneration()
+        #code_analyzer = CodeAnalyzer()
+        # Demonstrate code improvement
+        #original_code = """
+#def process_data(data):
+#    result = []
+#    for i in range(len(data)):
+#        result.append(data[i] * 2)
+#    return "Processed %d items" % len(result)
+#
+#def add(a, b):
+#    return a + b
+#    """
 
-    print("\nAutomatically Populating Knowledge Base:")
-    extracted_knowledge = extractor.extract_knowledge_from_text(sample_text)
-    
-    print("Entities in Knowledge Base:")
-    for entity in extracted_knowledge["entities"]:
-        print(f"- {entity}: {kb.get_entity(entity)}")
+        #print("\nOriginal code:")
+        #print(original_code)
 
-    print("\nRelationships in Knowledge Base:")
-    for subject, predicate, obj in extracted_knowledge["relationships"]:
-        print(f"- {subject} {predicate} {obj}")
+        #improved_code = code_analyzer.improve_code(original_code)
 
-    # Demonstrate reasoning capabilities
-    print("\nInferred relationships for BeSAI:")
-    inferred = re.infer_transitive_relationships("BeSAI", "uses")
-    for rel in inferred:
-        print(f"- {rel['from']} {rel['relationship']} {rel['to']} (Inferred: {rel['inferred']})")
+        #print("\nImproved code:")
+        #print(improved_code)
 
-    print("\nHypothesis for AI:")
-    hypothesis = re.generate_hypothesis("AI")
-    if hypothesis:
-        print(f"- Known attributes: {hypothesis['known_attributes']}")
-        print(f"- Inferred attributes: {hypothesis['inferred_attributes']}")
-        print(f"- Potential relationships: {hypothesis['potential_relationships']}")
-    else:
-        print("Unable to generate hypothesis. Entity 'AI' not found in the knowledge base.")
+        # Demonstrate ethical boundary
+        #action = "Share user data with third-party"
+        #context = {
+        #    "user_consent": False,
+        #    "data_anonymized": True,
+        #    "purpose": "Improve service quality"
+        #}
 
-    # Demonstrate code improvement
-    original_code = """
-def process_data(data):
-    result = []
-    for i in range(len(data)):
-        result.append(data[i] * 2)
-    return "Processed %d items" % len(result)
+        #is_ethical = ethical_boundary.is_action_ethical(action, context)
+        #print(f"\nAction '{action}' is {'ethical' if is_ethical else 'unethical'}")
+        #print(ethical_boundary.get_ethical_explanation(action, context))
 
-def add(a, b):
-    return a + b
-    """
-
-    print("\nOriginal code:")
-    print(original_code)
-
-    improved_code = code_analyzer.improve_code(original_code)
-
-    print("\nImproved code:")
-    print(improved_code)
-
-    # Demonstrate ethical boundary
-    action = "Share user data with third-party"
-    context = {
-        "user_consent": False,
-        "data_anonymized": True,
-        "purpose": "Improve service quality"
-    }
-
-    is_ethical = ethical_boundary.is_action_ethical(action, context)
-    print(f"\nAction '{action}' is {'ethical' if is_ethical else 'unethical'}")
-    print(ethical_boundary.get_ethical_explanation(action, context))
+    except Exception as e:
+        print(f"An error occurred in the main process: {str(e)}")
+        print("Detailed traceback:")
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()

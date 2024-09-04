@@ -10,4 +10,7 @@ venv/
 .vscode/
 
 # Ignore log files
-/src/ethics_safety/logs/*.log
+*.log
+
+# Ignore knowledge base
+src/persistent_knowledge.json
