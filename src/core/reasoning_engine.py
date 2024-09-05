@@ -256,20 +256,22 @@ class ReasoningEngine:
         return f"No insight available for {topic}"
 
     def calculate_relevance(self, topic1: str, topic2: str) -> float:
+        logging.info(f"Calculating relevance between {topic1} and {topic2}")
         try:
             # Get the relationships for each topic
             relationships1 = self.kb.get_relationships(topic1)
             relationships2 = self.kb.get_relationships(topic2)
 
             # Extract only the related entity names
-            entities1 = set(rel[0] for rel in relationships1 if isinstance(rel, tuple) and len(rel) > 0)
-            entities2 = set(rel[0] for rel in relationships2 if isinstance(rel, tuple) and len(rel) > 0)
+            entities1 = self._extract_related_entities(relationships1)
+            entities2 = self._extract_related_entities(relationships2)
 
             # Calculate the Jaccard similarity between the two sets of entities
             common_entities = entities1.intersection(entities2)
             union_entities = entities1.union(entities2)
 
             if not union_entities:
+                logging.info(f"No common entities between {topic1} and {topic2}")
                 return 0.0  # If there are no entities, return 0 relevance
 
             jaccard_similarity = len(common_entities) / len(union_entities)
@@ -282,12 +284,13 @@ class ReasoningEngine:
             combined_relevance = (jaccard_similarity + kb_relevance1 + kb_relevance2) / 3
 
             # Apply altered state effects
-            combined_relevance = self._apply_state_effects(combined_relevance)
+            final_relevance = self._apply_state_effects(combined_relevance)
 
-            return combined_relevance
+            logging.info(f"Calculated relevance between {topic1} and {topic2}: {final_relevance:.4f}")
+            return final_relevance
 
         except Exception as e:
-            print(f"Error calculating relevance between {topic1} and {topic2}: {str(e)}")
+            logging.exception(f"Error calculating relevance between {topic1} and {topic2}: {str(e)}")
             return 0.0  # Return 0 relevance if there's an error
 
 # Example usage

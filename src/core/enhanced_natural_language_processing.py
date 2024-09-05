@@ -157,22 +157,41 @@ class EnhancedNaturalLanguageProcessing:
         return attributes
 
     def analyze_text(self, text: str) -> Dict[str, Any]:
-        preprocessed_text = self.preprocess_text(text)
-        pos_tagged_text = [self.pos_tag(sentence_tokens) for sentence_tokens in preprocessed_text]
-        
-        analysis = {
-            'sentence_count': len(preprocessed_text),
-            'word_count': sum(len(sentence) for sentence in preprocessed_text),
-            'pos_distribution': self._get_pos_distribution(pos_tagged_text),
-            'entities': self.extract_entities(text),
-            'relationships': self.extract_relationships(text),
-            'attributes': self.extract_attributes(text)
-        }
+        logging.info("Starting text analysis")
+        try:
+            if not text or not isinstance(text, str):
+                logging.warning("Invalid input text for analysis")
+                return {}
 
-        # Add reasoning based on extracted information
-        analysis['inferences'] = self._generate_inferences(analysis)
-        
-        return analysis
+            preprocessed_text = self.preprocess_text(text)
+            pos_tagged_text = [self.pos_tag(sentence_tokens) for sentence_tokens in preprocessed_text]
+            
+            analysis = {
+                'sentence_count': len(preprocessed_text),
+                'word_count': sum(len(sentence) for sentence in preprocessed_text),
+                'pos_distribution': self._get_pos_distribution(pos_tagged_text),
+                'entities': self.extract_entities(text),
+                'relationships': self.extract_relationships(text),
+                'attributes': self.extract_attributes(text)
+            }
+
+            analysis['inferences'] = self._generate_inferences(analysis)
+            
+            logging.info(f"Text analysis completed. Sentences: {analysis['sentence_count']}, Words: {analysis['word_count']}")
+            return analysis
+
+        except Exception as e:
+            logging.error(f"Error during text analysis: {str(e)}", exc_info=True)
+            return {
+                'error': str(e),
+                'sentence_count': 0,
+                'word_count': 0,
+                'pos_distribution': {},
+                'entities': [],
+                'relationships': [],
+                'attributes': [],
+                'inferences': []
+            }
 
     def _get_pos_distribution(self, pos_tagged_text: List[List[tuple]]) -> Dict[str, int]:
         pos_counts = {}

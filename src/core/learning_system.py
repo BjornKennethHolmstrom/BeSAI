@@ -7,7 +7,7 @@ from core.natural_language_processing import NaturalLanguageProcessing
 from core.reasoning_engine import ReasoningEngine
 from core.enhanced_knowledge_base import EnhancedKnowledgeBase
 
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 
 class LearningSystem:
     def __init__(self, knowledgebase, nlp, reasoning_engine, metacognition):
@@ -17,24 +17,35 @@ class LearningSystem:
         self.metacognition = metacognition
         self.learning_history = []
 
-    def generate_hypothesis(self, topic: str) -> str:
-        # Get the entity and its relationships
-        entity = self.kb.get_entity(topic)
-        relationships = self.kb.get_relationships(topic)
-        
-        # Get metacognitive assessment
-        assessment = self.metacognition.assess_knowledge(topic)
-        
-        # Generate base hypothesis
-        base_hypothesis = self._generate_base_hypothesis(topic, entity, relationships)
-        
-        # Enhance hypothesis with cross-domain insights
-        enhanced_hypothesis = self._enhance_with_cross_domain_insights(base_hypothesis, topic)
-        
-        # Add metacognitive reflection
-        final_hypothesis = self._add_metacognitive_reflection(enhanced_hypothesis, assessment)
-        
-        return final_hypothesis
+    def generate_hypothesis(self, topic: str) -> Optional[str]:
+        logging.info(f"Generating hypothesis for topic: {topic}")
+        try:
+            # Get the entity and its relationships
+            entity = self.kb.get_entity(topic)
+            if not entity:
+                logging.warning(f"No entity found for topic: {topic}")
+                return None
+
+            relationships = self.kb.get_relationships(topic)
+            
+            # Get metacognitive assessment
+            assessment = self.metacognition.assess_knowledge(topic)
+            
+            # Generate base hypothesis
+            base_hypothesis = self._generate_base_hypothesis(topic, entity, relationships)
+            
+            # Enhance hypothesis with cross-domain insights
+            enhanced_hypothesis = self._enhance_with_cross_domain_insights(base_hypothesis, topic)
+            
+            # Add metacognitive reflection
+            final_hypothesis = self._add_metacognitive_reflection(enhanced_hypothesis, assessment)
+            
+            logging.info(f"Successfully generated hypothesis for {topic}")
+            return final_hypothesis
+
+        except Exception as e:
+            logging.exception(f"Error generating hypothesis for {topic}: {str(e)}")
+            return None
 
     def _generate_base_hypothesis(self, topic: str, entity: Dict[str, Any], relationships: List[Tuple[str, str, Dict[str, Any]]]) -> str:
         hypothesis = f"Based on the current understanding of {topic}, "
@@ -156,6 +167,22 @@ class LearningSystem:
                 elif certainty < 0.5:
                     topics.append(f"Verify information about {entity}")
         return topics
+
+    def analyze_sentiment(self, text: str) -> float:
+        """
+        Placeholder method for sentiment analysis.
+        Returns a sentiment score between -1 (very negative) and 1 (very positive).
+        """
+        logging.warning("Using placeholder sentiment analysis. Implement a proper sentiment analysis method for more accurate results.")
+        return 0.0  # Neutral sentiment as a placeholder
+    
+    def categorize_perspective(self, text: str) -> str:
+        """
+        Placeholder method for perspective categorization.
+        Returns a string representing the perspective category.
+        """
+        logging.warning("Using placeholder perspective categorization. Implement a proper categorization method for more accurate results.")
+        return "neutral"  # Neutral perspective as a placeholder
 
 # Example usage
 if __name__ == "__main__":

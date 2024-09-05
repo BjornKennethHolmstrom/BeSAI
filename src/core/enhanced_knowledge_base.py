@@ -10,6 +10,7 @@ from collections import Counter
 import json
 from datetime import datetime
 import re
+import logging
 
 class EnhancedKnowledgeBase:
     def __init__(self):
@@ -49,12 +50,20 @@ class EnhancedKnowledgeBase:
         }
         
         attributes["metadata"] = metadata
-        self.graph.add_edge(entity1, entity2, key=relationship, **attributes)
+        
+        # Ensure the 'key' is set in the attributes
+        attributes["key"] = relationship
+        
+        self.graph.add_edge(entity1, entity2, **attributes)
+
+        logging.info(f"Added relationship: {entity1} -{relationship}-> {entity2}")
 
     def get_relationships(self, entity: str) -> List[Tuple[str, str, Dict[str, Any]]]:
         relationships = []
         for _, related_entity, data in self.graph.edges(entity, data=True):
-            relationships.append((related_entity, data['key'], data))
+            # Use .get() method with a default value to avoid KeyError
+            relationship_type = data.get('key', 'unknown')
+            relationships.append((related_entity, relationship_type, data))
         return relationships
 
     def get_related_topics(self, topic: str, max_distance: int = 2, max_topics: int = 5) -> List[str]:
@@ -66,25 +75,65 @@ class EnhancedKnowledgeBase:
                 break
         return related_topics
 
-    def query(self, query: Dict[str, Any]) -> List[Dict[str, Any]]:
-        results = []
-        for node, data in self.graph.nodes(data=True):
-            if all(key in data and data[key] == value for key, value in query.items()):
-                results.append({'entity': node, 'attributes': data})
-        return results
+    def query(self, query: Dict[str, Any]) -> Optional[List[Dict[str, Any]]]:
+        logging.info(f"Executing query: {query}")
+        try:
+            results = []
+            for node, data in self.graph.nodes(data=True):
+                if all(data.get(key) == value for key, value in query.items()):
+                    result = {'entity': node, 'attributes': data}
+                    results.append(result)
+                    logging.debug(f"Found matching entity: {node}")
+            
+            logging.info(f"Query completed. Found {len(results)} results.")
+            return results if results else None
 
-    def update_entity(self, entity: str, attributes: Dict[str, Any], certainty: float = 1.0):
-        if entity in self.graph.nodes:
+        except AttributeError as e:
+            logging.error(f"AttributeError in query - possible issue with graph structure: {str(e)}")
+            return None
+
+        except KeyError as e:
+            logging.error(f"KeyError in query - possible missing key in query or data: {str(e)}")
+            return None
+
+        except Exception as e:
+            logging.exception(f"Unexpected error in query: {str(e)}")
+            raise
+    def update_entity(self, entity: str, attributes: Dict[str, Any], certainty: float = 1.0) -> Optional[bool]:
+        logging.info(f"Updating entity: {entity} with attributes: {attributes}")
+        try:
+            if entity not in self.graph.nodes:
+                logging.warning(f"Entity '{entity}' not found in the graph. Update aborted.")
+                return False
+
             current_attrs = self.graph.nodes[entity]
             current_certainty = current_attrs.get('certainty', {})
+
+            if not isinstance(current_certainty, dict):
+                current_certainty = {}
+                logging.warning(f"Certainty for entity '{entity}' was not a dictionary. Resetting to empty dict.")
+
             for key, value in attributes.items():
                 current_attrs[key] = value
-                if isinstance(current_certainty, dict):
-                    current_certainty[key] = (current_certainty.get(key, 1.0) + certainty) / 2
-                else:
-                    current_certainty = {key: (1.0 + certainty) / 2}
+                current_key_certainty = current_certainty.get(key, 1.0)
+                current_certainty[key] = (current_key_certainty + certainty) / 2
+
             current_attrs['certainty'] = current_certainty
 
+            logging.info(f"Successfully updated entity: {entity}")
+            return True
+
+        except AttributeError as e:
+            logging.error(f"AttributeError in update_entity - possible issue with graph structure: {str(e)}")
+            return None
+
+        except KeyError as e:
+            logging.error(f"KeyError in update_entity - unexpected missing key: {str(e)}")
+            return None
+
+        except Exception as e:
+            logging.exception(f"Unexpected error in update_entity: {str(e)}")
+            raise
     def get_entities_by_type(self, entity_type: str) -> List[str]:
         return list(self.entity_types.get(entity_type, []))
 
@@ -92,9 +141,16 @@ class EnhancedKnowledgeBase:
         return list(self.entity_types.keys())
 
     def get_entity(self, entity: str) -> Dict[str, Any]:
-        if entity in self.graph.nodes:
-            return self.graph.nodes[entity]
-        return {}
+        try:
+            if entity in self.graph.nodes:
+                return self.graph.nodes[entity]
+            return {}
+        except KeyError as e:
+            logging.error(f"KeyError in get_entity: {str(e)}")
+            return {}
+        except Exception as e:
+            logging.exception(f"Unexpected error in get_entity: {str(e)}")
+            raise
 
     def get_all_entities(self) -> List[str]:
         return list(self.graph.nodes())
@@ -125,42 +181,42 @@ class EnhancedKnowledgeBase:
         return new_kb
 
     def calculate_relevance(self, entity: str) -> float:
+        logging.info(f"Calculating relevance for entity: {entity}")
         try:
             relationships = self.get_relationships(entity)
             if not relationships:
+                logging.info(f"No relationships found for entity: {entity}")
                 return 0.0
 
-            # Count the number of relationships for each related entity
             related_entity_counts = Counter(rel[0] for rel in relationships if isinstance(rel, tuple) and len(rel) > 0)
 
             if not related_entity_counts:
+                logging.info(f"No valid related entities found for entity: {entity}")
                 return 0.0
 
-            # Calculate the average number of relationships
             avg_relationships = sum(related_entity_counts.values()) / len(related_entity_counts)
 
-            # Calculate relevance based on the number and strength of relationships
             relevance = 0.0
             for rel, count in related_entity_counts.items():
                 entity_data = self.get_entity(rel)
                 if isinstance(entity_data, dict):
                     certainty = entity_data.get('certainty', 1.0)
                     if isinstance(certainty, dict):
-                        # If certainty is a dict, use the average of its values
                         certainty = sum(certainty.values()) / len(certainty) if certainty else 1.0
                     relevance += certainty * count
                 else:
-                    relevance += count  # Default to using just the count if entity_data is not a dict
+                    relevance += count
 
-            relevance /= len(relationships) if relationships else 1
-
-            # Adjust relevance based on the average number of relationships
+            relevance /= len(relationships)
             adjusted_relevance = relevance * (1 + avg_relationships / 10)
+            final_relevance = min(1.0, adjusted_relevance)
 
-            return min(1.0, adjusted_relevance)  # Ensure relevance is between 0 and 1
+            logging.info(f"Calculated relevance for {entity}: {final_relevance:.4f}")
+            return final_relevance
+
         except Exception as e:
-            print(f"Error calculating relevance for {entity}: {str(e)}")
-            return 0.0  # Return 0 relevance if there's an error
+            logging.error(f"Error calculating relevance for {entity}: {str(e)}", exc_info=True)
+            return 0.0
 
     def clean_entities(self):
         entities_to_remove = []

@@ -18,47 +18,81 @@ class Metacognition:
         """
         Assess the AI's knowledge on a given topic.
         """
-        entity = self.kb.get_entity(topic)
-        relationships = self.kb.get_relationships(topic)
-        relevance = self.kb.calculate_relevance(topic)
+        logging.info(f"Assessing knowledge for topic: {topic}")
+        try:
+            entity = self.kb.get_entity(topic)
+            relationships = self.kb.get_relationships(topic)
+            relevance = self.kb.calculate_relevance(topic)
 
-        assessment = {
-            "topic": topic,
-            "knowledge_depth": len(entity) + len(relationships),
-            "relevance": relevance,
-            "confidence": min(relevance, self.confidence_threshold),
-            "gaps": self._identify_knowledge_gaps(topic)
-        }
+            knowledge_depth = len(entity) + len(relationships) if entity else 0
+            confidence = min(relevance, self.confidence_threshold)
 
-        return assessment
+            assessment = {
+                "topic": topic,
+                "knowledge_depth": knowledge_depth,
+                "relevance": relevance,
+                "confidence": confidence,
+                "gaps": self._identify_knowledge_gaps(topic)
+            }
+
+            logging.info(f"Knowledge assessment for {topic}: depth={knowledge_depth}, confidence={confidence:.2f}")
+            return assessment
+
+        except Exception as e:
+            logging.exception(f"Error assessing knowledge for {topic}: {str(e)}")
+            return {
+                "topic": topic,
+                "knowledge_depth": 0,
+                "relevance": 0,
+                "confidence": 0,
+                "gaps": ["Error in assessment process"],
+                "error": str(e)
+            }
 
     def detect_biases(self, topic: str) -> Dict[str, Any]:
         """
         Detect potential biases in the AI's knowledge about a topic.
         """
-        entity = self.kb.get_entity(topic)
-        relationships = self.kb.get_relationships(topic)
-        
-        # Analyze sources
-        sources = [entity.get('metadata', {}).get('source', 'unknown')]
-        sources.extend([r[2].get('metadata', {}).get('source', 'unknown') for r in relationships])
-        source_diversity = len(set(sources)) / len(sources) if sources else 0
+        try:
+            entity = self.kb.get_entity(topic)
+            relationships = self.kb.get_relationships(topic)
+            
+            # Analyze sources
+            sources = [entity.get('metadata', {}).get('source', 'unknown')]
+            sources.extend([r[2].get('metadata', {}).get('source', 'unknown') for r in relationships])
+            source_diversity = len(set(sources)) / len(sources) if sources else 0
 
-        # Analyze sentiment
-        sentiments = [self.ls.analyze_sentiment(r[0]) for r in relationships]
-        sentiment_bias = max(Counter(sentiments).values()) / len(sentiments) if sentiments else 0
+            # Analyze sentiment
+            sentiments = []
+            perspectives = []
+            for r in relationships:
+                try:
+                    if hasattr(self.ls, 'analyze_sentiment'):
+                        sentiments.append(self.ls.analyze_sentiment(r[0]))
+                    if hasattr(self.ls, 'categorize_perspective'):
+                        perspectives.append(self.ls.categorize_perspective(r[0]))
+                except Exception as e:
+                    logging.warning(f"Error in sentiment analysis or perspective categorization: {str(e)}")
 
-        # Analyze perspective (assuming we have a method to categorize perspectives)
-        perspectives = [self.ls.categorize_perspective(r[0]) for r in relationships]
-        perspective_bias = max(Counter(perspectives).values()) / len(perspectives) if perspectives else 0
+            sentiment_bias = max(Counter(sentiments).values()) / len(sentiments) if sentiments else 0
+            perspective_bias = max(Counter(perspectives).values()) / len(perspectives) if perspectives else 0
 
-        biases = {
-            "source_bias": 1 - source_diversity,
-            "sentiment_bias": sentiment_bias,
-            "perspective_bias": perspective_bias
-        }
+            biases = {
+                "source_bias": 1 - source_diversity,
+                "sentiment_bias": sentiment_bias,
+                "perspective_bias": perspective_bias
+            }
 
-        return biases
+            return biases
+
+        except Exception as e:
+            logging.error(f"Error detecting biases for topic {topic}: {str(e)}")
+            return {
+                "source_bias": 0,
+                "sentiment_bias": 0,
+                "perspective_bias": 0,
+                "error": str(e)
+            }
 
     def acknowledge_biases(self, topic: str) -> str:
         """
@@ -85,15 +119,24 @@ class Metacognition:
         """
         Identify potential gaps in knowledge about a topic.
         """
-        gaps = []
-        essential_attributes = ["definition", "origin", "applications", "related_concepts"]
-        entity = self.kb.get_entity(topic)
-        
-        for attr in essential_attributes:
-            if attr not in entity:
-                gaps.append(f"Missing {attr}")
+        try:
+            gaps = []
+            essential_attributes = ["definition", "origin", "applications", "related_concepts"]
+            entity = self.kb.get_entity(topic)
+            
+            if not entity:
+                return ["No information available"]
 
-        return gaps
+            for attr in essential_attributes:
+                if attr not in entity:
+                    gaps.append(f"Missing {attr}")
+
+            logging.debug(f"Identified knowledge gaps for {topic}: {gaps}")
+            return gaps
+
+        except Exception as e:
+            logging.error(f"Error identifying knowledge gaps for {topic}: {str(e)}")
+            return ["Error in gap identification process"]
 
     def identify_improvement_areas(self) -> List[Dict[str, Any]]:
         improvement_areas = []

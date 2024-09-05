@@ -1,4 +1,6 @@
 import logging
+import os
+from logging.handlers import RotatingFileHandler
 import threading
 import cmd
 import schedule
@@ -452,7 +454,33 @@ def run_schedule():
             logging.error(f"Error in schedule: {str(e)}")
             logging.error(traceback.format_exc())
 
+def setup_logging(log_file='besai.log', log_level=logging.INFO):
+    # Create logs directory if it doesn't exist
+    log_dir = 'logs'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    # Set up logging to file
+    file_handler = RotatingFileHandler(
+        os.path.join(log_dir, log_file), maxBytes=10*1024*1024, backupCount=5
+    )
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    ))
+
+    # Set up logging to console
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logging.Formatter(
+        '%(asctime)s - %(levelname)s - %(message)s'
+    ))
+
+    # Add the handlers to the root logger
+    logging.getLogger('').setLevel(log_level)
+    logging.getLogger('').addHandler(file_handler)
+    logging.getLogger('').addHandler(console_handler)
+
 if __name__ == "__main__":
+    setup_logging()
     console = BeSAIConsole()
     try:
         console.cmdloop()

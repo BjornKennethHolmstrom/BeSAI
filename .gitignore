@@ -10,6 +10,7 @@ venv/
 .vscode/
 
 # Ignore log files
+logs/
 *.log
 
 # Ignore knowledge base

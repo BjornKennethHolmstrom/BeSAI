@@ -57,74 +57,78 @@ class AutonomousLearning:
 
     def explore_topic(self, topic: str, depth: int = 0):
         start_time = time.time()
-        if depth >= self.max_exploration_depth or self.exploration_count >= self.max_explorations:
-            logging.info(f"Stopping exploration of {topic} at depth {depth}. Max depth or max explorations reached.")
-            return
-
-        topic = self._clean_topic(topic)
-        if not topic or topic in self.explored_topics:
-            logging.info(f"Skipping topic {topic} (depth: {depth}). Already explored or invalid.")
-            return
-
-        self.exploration_count += 1
-        logging.info(f"Exploring topic: {topic} (depth: {depth}, exploration: {self.exploration_count})")
-        self.explored_topics.add(topic)
+        logging.info(f"Starting exploration of topic: {topic} (depth: {depth})")
 
         try:
-            logging.info(f"Scraping Wikipedia for {topic}")
+            if depth >= self.max_exploration_depth or self.exploration_count >= self.max_explorations:
+                logging.info(f"Stopping exploration of {topic} at depth {depth}. Max depth or max explorations reached.")
+                return
+
+            topic = self._clean_topic(topic)
+            if not topic or topic in self.explored_topics:
+                logging.info(f"Skipping topic {topic} (depth: {depth}). Already explored or invalid.")
+                return
+
+            self.exploration_count += 1
+            self.explored_topics.add(topic)
+
             wiki_content = self._scrape_wikipedia(topic)
-            logging.info(f"Scraping IEP for {topic}")
             iep_content = self._scrape_iep(topic)
-            combined_content = wiki_content + " " + iep_content
+            combined_content = f"{wiki_content}\n\n{iep_content}".strip()
 
-            if combined_content.strip():
-                logging.info(f"Analyzing content for {topic}")
-                analysis = self.nlp.analyze_text(combined_content)
-                logging.info(f"Learning from text for {topic}")
-                self.ls.learn_from_text(combined_content)
+            if not combined_content:
+                logging.warning(f"No content found for topic: {topic}")
+                return
 
-                # Add knowledge to the versioned knowledge base
-                self.kb.add_entity(topic, {"content": combined_content}, source="Wikipedia and IEP")
-                
-                for entity in analysis['entities']:
-                    self.kb.add_entity(entity['text'], {"type": entity['label']}, source="NLP Analysis")
-                
-                for relationship in analysis['relationships']:
-                    self.kb.add_relationship(relationship['subject'], relationship['object'], relationship['predicate'], source="NLP Analysis")
+            analysis = self.nlp.analyze_text(combined_content)
+            self.ls.learn_from_text(combined_content)
 
-                # Perform metacognitive assessment
-                self.perform_metacognitive_assessment(topic)
+            # Add knowledge to the knowledge base
+            self.kb.add_entity(topic, {"content": combined_content}, source="Wikipedia and IEP")
+            
+            for entity in analysis.get('entities', []):
+                self.kb.add_entity(entity['text'], {"type": entity.get('label', 'unknown')}, source="NLP Analysis")
+            
+            for relationship in analysis.get('relationships', []):
+                self.kb.add_relationship(
+                    relationship.get('subject', ''), 
+                    relationship.get('object', ''), 
+                    relationship.get('predicate', ''), 
+                    source="NLP Analysis"
+                )
 
-                logging.info(f"Generating hypothesis for {topic}")
-                hypothesis = self.ls.generate_hypothesis(topic)
-                if hypothesis:
-                    logging.info(f"Generated hypothesis for {topic}: {hypothesis[:100]}...")  # Log first 100 chars
-                    self.kb.add_entity(f"hypothesis_{topic}", {"content": hypothesis}, source="Hypothesis Generation")
-                    logging.info(f"Stored hypothesis for {topic}")
+            self.perform_metacognitive_assessment(topic)
 
-                if depth < self.max_exploration_depth - 1:
-                    related_topics = [self._clean_topic(entity['text']) for entity in analysis['entities'] if entity['text'].lower() != topic.lower()]
-                    related_topics = [t for t in related_topics if t and t not in self.explored_topics]
-                    logging.info(f"Prioritizing related topics for {topic}")
-                    prioritized_topics = self._prioritize_topics(related_topics, topic)
+            hypothesis = self.ls.generate_hypothesis(topic)
+            if hypothesis:
+                self.kb.add_entity(f"hypothesis_{topic}", {"content": hypothesis}, source="Hypothesis Generation")
 
-                    for related_topic in prioritized_topics[:self.max_topics_per_level]:
-                        if self.exploration_count < self.max_explorations:
-                            time.sleep(random.uniform(1, 3))
-                            self.explore_topic(related_topic, depth + 1)
-                        else:
-                            logging.info("Maximum number of explorations reached. Stopping further exploration.")
-                            return
+            if depth < self.max_exploration_depth - 1:
+                related_topics = [
+                    self._clean_topic(entity['text']) 
+                    for entity in analysis.get('entities', []) 
+                    if entity['text'].lower() != topic.lower()
+                ]
+                related_topics = [t for t in related_topics if t and t not in self.explored_topics]
+                prioritized_topics = self._prioritize_topics(related_topics, topic)
+
+                for related_topic in prioritized_topics[:self.max_topics_per_level]:
+                    if self.exploration_count < self.max_explorations and not self.stop_event.is_set():
+                        time.sleep(random.uniform(1, 3))
+                        self.explore_topic(related_topic, depth + 1)
+                    else:
+                        logging.info("Maximum explorations reached or stop event set. Stopping further exploration.")
+                        return
+
             self.metacognition.update_goal_progress(topic)
-            logging.info(f"Saving knowledge for {topic}")
             self.save_knowledge()
 
         except Exception as e:
             logging.error(f"Error exploring topic {topic}: {str(e)}", exc_info=True)
             self.kb.flag_improvement(topic, f"Error during exploration: {str(e)}")
-
-        end_time = time.time()
-        logging.info(f"Exploration of {topic} completed in {end_time - start_time:.2f} seconds")
+        finally:
+            end_time = time.time()
+            logging.info(f"Exploration of {topic} completed in {end_time - start_time:.2f} seconds")
 
     def autonomous_exploration(self):
         while not self.stop_event.is_set():
