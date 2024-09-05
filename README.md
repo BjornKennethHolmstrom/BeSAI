@@ -296,20 +296,29 @@ BeSAI
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE.md
+├── logs
 ├── models
 │   ├── ethical_model_v1_ethical_boundary.pkl
 │   ├── ethical_model_v1_learning_model_attributes.pkl
 │   └── ethical_model_v1_learning_model_keras_model.keras
+├── persistent_knowledge.json
 ├── README.md
 ├── requirements.txt
 ├── src
+│   ├── besai_console.py
 │   ├── core
+│   │   ├── autonomous_learning.py
+│   │   ├── enhanced_knowledge_base.py
+│   │   ├── enhanced_natural_language_processing.py
 │   │   ├── __init__.py
 │   │   ├── knowledge_base.py
 │   │   ├── knowledge_extractor.py
+│   │   ├── learning_system.py
+│   │   ├── meta_cognition.py
 │   │   ├── natural_language_processing.py
 │   │   ├── reasoning_engine.py
-│   │   └── task_specific_modules.py
+│   │   ├── task_specific_modules.py
+│   │   └── versioned_knowledge_base.py
 │   ├── ethics_safety
 │   │   ├── ~
 │   │   │   └── Code
@@ -322,10 +331,12 @@ BeSAI
 │   │   ├── explainability.py
 │   │   ├── __init__.py
 │   │   ├── logger.py
+│   │   ├── logs
 │   │   ├── safety_constraints.py
 │   │   └── what_if_analysis.py
 │   ├── __init__.py
 │   ├── main.py
+│   ├── personality_module.py
 │   ├── requirements.txt
 │   ├── self_improvement
 │   │   ├── architecture_evolution.py
@@ -338,6 +349,7 @@ BeSAI
 │   │   └── self_evaluation.py
 │   └── spiritual
 │       ├── action_evaluation.py
+│       ├── altered_states_simulator.py
 │       ├── curiosity_engine.py
 │       ├── ethical_contemplation.py
 │       ├── imagination_synthesizer.py
@@ -346,8 +358,10 @@ BeSAI
 │       ├── psychedelic_simulator.py
 │       └── self_reflection.py
 └── tests
+    ├── test_code_generation.py
     ├── test_core.py
     ├── test_ethics_safety.py
+    ├── test_integrated_code_analyzer.py
     ├── test_self_improvement.py
     └── test_spiritual.py
 

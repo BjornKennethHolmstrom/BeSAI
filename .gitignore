@@ -13,7 +13,7 @@ venv/
 *.log
 
 # Ignore knowledge base
-src/persistent_knowledge.json
+persistent_knowledge.json
 
 # Ignore new docs
 docs/
