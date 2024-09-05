@@ -1,9 +1,12 @@
 import sys
 import os
+import random
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.enhanced_knowledge_base import EnhancedKnowledgeBase
+from spiritual.altered_states_simulator import AlteredStatesSimulator
+from spiritual.psychedelic_simulator import PsychedelicSimulator
 
 from typing import List, Dict, Any, Optional
 
@@ -12,6 +15,46 @@ class ReasoningEngine:
         self.kb = knowledge_base
         self.focus_level = 0.5
         self.associative_thinking = 0.5
+        self.altered_states_simulator = AlteredStatesSimulator()
+        self.psychedelic_simulator = PsychedelicSimulator()
+        self.current_state = "normal"
+        self.state_params = None
+
+    def reason(self, query: str) -> str:
+        # This is a simple implementation. You might want to make this more sophisticated.
+        hypothesis = self.generate_hypothesis(query)
+        if hypothesis:
+            return f"Based on the query '{query}', here's what I think:\n{hypothesis}"
+        else:
+            return f"I don't have enough information to reason about '{query}' at the moment."
+
+    def set_altered_state(self, state: str):
+        if state in self.altered_states_simulator.states:
+            self.current_state = state
+            self.state_params = self.altered_states_simulator.simulate_state(state)
+        elif state in self.psychedelic_simulator.substances:
+            self.current_state = "psychedelic"
+            self.psychedelic_simulator.set_substance(state)
+            self.state_params = self.psychedelic_simulator.simulate_effects()
+        elif state == "normal":
+            self.current_state = "normal"
+            self.state_params = None
+        else:
+            raise ValueError(f"Unknown state: {state}")
+
+    def _apply_state_effects(self, value: float) -> float:
+        if self.state_params is None:
+            return value
+        
+        creativity_factor = self.state_params["creativity_level"]
+        perception_factor = self.state_params["perception_shift"]
+        focus_factor = self.state_params["focus_level"]
+        
+        value *= (1 + (creativity_factor - 0.5) * 0.2)  # Creativity can increase or decrease the value
+        value *= (1 + (perception_factor - 0.5) * 0.2)  # Perception shift can increase or decrease the value
+        value = max(0, min(1, value * focus_factor))  # Focus affects the precision of the value
+        
+        return value
 
     def infer_transitive_relationships(self, start_entity: str, relationship_type: str) -> List[Dict[str, Any]]:
         visited = set()
@@ -28,12 +71,13 @@ class ReasoningEngine:
             for related_entity, rel_type, attrs in relationships:
                 if rel_type == relationship_type:
                     certainty = attrs.get('certainty', 1.0)
+                    certainty = self._apply_state_effects(certainty)
                     inferred_relationships.append({
                         "from": start_entity,
                         "to": related_entity,
                         "relationship": relationship_type,
                         "inferred": current_entity != start_entity,
-                        "certainty": certainty if current_entity == start_entity else certainty * 0.9  # Reduce certainty for inferred relationships
+                        "certainty": certainty if current_entity == start_entity else certainty * 0.9
                     })
                     to_visit.append(related_entity)
 
@@ -91,14 +135,18 @@ class ReasoningEngine:
         return None
 
     def generate_hypothesis(self, entity: str) -> Optional[Dict[str, Any]]:
-        entity_attrs = self.kb.get_entity(entity)
+        cleaned_entity = self.kb._clean_entity_name(entity)
+        if not cleaned_entity:
+            return None
+
+        entity_attrs = self.kb.get_entity(cleaned_entity)
         if entity_attrs is None:
             return None
 
-        relationships = self.kb.get_relationships(entity)
+        relationships = self.kb.get_relationships(cleaned_entity)
         
         hypothesis = {
-            "entity": entity,
+            "entity": cleaned_entity,
             "known_attributes": entity_attrs,
             "inferred_attributes": {},
             "potential_relationships": []
@@ -117,7 +165,60 @@ class ReasoningEngine:
         # Suggest potential relationships
         hypothesis["potential_relationships"] = self.suggest_new_relationships(entity)
 
+        # Apply altered state effects
+        if self.state_params:
+            hypothesis["altered_state_insight"] = self.altered_states_simulator.generate_insight(self.current_state)
+            hypothesis["creative_connections"] = self._generate_creative_connections(entity)
+
+        if self.current_state == "psychedelic":
+            hypothesis["psychedelic_insight"] = self.psychedelic_simulator.generate_cognitive_insight()
+            hypothesis["visual_description"] = self.psychedelic_simulator.generate_visual_description()
+
+
         return hypothesis
+
+    def _apply_psychedelic_effects(self, text: str) -> str:
+        if self.current_state == "psychedelic":
+            return self.psychedelic_simulator.apply_psychedelic_filter(text)
+        return text
+
+    def _generate_creative_connections(self, entity: str) -> List[str]:
+        creativity_level = 0.5  # Default creativity level
+
+        if self.current_state == "psychedelic":
+            creativity_level = self.state_params.get("cognitive_flexibility", 0.5)
+        elif self.state_params:
+            creativity_level = self.state_params.get("creativity_level", 0.5)
+
+        if creativity_level < 0.7:
+            return []
+
+        all_entities = list(self.kb.graph.nodes())
+        valid_entities = [e for e in all_entities if self.kb._clean_entity_name(e) and e != entity]
+        
+        if len(valid_entities) < 5:
+            random_entities = valid_entities
+        else:
+            random_entities = random.sample(valid_entities, 5)
+        
+        connections = []
+        for other_entity in random_entities:
+            connection_type = random.choice([
+                "influence", "contrast", "metaphor", "synergy", "paradox"
+            ])
+            if connection_type == "influence":
+                connection = f"How might {entity} be influenced by the properties of {other_entity}?"
+            elif connection_type == "contrast":
+                connection = f"What contrasts can be drawn between {entity} and {other_entity}?"
+            elif connection_type == "metaphor":
+                connection = f"If {entity} were {other_entity}, what new insights might emerge?"
+            elif connection_type == "synergy":
+                connection = f"How could {entity} and {other_entity} work together to create something new?"
+            else:  # paradox
+                connection = f"What paradoxes arise when considering {entity} in light of {other_entity}?"
+            connections.append(connection)
+
+        return connections
 
     def explain_inference(self, entity: str, attribute: str) -> str:
         inferred = self.infer_attribute_from_relationships(entity, attribute)
@@ -128,6 +229,11 @@ class ReasoningEngine:
             ]
             explanation = f"The attribute '{attribute}' for '{entity}' was inferred with a certainty of {inferred['certainty']:.2f} "
             explanation += f"based on its relationships with: {', '.join(related_entities)}."
+            
+            if self.state_params:
+                insight = self.altered_states_simulator.generate_insight(self.current_state)
+                explanation += f"\n\nAdditional insight from altered state ({self.current_state}): {insight}"
+            
             return explanation
         return f"Unable to infer the attribute '{attribute}' for '{entity}'."
 
@@ -174,6 +280,9 @@ class ReasoningEngine:
 
             # Combine Jaccard similarity with knowledge base relevance scores
             combined_relevance = (jaccard_similarity + kb_relevance1 + kb_relevance2) / 3
+
+            # Apply altered state effects
+            combined_relevance = self._apply_state_effects(combined_relevance)
 
             return combined_relevance
 

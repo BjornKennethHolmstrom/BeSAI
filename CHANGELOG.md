@@ -1,6 +1,15 @@
 # CHANGELOG
 
-## Version 0.9.0 (Current)
+## Version 0.10.0 (Current)
+
+- Implemented PersonalityModule for more human-like and diverse interactions
+- Integrated PersonalityModule with BeSAIConsole for personality-influenced responses
+- Enhanced ReasoningEngine with a new 'reason' method for improved query handling
+- Improved error handling and robustness in BeSAIConsole
+- Updated file loading mechanism for personality data
+- Resolved issues with NLTK data availability
+
+## Version 0.9.0
 
 - Implemented Metacognition module for enhanced self-awareness and reflection
 - Improved hypothesis generation with cross-domain insights and creative connections

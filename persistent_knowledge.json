@@ -1,83 +1,20 @@
 {
   "entities": {
-    "1": {
-      "type": "CARDINAL",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353757",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "1][web 2": {
-      "type": "CARDINAL",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353780",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "2": {
-      "type": "CARDINAL",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353784",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
     "Upanishads": {
       "type": "GPE",
       "metadata": {
-        "source": "Wikipedia and IEP",
-        "acquisition_date": "2024-09-04T21:34:25.579519",
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237679",
         "version": 1,
         "certainty": 1.0
       },
       "content": "\n Divisions\n Sama vedic\n Yajur vedic\n Atharva vedic\n "
     },
-    "Jainism, Buddhism and Hinduism.[5]": {
-      "type": "ORG",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353789",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "dharma dhyana": {
-      "type": "PERSON",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353792",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
     "Buddhist": {
       "type": "NORP",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353795",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "anapanasati": {
-      "type": "ORG",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353797",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "vipassana": {
-      "type": "PERSON",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353800",
+        "acquisition_date": "2024-09-05T03:40:13.237705",
         "version": 1,
         "certainty": 1.0
       }
@@ -86,16 +23,7 @@
       "type": "NORP",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353802",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "Pata\u00f1jali's Yoga": {
-      "type": "ORG",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353805",
+        "acquisition_date": "2024-09-05T03:40:13.237709",
         "version": 1,
         "certainty": 1.0
       }
@@ -104,25 +32,16 @@
       "type": "PERSON",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353808",
-        "version": 1,
-        "certainty": 1.0
-      }
-    },
-    "cun \u5b58": {
-      "type": "PERSON",
-      "metadata": {
-        "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353811",
+        "acquisition_date": "2024-09-05T03:40:13.237712",
         "version": 1,
         "certainty": 1.0
       }
     },
     "Judaism": {
-      "type": "NORP",
+      "type": "ORG",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353813",
+        "acquisition_date": "2024-09-05T03:40:13.237717",
         "version": 1,
         "certainty": 1.0
       }
@@ -131,7 +50,7 @@
       "type": "NORP",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353816",
+        "acquisition_date": "2024-09-05T03:40:13.237720",
         "version": 1,
         "certainty": 1.0
       }
@@ -140,7 +59,7 @@
       "type": "ORG",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353818",
+        "acquisition_date": "2024-09-05T03:40:13.237723",
         "version": 1,
         "certainty": 1.0
       }
@@ -149,25 +68,4924 @@
       "type": "NORP",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353821",
+        "acquisition_date": "2024-09-05T03:40:13.237725",
         "version": 1,
         "certainty": 1.0
       }
     },
-    "pain,[6": {
-      "type": "FAC",
+    "Benevolence": {
+      "content": "Benevolence or Benevolent may refer to:\n ",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353823",
+        "acquisition_date": "2024-09-05T03:40:13.237728",
         "version": 1,
         "certainty": 1.0
       }
     },
-    "perception,[7": {
+    "German": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237730",
+        "version": 1,
+        "certainty": 1.0
+      },
+      "content": "German(s) may refer to:\n "
+    },
+    "Aha-Erlebnis": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237733",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Karl B\u00fchler": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237736",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Gestalt": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237739",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Classic": {
       "type": "PRODUCT",
       "metadata": {
         "source": null,
-        "acquisition_date": "2024-09-04T21:34:18.353826",
+        "acquisition_date": "2024-09-05T03:40:13.237742",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eugene Wigner": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237745",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Freeman Dyson": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237751",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Victor Stenger": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237753",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "David Bohm": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237756",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Empathy": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237758",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "David Hume": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237761",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Adam Smith": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237763",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Two": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237766",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Anglo": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237769",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hume": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237772",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Smith": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237775",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Michael Slote": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237777",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "John Rawls": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237780",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Thomas Nagel": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237784",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Continental": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237786",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Johann Herder": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237789",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Edmund Husserl": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237791",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Martin Heidegger": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237794",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Max Scheler": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237796",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Edith Stein": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237799",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Einf\u00fchlung": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237801",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Husserl": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237804",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Heidegger, Scheler": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237806",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Stein": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237809",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Heidegger": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237813",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Scheler": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237816",
+        "version": 1,
+        "certainty": 1.0
+      },
+      "content": "Scheler is a surname. Notable people with the surname include:\n "
+    },
+    "Contemporary Continental": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237818",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Larry Hatab": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237821",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Frederick Olafson": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237824",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Heideggerian Mitsein": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237827",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mitdasein": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237830",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Friedrich Nietzsche": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237832",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Holocaust": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237835",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Emmanuel Levinas": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237838",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Greek": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237840",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "English": {
+      "type": "LANGUAGE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237843",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aristotle": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237847",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Flavius Jospheus": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237849",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Judaica": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237852",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Polybius Histories": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237854",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Liddell": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237856",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aeschylus": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237859",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aristophanes": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237861",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Shakespeare": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237864",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cornell University": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237866",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Edward Bradford Titchner": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237869",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Wilhelm Wundt": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237871",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hoffman": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237878",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "British": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237881",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mathematics": {
+      "type": "LAW",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237883",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mathematics Subject Classification": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237886",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Zen": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237888",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tibetan": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237891",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Th\u00edch Nh\u1ea5t H\u1ea1nh": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237893",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Joseph Goldstein": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237896",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Herbert Benson": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237898",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jon Kabat-Zinn": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237900",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Egypt": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237903",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "India": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237905",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "China": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237909",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Greece": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237912",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hinduism, Buddhism, Confucianism, Daoism": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237914",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Socrates": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237917",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "One": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237920",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ksp": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237923",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kspq": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237926",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dretske": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237929",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lewis": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237932",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Roberts": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237934",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Plato": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237937",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meno": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237939",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "De Anima": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237942",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Descartes": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237948",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Immanuel Kant": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237951",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nicolas Malebranche": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237954",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pierre Cabanis": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237956",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "John Locke": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237961",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Walter Pitts": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237964",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pitts": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237967",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kurt G\u00f6del": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237970",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Alonzo Church": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237973",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Alan Turing": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237975",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Von Neumann": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237978",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Today": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237980",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Latin": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237983",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Thomas Hobbes": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237985",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Leviathan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237988",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Conscious": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237990",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Archbishop Ussher": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237993",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Roman": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237995",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cicero": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.237997",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ren\u00e9 Descartes": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238000",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Regul\u00e6": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238002",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Amsterdam": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238005",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Rosenthal": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238007",
+        "version": 1,
+        "certainty": 1.0
+      },
+      "content": "Rosenthal is a German and Jewish surname meaning \"rose valley\".[1] The Lithuanized form is Rosenthalis. Notable people with the name include:\n "
+    },
+    "Programming": {
+      "content": "Program, programme, programmer, or programming may refer to:\n ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238010",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Quantum": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238014",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Niels Bohr": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238016",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Erwin Schr\u00f6dinger": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238019",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Werner Heisenberg": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238021",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Max Born": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238025",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Paul Dirac": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238027",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Spirituality": {
+      "content": "Antiquity\n Medieval\n Early modern\n Modern\n Iran\n ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238030",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Clinical Psychology Review": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238032",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Google Search": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238035",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Amazon": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238037",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Netflix": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238040",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Google": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238042",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Siri": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238045",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Alexa": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238047",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Waymo": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238050",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Apple Intelligence": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238052",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "European": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238055",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Marvin Minsky": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238057",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Deep Blue": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238060",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Python": {
+      "content": "Python may refer to:\n ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238062",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eric Kandel": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238064",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Neolithic": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238069",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Egyptians": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238071",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Middle Kingdom": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238074",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Herodotus": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238089",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "South Asia": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238091",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "June": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238094",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pakistan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238098",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nepal": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238101",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bhutan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238103",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bangladesh": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238105",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Myanmar": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238108",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sri Lanka": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238110",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Maldives": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238113",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Andaman": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238115",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nicobar Islands": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238118",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Thailand": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238120",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indonesia": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238123",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238125",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Africa": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238128",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indus": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238130",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sanskrit": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238133",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Rigveda": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238137",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dravidian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238140",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Gupta Empires": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238142",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "South India": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238145",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Zoroastrianism": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238148",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Muslim": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238150",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Central Asia": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238153",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Vijayanagara Empire": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238155",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Punjab": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238160",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "East India Company": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238163",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Crown": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238165",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indians": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238168",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dominion": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238170",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kashmir": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238173",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Michael A. Slote": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238175",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Trinity College Dublin": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238178",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Harvard University": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238180",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nel Noddings": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238183",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Western": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238185",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Burma": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238191",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Southeast Asia": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238194",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mainland Southeast Asia": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238198",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Laos": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238201",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Naypyidaw": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238203",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Yangon": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238206",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Upper": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238208",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bamar": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238211",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Irrawaddy": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238213",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Burmese": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238216",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Theravada Buddhism": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238218",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pagan Kingdom": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238222",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mongol": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238225",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Taungoo": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238227",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Manipur": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238230",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Japanese": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238232",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aung": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238235",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Rohingya": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238237",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aung San": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238240",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tatmadaw": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238242",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "East Asia": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238245",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Beijing": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238247",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Shanghai": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238250",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Paleolithic": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238252",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Yellow River": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238257",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Qin": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238260",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Han": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238262",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tang": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238265",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Yuan": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238267",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ming": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238269",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Chinese": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238272",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Beiyang": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238274",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kuomintang": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238277",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Chinese Communist Party": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238279",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nationalist": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238282",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Japan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238286",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Communists": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238288",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Taiwan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238291",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cultural Revolution": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238293",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Maoist": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238295",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sino-Soviet": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238298",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tiananmen Square": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238300",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Arabic": {
+      "type": "LANGUAGE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238303",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mi\u1e63riyy\u016bn": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238305",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Egyptian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238308",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ma\u1e63riyy\u012bn": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238312",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mediterranean": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238314",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Masri": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238317",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sunni": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238319",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Shia": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238322",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Coptic Christians": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238324",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Coptic": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238326",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nay Pyi Taw": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238329",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Naypyitaw": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238331",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nepranytau": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238334",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pyinmana District": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238336",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Southeast Asian Games": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238339",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mandalay": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238341",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Yattanarbon Naypyidaw": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238345",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pyinmana": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238348",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sikkim": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238350",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dhaka": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238353",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Chittagong": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238355",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengali": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238358",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bangladeshi English": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238360",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengal": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238362",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengali Muslim": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238368",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Gangaridai": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238371",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mughal": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238373",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengal Sultanate": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238376",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mughal Bengal": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238378",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eastern Bengal": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238380",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "A. K. Fazlul Huq": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238383",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "East Bengal": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238386",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "East Pakistan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238389",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pakistani": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238393",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mujibur Rahman": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238395",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bangladeshi": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238398",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengalis": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238400",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cambridge": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238403",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Massachusetts": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238406",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Harvard College": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238411",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Puritan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238414",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "John Harvard": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238416",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Harvard": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238419",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Congregational": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238421",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Boston": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238423",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "James B. Conant": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238427",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Harvard Radcliffe Institute": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238430",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Harvard Yard": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238432",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Charles River": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238435",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Allston": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238437",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jewish": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238439",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lithuanized": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238442",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Rosenthalis": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238444",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Moshe Rosenthalis": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238447",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hebrew": {
+      "type": "LANGUAGE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238449",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "\u05de\u05e9\u05d4": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238452",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lithuania": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238454",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Socialist": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238456",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Israel": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238459",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Abstract, Fauvism, Figurative, Expressionism": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238461",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Israeli": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238464",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jaffa Port": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238468",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Marijampol\u0117": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238470",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aryeh": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238473",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Margushilski": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238475",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tel Aviv": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238477",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Germans": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238480",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Russian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238484",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lithuanian": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238486",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Vilnius": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238489",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Petras Kalpokas": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238491",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Antanas Gudaitis": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238494",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cha\u00efm Soutine": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238496",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pinchus Kremegne": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238499",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jacques Lipchitz": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238501",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pravda": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238503",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tretyakov Gallery": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238506",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Moscow": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238508",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Three": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238510",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jews": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238513",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Canaanite": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238515",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Babylonian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238518",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Judahites": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238520",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hellenistic": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238522",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sephardim": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238525",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Iberian": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238529",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Middle East": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238532",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "North": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238534",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Europe": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238538",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nazi Germany": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238541",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dharma Dhyana": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238543",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Anapanasati": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238545",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Vipassana": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238548",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pata\u00f1jalis Yoga": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238550",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cun \u5b58": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238552",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Upanishads": {
+      "content": "Meta-insight for Upanishads:\nConfidence: 0.00\nKnowledge depth: 3\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Upanishads:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238555",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Benevolence": {
+      "content": "Meta-insight for Benevolence:\nConfidence: 0.00\nKnowledge depth: 2\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Benevolence:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238557",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Homer Simpsons": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238560",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Error.67 Solutions": {
+      "type": "LAW",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238562",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mdma": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238565",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Upanishads": {
+      "content": "Based on the current understanding of Upanishads, it appears that type is GPE, content is \n Divisions\n Sama vedic\n Yajur vedic\n Atharva vedic\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Upanishads is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238567",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eighteenth Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238569",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "First": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238572",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Twenty-First Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238574",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Stephen Darwalls": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238577",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Second": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238579",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Plutarchs Lives": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238581",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Scott": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238584",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hundreds": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238588",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "End Of The 19Th Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238592",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "More Than Sixty": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238594",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sati": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238597",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "P. Contrastivism": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238599",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Benedict De Spinoza": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238602",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Warren Mcculloch": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238604",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "John Von Neumann": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238607",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Thomas Nagels": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238609",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nagel": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238611",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Carruthers": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238614",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Programming": {
+      "content": "Meta-insight for Programming:\nConfidence: 0.00\nKnowledge depth: 2\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Programming:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238616",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Programming": {
+      "content": "Based on the current understanding of Programming, it appears that content is Program, programme, programmer, or programming may refer to:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Programming is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238619",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Quantum Technology": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238621",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Max Plancks": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238623",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Albert Einsteins": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238626",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mid-1920S": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238628",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Spirituality": {
+      "content": "Meta-insight for Spirituality:\nConfidence: 0.00\nKnowledge depth: 2\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Spirituality:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238631",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Spirituality": {
+      "content": "Based on the current understanding of Spirituality, it appears that content is Antiquity\n Medieval\n Early modern\n Modern\n Iran\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Spirituality is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238633",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Past Two Millennia": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238636",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Scientific Revolution": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238638",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Youtube": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238647",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ai Winter.910 Funding": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238651",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "John Mccarthy": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238655",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Contra": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238658",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mccarthy": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238660",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Samuel": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238663",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mycin": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238665",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Brooks": {
+      "type": "LAW",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238667",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Python": {
+      "content": "Meta-insight for Python:\nConfidence: 0.00\nKnowledge depth: 2\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Python:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238670",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Python": {
+      "content": "Based on the current understanding of Python, it appears that content is Python may refer to:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Python is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238672",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Benevolence": {
+      "content": "Based on the current understanding of Benevolence, it appears that content is Benevolence or Benevolent may refer to:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Benevolence is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238675",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Scheler": {
+      "content": "Meta-insight for Scheler:\nConfidence: 0.00\nKnowledge depth: 3\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Scheler:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238677",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Scheler": {
+      "content": "Based on the current understanding of Scheler, it appears that type is PERSON, content is Scheler is a surname. Notable people with the surname include:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Scheler is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238679",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Republic Of India": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238682",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Seventh": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238684",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indian Ocean": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238686",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Arabian Sea": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238689",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bay Of Bengal": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238691",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "No Later Than 55,000 Years": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238694",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ",000 Years Ago": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238696",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indus Valley Civilisation": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238698",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Third Millennium": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238701",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bce": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238703",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Delhi Sultanate": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238707",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mughal Empire": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238711",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Two Centuries": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238719",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dominion Of India": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238722",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Million": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238724",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Almost 1.4 Billion": {
+      "type": "MONEY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238726",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Annually": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238729",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Culture.65 India": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238731",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Inequality.66 India": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238734",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Four": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238736",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "University Of Miami": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238739",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "University Of Maryland": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238741",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Impossibility Of Perfection": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238744",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Asean": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238746",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Dark Grey": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238749",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Republic Of The Union Of Myanmare": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238751",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "About": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238753",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Andaman Sea": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238756",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Tibeto-Burman-Speaking": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238758",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pyu City-States": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238761",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Early 19Th-Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238763",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "January": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238768",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Burma Independence Act": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238770",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Burma Socialist Programme Party": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238772",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "August": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238775",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Two Years Later": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238779",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "United Nations": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238781",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Covid-": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238784",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Peoples Republic Of China": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238786",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ".4 Billion": {
+      "type": "MONEY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238789",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Five": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238791",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Fourteen": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238794",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nearly 9.6 Million Square Kilometers": {
+      "type": "QUANTITY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238796",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Third": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238798",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Late Second Millennium": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238801",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eighth To Third Centuries": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238803",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "More Than Two Millennia": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238806",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Silk Road": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238808",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Great Wall": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238810",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Late 19Th Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238813",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Decades": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238815",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Republic Of China": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238818",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Roc": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238824",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Following Year": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238826",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Warlord Era": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238829",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kmt": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238831",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Chinese Civil War": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238833",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ccp": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238836",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Empire Of Japan": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238840",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Second Sino-Japanese War": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238842",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nanjing Massacre": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238845",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Prc": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238847",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Great Leap Forward": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238849",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Great Chinese Famine": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238852",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Millions": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238854",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Shanghai Communiqu\u00e9": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238857",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "United States": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238859",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Un Security Council": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238861",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Aiib": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238864",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Silk Road Fund": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238866",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "New Development Bank": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238868",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Rcep": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238871",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Brics": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238873",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Apec": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238878",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sco": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238880",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "East Asia Summit": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238883",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Around One-Fifth": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238885",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Unesco World Heritage Sites": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238887",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "\u0645\u0635\u0631\u064a\u0648\u0646": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238890",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Group": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238892",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Nile Valley": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238895",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "First Cataract": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238899",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Daily": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238901",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Coptic Orthodox Church": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238903",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Estimated 105.3 Million": {
+      "type": "MONEY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238906",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Grand Capital": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238908",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Naypyidaw Union": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238911",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "November": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238913",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "March": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238916",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Union Parliament": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238918",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Supreme Court": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238920",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Presidential Palace": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238923",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Cabinet Of Myanmar": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238925",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bimstec Summit": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238928",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ninth East Asia Summit": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238930",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Afc U-19 Championship": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238934",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kings.3 Traditionally": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238936",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "About 320 Kilometres": {
+      "type": "QUANTITY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238939",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Least": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238941",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Peoples Republic Of Bangladesh,B": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238944",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eighth": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238946",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ",460 Square Kilometres": {
+      "type": "QUANTITY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238949",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Siliguri Corridor": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238951",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Partition Of British India": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238955",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Battle Of Plassey": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238958",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "All India Muslim League": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238960",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lahore Resolution": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238963",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Radcliffe Line": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238965",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bengali Language Movement": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238968",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Awami League": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238970",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bangladesh Liberation War": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238972",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Mukti Bahini": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238975",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bangladesh Supreme Court": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238977",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Fifth": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238980",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Almost": {
+      "type": "PERCENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238982",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Eight": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238984",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Climate Vulnerable Forum": {
+      "type": "LAW",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238989",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bay Of Bengal Initiative": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238991",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Multi-Sectoral Technical And Economic Cooperation": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238993",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bimstec": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238996",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "South Asian Association For Regional Cooperation": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.238998",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Organization Of Islamic Cooperation": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239001",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Commonwealth Of Nations": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239003",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "American Civil War": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239005",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Charles William Eliots": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239008",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Association Of American": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239010",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Great Depression And World War Ii": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239013",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ten": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239016",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Faculty Of Arts And Sciences": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239019",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "-Acre": {
+      "type": "QUANTITY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239021",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ".7 Billion": {
+      "type": "MONEY",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239024",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "American Library Association": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239026",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Fourth": {
+      "type": "ORDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239029",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_Rosenthal": {
+      "content": "Meta-insight for Rosenthal:\nConfidence: 0.00\nKnowledge depth: 3\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for Rosenthal:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239031",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_Rosenthal": {
+      "content": "Based on the current understanding of Rosenthal, it appears that type is ORG, content is Rosenthal is a German and Jewish surname meaning \"rose valley\".[1] The Lithuanized form is Rosenthalis. Notable people with the name include:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of Rosenthal is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239033",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Soviet Union": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239036",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Years": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239038",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Thousands": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239042",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Joie De Vivre": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239045",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hebrew High School": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239047",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kaunas Art School": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239049",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Year": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239052",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Red Army": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239054",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Vilnius Academy Of Arts": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239057",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Release Of Political Prisoners": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239059",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Kaunas Jail": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239061",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Moscow Art Academy": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239064",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Soviet Art Gallery": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239066",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Age": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239069",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lithuanian Artists Association": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239071",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Medal Of Excellence": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239075",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Supreme Soviet": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239078",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ussr": {
+      "type": "GPE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239080",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "National Museum Of Lithuania": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239082",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Meta_Insight_German": {
+      "content": "Meta-insight for German:\nConfidence: 0.00\nKnowledge depth: 3\nLearning rate: 0.50\nUnderstanding depth: 0.60\n\nBias Awareness:\nBias Acknowledgment for German:\nI haven't detected significant biases in my knowledge of this topic, but I'll remain vigilant.",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239085",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Hypothesis_German": {
+      "content": "Based on the current understanding of German, it appears that type is NORP, content is German(s) may refer to:\n . \n\nReflecting on this hypothesis, I acknowledge that my understanding of German is limited. This hypothesis should be considered speculative and requires further investigation. Areas that could strengthen this hypothesis include: Missing definition, Missing origin, Missing applications, Missing related_concepts. ",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239087",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Iso 259-2: Yehudim": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239090",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Judaism.1617 Jewish": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239092",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Late 6Th Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239096",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Communities": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239099",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ashkenazim (Western Europe": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239101",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "World War Ii": {
+      "type": "EVENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239104",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Update": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239106",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ".2 Million": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239108",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sergio Della Pergola": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239111",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ph.D": {
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239113",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Jainism, Buddhism And Hinduism": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239115",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Pain": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239118",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Perception": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239120",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Insight": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239123",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Th Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239125",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Experiences": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239127",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Activity": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239130",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Experience": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239134",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Consciousness": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239136",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Euclids Elements": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239139",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Th And 17Th Centuries": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239141",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Method": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239144",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Richard J. Davidson": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239146",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "S And 1950S": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239148",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Force": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239153",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Weapons": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239155",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "S Hundreds Of Billions Of Dollars": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239158",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "St Century": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239160",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Ago": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239162",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Plains": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239165",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Lower Myanmar": {
+      "type": "LOC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239167",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    ",700": {
+      "type": "CARDINAL",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239169",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Sufi Orders": {
+      "type": "PERSON",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239172",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Around 99": {
+      "type": "PERCENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239174",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Density": {
+      "type": "NORP",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239177",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Indo-Pacific": {
+      "type": "FAC",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239179",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Longwood Medical Area": {
+      "type": "ORG",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239181",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "November 18": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239184",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "August 26": {
+      "type": "DATE",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239186",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Around 0": {
+      "type": "PERCENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239190",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Less Than 0": {
+      "type": "PERCENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239193",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "More Than 2": {
+      "type": "PERCENT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239196",
+        "version": 1,
+        "certainty": 1.0
+      }
+    },
+    "Bible": {
+      "type": "PRODUCT",
+      "metadata": {
+        "source": null,
+        "acquisition_date": "2024-09-05T03:40:13.239198",
         "version": 1,
         "certainty": 1.0
       }

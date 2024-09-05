@@ -9,6 +9,7 @@ from collections import defaultdict
 from collections import Counter
 import json
 from datetime import datetime
+import re
 
 class EnhancedKnowledgeBase:
     def __init__(self):
@@ -36,14 +37,15 @@ class EnhancedKnowledgeBase:
                 self.entity_types[entity_type] = set()
             self.entity_types[entity_type].add(entity)
 
-    def add_relationship(self, entity1: str, entity2: str, relationship: str, attributes: Dict[str, Any] = None, source: str = None):
+    def add_relationship(self, entity1: str, entity2: str, relationship: str, attributes: Dict[str, Any] = None, source: str = None, certainty: float = 1.0):
         if attributes is None:
             attributes = {}
         
         metadata = {
             "source": source,
             "acquisition_date": datetime.now().isoformat(),
-            "version": self.version
+            "version": self.version,
+            "certainty": certainty
         }
         
         attributes["metadata"] = metadata
@@ -54,6 +56,15 @@ class EnhancedKnowledgeBase:
         for _, related_entity, data in self.graph.edges(entity, data=True):
             relationships.append((related_entity, data['key'], data))
         return relationships
+
+    def get_related_topics(self, topic: str, max_distance: int = 2, max_topics: int = 5) -> List[str]:
+        related_topics = []
+        for node in nx.bfs_tree(self.graph, topic, depth_limit=max_distance):
+            if node != topic:
+                related_topics.append(node)
+            if len(related_topics) >= max_topics:
+                break
+        return related_topics
 
     def query(self, query: Dict[str, Any]) -> List[Dict[str, Any]]:
         results = []
@@ -150,6 +161,72 @@ class EnhancedKnowledgeBase:
         except Exception as e:
             print(f"Error calculating relevance for {entity}: {str(e)}")
             return 0.0  # Return 0 relevance if there's an error
+
+    def clean_entities(self):
+        entities_to_remove = []
+        entities_to_rename = {}
+
+        for entity in self.graph.nodes():
+            cleaned_entity = self._clean_entity_name(entity)
+            if not cleaned_entity:
+                entities_to_remove.append(entity)
+            elif cleaned_entity != entity:
+                entities_to_rename[entity] = cleaned_entity
+
+        # Remove invalid entities
+        for entity in entities_to_remove:
+            self.remove_entity(entity)
+
+        # Rename entities
+        for old_name, new_name in entities_to_rename.items():
+            self._rename_entity(old_name, new_name)
+
+    def _clean_entity_name(self, entity: str) -> str:
+        # Remove special characters but keep spaces and common punctuation
+        entity = re.sub(r'[^\w\s\-.,;:!?()]', '', entity)
+        # Remove extra whitespace
+        entity = ' '.join(entity.split())
+        # Convert to title case
+        entity = entity.title()
+        # Remove any numbers or common words at the beginning or end of the entity
+        entity = re.sub(r'^[\d\s]+|[\d\s]+$', '', entity)
+        entity = re.sub(r'^(The|A|An|Of|In|On|At|To|For|And|Or|But)\s+|\s+(The|A|An|Of|In|On|At|To|For|And|Or|But)$', '', entity, flags=re.IGNORECASE)
+        # Remove trailing punctuation
+        entity = re.sub(r'[.,;:!?]$', '', entity)
+        # Ignore entities that are too short, only contain numbers, or are common words
+        if len(entity) < 3 or entity.isdigit() or entity.lower() in {'the', 'and', 'or', 'of', 'in', 'on', 'at', 'to', 'a', 'an', 'for', 'web'}:
+            return ''
+        return entity.strip()
+
+    def _rename_entity(self, old_name: str, new_name: str):
+        if old_name in self.graph and new_name not in self.graph:
+            nx.relabel_nodes(self.graph, {old_name: new_name}, copy=False)
+            # Update entity_types
+            for entity_type, entities in self.entity_types.items():
+                if old_name in entities:
+                    entities.remove(old_name)
+                    entities.add(new_name)
+        elif new_name in self.graph:
+            # Merge entities if new_name already exists
+            self._merge_entities(old_name, new_name)
+
+    def _merge_entities(self, entity1: str, entity2: str):
+        # Combine attributes
+        attrs1 = self.graph.nodes[entity1]
+        attrs2 = self.graph.nodes[entity2]
+        merged_attrs = {**attrs1, **attrs2}
+        self.graph.nodes[entity2].update(merged_attrs)
+
+        # Redirect relationships
+        for predecessor in self.graph.predecessors(entity1):
+            for _, edge_data in self.graph[predecessor][entity1].items():
+                self.graph.add_edge(predecessor, entity2, **edge_data)
+        for successor in self.graph.successors(entity1):
+            for _, edge_data in self.graph[entity1][successor].items():
+                self.graph.add_edge(entity2, successor, **edge_data)
+
+        # Remove the old entity
+        self.remove_entity(entity1)
 
     def remove_entity(self, entity: str):
         """

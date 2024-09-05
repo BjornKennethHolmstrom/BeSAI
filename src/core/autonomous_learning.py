@@ -53,6 +53,8 @@ class AutonomousLearning:
         self.learning_plan_interval = timedelta(days=7)  # Generate a new plan weekly
         self.last_plan_generation = datetime.min
 
+        self.clean_priority_topics()
+
     def explore_topic(self, topic: str, depth: int = 0):
         start_time = time.time()
         if depth >= self.max_exploration_depth or self.exploration_count >= self.max_explorations:
@@ -129,14 +131,12 @@ class AutonomousLearning:
             self.check_and_generate_learning_plan()
             self.pursue_learning_goals()
             
-            # Existing exploration logic
-            if len(self.explored_topics) < self.max_explorations:
-                topic = self.select_next_topic()
-                if topic:
-                    self.explore_topic(topic)
-                else:
-                    logging.info("No unexplored topics found. Waiting...")
-            self.wait(self.exploration_interval)
+            topic = self.select_next_topic()
+            if topic:
+                self.explore_topic(topic)
+            else:
+                logging.info("No unexplored topics found. Waiting for new information...")
+                self.wait(self.exploration_interval)
 
     def check_and_generate_learning_plan(self):
         if datetime.now() - self.last_plan_generation >= self.learning_plan_interval:
@@ -155,18 +155,22 @@ class AutonomousLearning:
     def select_next_topic(self):
         # Prioritize topics from learning goals
         active_goals = self.metacognition.get_active_goals()
-        goal_topics = [goal['topic'] for goal in active_goals if goal['topic'] not in self.explored_topics]
+        goal_topics = [goal['topic'] for goal in active_goals if self._is_valid_unexplored_topic(goal['topic'])]
         if goal_topics:
             return random.choice(goal_topics)
 
         # Fall back to existing topic selection logic
-        unexplored_priorities = [topic for topic in self.priority_topics if topic not in self.explored_topics]
+        unexplored_priorities = [topic for topic in self.priority_topics if self._is_valid_unexplored_topic(topic)]
         if unexplored_priorities:
             return random.choice(unexplored_priorities)
         
         all_entities = set(self.kb.get_all_entities())
-        unexplored_topics = all_entities - self.explored_topics
-        return random.choice(list(unexplored_topics)) if unexplored_topics else None
+        unexplored_topics = [topic for topic in all_entities if self._is_valid_unexplored_topic(topic)]
+        return random.choice(unexplored_topics) if unexplored_topics else None
+
+    def _is_valid_unexplored_topic(self, topic):
+        cleaned_topic = self._clean_topic(topic)
+        return cleaned_topic and cleaned_topic not in self.explored_topics
 
     def wait(self, duration):
         """Wait for the specified duration, checking for stop event periodically"""
@@ -185,18 +189,22 @@ class AutonomousLearning:
             logging.info("Autonomous exploration is already running.")
 
     def _clean_topic(self, topic: str) -> str:
-        # Remove special characters but keep spaces
-        topic = re.sub(r'[^a-zA-Z0-9\s]', '', topic)
+        # Remove special characters but keep spaces and common punctuation
+        topic = re.sub(r'[^\w\s\-.,;:!?()]', '', topic)
         # Remove extra whitespace
         topic = ' '.join(topic.split())
         # Convert to title case
         topic = topic.title()
-        # Remove any numbers at the end of the topic
-        topic = re.sub(r'\d+$', '', topic).strip()
-        # Ignore topics that are too short or only contain numbers
-        if len(topic) < 3 or topic.isdigit() or topic.lower() in {'the', 'and', 'or', 'of', 'in', 'on', 'at', 'to'}:
+        # Remove any numbers or common words at the beginning or end of the topic
+        topic = re.sub(r'^[\d\s]+|[\d\s]+$', '', topic)
+        topic = re.sub(r'^(The|A|An|Of|In|On|At|To|For|And|Or|But)\s+|\s+(The|A|An|Of|In|On|At|To|For|And|Or|But)$', '', topic, flags=re.IGNORECASE)
+        # Ignore topics that are too short, only contain numbers, or are common words
+        if len(topic) < 3 or topic.isdigit() or topic.lower() in {'the', 'and', 'or', 'of', 'in', 'on', 'at', 'to', 'a', 'an', 'for', 'web'}:
             return ''
-        return topic
+        return topic.strip()
+
+    def clean_priority_topics(self):
+        self.priority_topics = [topic for topic in self.priority_topics if self._is_valid_unexplored_topic(topic)]
 
     def stop_autonomous_exploration(self):
         logging.info("Stopping autonomous exploration...")

@@ -7,6 +7,7 @@ from .ethical_contemplation import EthicalContemplation
 from .memory_prioritization import MemoryPrioritization
 from .action_evaluation import ActionEvaluation
 from .psychedelic_simulator import PsychedelicSimulator
+from .altered_states_simulator import AlteredStatesSimulator
 
 __all__ = [
     'CuriosityEngine',
@@ -15,5 +16,6 @@ __all__ = [
     'EthicalContemplation',
     'MemoryPrioritization',
     'ActionEvaluation',
-    'PsychedelicSimulator'
+    'PsychedelicSimulator',
+    'AlteredStatesSimulator'
 ]

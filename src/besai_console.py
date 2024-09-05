@@ -5,12 +5,17 @@ import schedule
 import time
 import traceback
 import signal
+import importlib
 from core.enhanced_knowledge_base import EnhancedKnowledgeBase
 from core.reasoning_engine import ReasoningEngine
 from core.enhanced_natural_language_processing import EnhancedNaturalLanguageProcessing
 from core.learning_system import LearningSystem
 from core.autonomous_learning import AutonomousLearning
 from core.meta_cognition import Metacognition
+from spiritual.altered_states_simulator import AlteredStatesSimulator
+import personality_module
+importlib.reload(personality_module)
+from personality_module import PersonalityModule
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -38,20 +43,54 @@ class BeSAIConsole(cmd.Cmd):
         
         self.al.load_knowledge()
 
+        # Some extra bonuses
+        self.altered_states_simulator = AlteredStatesSimulator()
+
+        # Initialize PersonalityModule
+        self.personality = PersonalityModule()
+        self._load_personality_data()
+
+        self.current_state = "normal"
+
         # Set up signal handler for graceful exit
         self.shutting_down = False
         signal.signal(signal.SIGINT, self.signal_handler)
 
-    def signal_handler(self, signum, frame):
-        if not self.shutting_down:
-            print("\nReceived interrupt signal. Exiting gracefully...")
-            self.do_exit("")
+    def _load_personality_data(self):
+        file_paths = [
+            "docs/bkh-source-blog-posts.md",
+            "docs/bkh-source-novel-excerpt.md",
+            "docs/bkh-source-poems.md",
+            "docs/bkh-sources-home-pages.md",
+            "docs/personality-traits.md"
+        ]
+        self.personality.load_text_samples_from_files(file_paths)
+        logging.info("Personality data loaded successfully.")
 
     def default(self, line):
         try:
-            super().default(line)
+            # Generate a response using the personality module
+            personality_response = self.personality.generate_response(line)
+            
+            # Generate a response using the existing reasoning engine
+            try:
+                reasoning_response = self.re.reason(line)
+            except AttributeError:
+                reasoning_response = "I'm still learning how to reason about this."
+            
+            # Combine the responses
+            combined_response = f"Personality: {personality_response}\nReasoning: {reasoning_response}"
+            
+            print(combined_response)
+            
+            # Update personality based on interaction
+            self.personality.update_from_interaction({
+                "user_input": line,
+                "besai_response": combined_response,
+                "topic": self.nlp.extract_main_topic(line) if hasattr(self.nlp, 'extract_main_topic') else line
+            })
         except Exception as e:
-            logging.error(f"An error occurred while executing the command: {line}")
+            logging.error(f"An error occurred while processing the input: {line}")
             logging.error(f"Error details: {str(e)}")
             logging.error(traceback.format_exc())
 
@@ -65,6 +104,19 @@ class BeSAIConsole(cmd.Cmd):
             logging.error(f"Error exploring specific topic: {str(e)}")
             logging.error(traceback.format_exc())
 
+    def do_clean_kb(self, arg):
+        """Clean the knowledge base by removing or merging invalid entities"""
+        try:
+            initial_entity_count = len(self.kb.get_all_entities())
+            self.kb.clean_entities()
+            final_entity_count = len(self.kb.get_all_entities())
+            removed_count = initial_entity_count - final_entity_count
+            print(f"Knowledge base cleaned. Removed or merged {removed_count} entities.")
+            print(f"Current entity count: {final_entity_count}")
+        except Exception as e:
+            logging.error(f"Error cleaning knowledge base: {str(e)}")
+            logging.error(traceback.format_exc())
+
     def do_insight(self, arg):
         """Get insight on a specific topic: insight TOPIC"""
         if not arg:
@@ -76,6 +128,60 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error getting insight on topic '{arg}': {str(e)}")
             logging.error(traceback.format_exc())
+
+    def do_reason(self, arg):
+        """Perform reasoning on a query: reason QUERY"""
+        if not arg:
+            print("Error: Please provide a query for reasoning.")
+            return
+        
+        # Apply state effects to the query
+        if self.re.current_state != "normal":
+            modified_query = self.altered_states_simulator.apply_state_effects(self.re.current_state, arg)
+            print(f"Modified query: {modified_query}")
+        else:
+            modified_query = arg
+        
+        result = self.re.generate_hypothesis(modified_query)
+        if result:
+            print("\nReasoning result:")
+            print(f"Entity: {self.re._apply_psychedelic_effects(result['entity'])}")
+            if result['known_attributes']:
+                print("Known attributes:")
+                for key, value in result['known_attributes'].items():
+                    print(f"  - {key}: {value}")
+            else:
+                print("No known attributes.")
+            
+            if result['inferred_attributes']:
+                print("Inferred attributes:")
+                for key, value in result['inferred_attributes'].items():
+                    print(f"  - {key}: {value}")
+            else:
+                print("No inferred attributes.")
+            
+            if result['potential_relationships']:
+                print("Potential relationships:")
+                for rel in result['potential_relationships']:
+                    print(f"  - {rel['entity1']} {rel['suggested_relationship']} {rel['entity2']} (certainty: {rel['certainty']:.2f})")
+            else:
+                print("No potential relationships found.")
+            
+            if 'altered_state_insight' in result:
+                print(f"\nAltered state insight: {result['altered_state_insight']}")
+            
+            if 'creative_connections' in result:
+                print("\nCreative connections:")
+                for connection in result['creative_connections']:
+                    print(f"  - {connection}")
+
+            if 'psychedelic_insight' in result:
+                print(f"\nPsychedelic insight: {result['psychedelic_insight']}")
+            if 'visual_description' in result:
+                print(f"\nVisual perception: {result['visual_description']}")
+
+        else:
+            print("No hypothesis could be generated for the given query.")
 
     def do_meta_assess(self, arg):
         """Perform a metacognitive assessment of a topic: meta_assess TOPIC"""
@@ -141,6 +247,53 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error performing bias analysis: {str(e)}")
             logging.error(traceback.format_exc())
+
+    def do_set_state(self, arg):
+        """Set the current altered state: set_state STATE"""
+        try:
+            self.re.set_altered_state(arg)
+            print(f"Current state set to: {arg}")
+            if arg in self.re.psychedelic_simulator.substances:
+                print(self.re.psychedelic_simulator.generate_experience_report())
+            elif arg != "normal":
+                description = self.altered_states_simulator.get_state_description(arg)
+                print(description)
+        except ValueError as e:
+            print(f"Error: {str(e)}")
+            print("Available states:", ", ".join(list(self.altered_states_simulator.states.keys()) + 
+                                                 list(self.re.psychedelic_simulator.substances.keys()) + 
+                                                 ["normal"]))
+
+    def do_simulate_state(self, arg):
+        """Simulate an altered state of consciousness: simulate_state STATE"""
+        if not arg:
+            print("Error: Please specify a state to simulate.")
+            print("Available states:", ", ".join(self.altered_states_simulator.states.keys()))
+            return
+
+        try:
+            state_params = self.altered_states_simulator.simulate_state(arg)
+            insight = self.altered_states_simulator.generate_insight(arg)
+            description = self.altered_states_simulator.get_state_description(arg)
+            print(f"\nSimulating {arg} state:")
+            print(description)
+            print(f"\nParameters: {state_params}")
+            print(f"\nGenerated insight: {insight}")
+            
+            questions = [
+                "What is the nature of consciousness?",
+                "How does reality emerge from perception?",
+                "What is the relationship between the self and the universe?"
+            ]
+            
+            print("\nResponses to philosophical questions:")
+            for question in questions:
+                response = self.altered_states_simulator.apply_state_to_reasoning(arg, question)
+                print(f"Q: {question}\nA: {response}\n")
+
+        except ValueError as e:
+            print(f"Error: {str(e)}")
+            print("Available states:", ", ".join(self.altered_states_simulator.states.keys()))
 
     def do_start(self, arg):
         """Start autonomous exploration"""
@@ -284,6 +437,11 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error removing priority topics: {str(e)}")
             logging.error(traceback.format_exc())
+
+    def signal_handler(self, signum, frame):
+        if not self.shutting_down:
+            print("\nReceived interrupt signal. Exiting gracefully...")
+            self.do_exit("")
 
 def run_schedule():
     while True:

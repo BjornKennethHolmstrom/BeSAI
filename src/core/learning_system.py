@@ -104,14 +104,20 @@ class LearningSystem:
         
         # Add entities and relationships to knowledge base
         for entity in analysis['entities']:
-            self.kb.add_entity(entity['text'], {"type": entity['label']}, entity_type=entity['label'], certainty=0.8)
+            self.kb.add_entity(entity['text'], {"type": entity['label']}, entity_type=entity['label'], source="NLP Analysis", certainty=0.8)
         
         for relationship in analysis['relationships']:
-            self.kb.add_relationship(relationship['subject'], relationship['object'], relationship['predicate'], certainty=0.7)
+            self.kb.add_relationship(
+                relationship['subject'],
+                relationship['object'],
+                relationship['predicate'],
+                source="NLP Analysis",
+                certainty=0.7
+            )
         
         # Add attributes
         for attribute in analysis['attributes']:
-            self.kb.update_entity(attribute['entity'], {attribute['attribute']: True}, certainty=0.6)
+            self.kb.update_entity(attribute['entity'], {attribute['attribute']: attribute['value']}, certainty=0.6)
         
         self.learning_history.append(f"Learned from text: {text[:50]}...")
 
