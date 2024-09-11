@@ -9,6 +9,8 @@ from core.enhanced_knowledge_base import EnhancedKnowledgeBase
 
 from typing import List, Dict, Any, Tuple, Optional
 
+import logging
+
 class LearningSystem:
     def __init__(self, knowledgebase, nlp, reasoning_engine, metacognition):
         self.kb = knowledgebase

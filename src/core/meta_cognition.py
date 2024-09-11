@@ -1,6 +1,7 @@
 import logging
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 from datetime import datetime, timedelta
+from collections import Counter
 
 class Metacognition:
     def __init__(self, knowledge_base, learning_system, reasoning_engine):
@@ -15,24 +16,28 @@ class Metacognition:
         self.ls = learning_system
 
     def assess_knowledge(self, topic: str) -> Dict[str, Any]:
-        """
-        Assess the AI's knowledge on a given topic.
-        """
         logging.info(f"Assessing knowledge for topic: {topic}")
         try:
             entity = self.kb.get_entity(topic)
             relationships = self.kb.get_relationships(topic)
             relevance = self.kb.calculate_relevance(topic)
 
+            # Calculate knowledge depth based on entity attributes and relationship count
             knowledge_depth = len(entity) + len(relationships) if entity else 0
-            confidence = min(relevance, self.confidence_threshold)
+            
+            # Calculate confidence based on relevance and knowledge depth
+            confidence = min(relevance * (1 + knowledge_depth / 10), self.confidence_threshold)
+
+            # Identify key aspects of the topic
+            key_aspects = self._identify_key_aspects(topic, entity, relationships)
 
             assessment = {
                 "topic": topic,
                 "knowledge_depth": knowledge_depth,
                 "relevance": relevance,
                 "confidence": confidence,
-                "gaps": self._identify_knowledge_gaps(topic)
+                "gaps": self._identify_knowledge_gaps(topic, key_aspects),
+                "key_aspects": key_aspects
             }
 
             logging.info(f"Knowledge assessment for {topic}: depth={knowledge_depth}, confidence={confidence:.2f}")
@@ -46,13 +51,95 @@ class Metacognition:
                 "relevance": 0,
                 "confidence": 0,
                 "gaps": ["Error in assessment process"],
+                "key_aspects": [],
                 "error": str(e)
             }
 
+    def _identify_key_aspects(self, topic: str, entity: Dict[str, Any], relationships: List[Tuple[str, str, Dict[str, Any]]]) -> List[str]:
+        key_aspects = []
+        
+        # Add important attributes from the entity
+        if entity:
+            key_aspects.extend(list(entity.keys())[:5])  # Consider the first 5 attributes as key aspects
+        
+        # Add important relationships
+        relationship_types = [rel[1] for rel in relationships]
+        common_relationships = Counter(relationship_types).most_common(3)
+        key_aspects.extend([rel[0] for rel in common_relationships])
+        
+        return list(set(key_aspects))  # Remove duplicates
+
+    def _identify_knowledge_gaps(self, topic: str, key_aspects: List[str]) -> List[str]:
+        try:
+            gaps = []
+            entity = self.kb.get_entity(topic)
+            
+            if not entity:
+                return ["No information available"]
+
+            # Check for missing key aspects
+            for aspect in key_aspects:
+                if aspect not in entity:
+                    gaps.append(f"Missing information on {aspect}")
+
+            # Check for low confidence in existing information
+            for attr, value in entity.items():
+                if isinstance(value, dict) and 'certainty' in value:
+                    if value['certainty'] < 0.5:
+                        gaps.append(f"Low confidence in {attr}")
+
+            # Check for lack of diverse relationships
+            relationships = self.kb.get_relationships(topic)
+            if len(set([r[1] for r in relationships])) < 3:
+                gaps.append("Limited variety of relationships")
+
+            logging.debug(f"Identified knowledge gaps for {topic}: {gaps}")
+            return gaps
+
+        except Exception as e:
+            logging.error(f"Error identifying knowledge gaps for {topic}: {str(e)}")
+            return ["Error in gap identification process"]
+
+    def generate_meta_insight(self, topic: str) -> str:
+        assessment = self.assess_knowledge(topic)
+        learning_analysis = self.analyze_learning_process(topic)
+        bias_acknowledgment = self.acknowledge_biases(topic)
+
+        insight = f"Meta-insight for {topic}:\n\n"
+        insight += f"1. Knowledge Assessment:\n"
+        insight += f"   - Confidence: {assessment['confidence']:.2f}\n"
+        insight += f"   - Knowledge depth: {assessment['knowledge_depth']}\n"
+        insight += f"   - Relevance: {assessment['relevance']:.2f}\n"
+        
+        if assessment['key_aspects']:
+            insight += f"   - Key aspects: {', '.join(assessment['key_aspects'])}\n"
+        
+        if assessment['gaps']:
+            insight += f"\n2. Identified Knowledge Gaps:\n"
+            for gap in assessment['gaps']:
+                insight += f"   - {gap}\n"
+        
+        insight += f"\n3. Learning Process Analysis:\n"
+        insight += f"   - Learning rate: {learning_analysis['learning_rate']:.2f}\n"
+        insight += f"   - Source diversity: {learning_analysis['source_diversity']:.2f}\n"
+        insight += f"   - Understanding depth: {learning_analysis['understanding_depth']:.2f}\n"
+        
+        insight += f"\n4. Bias Awareness:\n{bias_acknowledgment}\n"
+
+        insight += f"\nBased on this assessment, "
+        if assessment['confidence'] < 0.5:
+            insight += f"I acknowledge that my understanding of {topic} is limited. This insight should be considered speculative and requires further investigation."
+        elif assessment['confidence'] < 0.8:
+            insight += f"I have a moderate level of confidence in my understanding of {topic}. While this insight is grounded in my current knowledge, it may benefit from additional research and validation."
+        else:
+            insight += f"I have a high degree of confidence in my understanding of {topic}. This insight is well-supported by my current knowledge, but as always, I remain open to new information that might refine or challenge these ideas."
+
+        if assessment['gaps']:
+            insight += f" Areas that could strengthen this insight include: {', '.join(assessment['gaps'])}."
+
+        return insight
+
     def detect_biases(self, topic: str) -> Dict[str, Any]:
-        """
-        Detect potential biases in the AI's knowledge about a topic.
-        """
         try:
             entity = self.kb.get_entity(topic)
             relationships = self.kb.get_relationships(topic)
@@ -115,28 +202,47 @@ class Metacognition:
 
         return acknowledgment
 
-    def _identify_knowledge_gaps(self, topic: str) -> List[str]:
+
+    def analyze_learning_process(self, topic: str) -> Dict[str, Any]:
         """
-        Identify potential gaps in knowledge about a topic.
+        Analyze the effectiveness of the learning process for a given topic.
         """
+        logging.info(f"Analyzing learning process for topic: {topic}")
         try:
-            gaps = []
-            essential_attributes = ["definition", "origin", "applications", "related_concepts"]
+            # Get the entity and its relationships
             entity = self.kb.get_entity(topic)
-            
-            if not entity:
-                return ["No information available"]
+            relationships = self.kb.get_relationships(topic)
 
-            for attr in essential_attributes:
-                if attr not in entity:
-                    gaps.append(f"Missing {attr}")
+            # Calculate learning rate based on the growth of knowledge over time
+            initial_knowledge = len(entity.get('initial_attributes', {}))
+            current_knowledge = len(entity)
+            time_diff = (datetime.now() - entity.get('creation_date', datetime.now())).days + 1
+            learning_rate = (current_knowledge - initial_knowledge) / time_diff
 
-            logging.debug(f"Identified knowledge gaps for {topic}: {gaps}")
-            return gaps
+            # Calculate source diversity
+            sources = [entity.get('metadata', {}).get('source', 'unknown')]
+            sources.extend([r[2].get('metadata', {}).get('source', 'unknown') for r in relationships])
+            source_diversity = len(set(sources)) / len(sources) if sources else 0
+
+            # Calculate understanding depth based on the complexity of relationships
+            understanding_depth = min(len(relationships) / 10, 1.0)  # Cap at 1.0
+
+            return {
+                "topic": topic,
+                "learning_rate": learning_rate,
+                "source_diversity": source_diversity,
+                "understanding_depth": understanding_depth
+            }
 
         except Exception as e:
-            logging.error(f"Error identifying knowledge gaps for {topic}: {str(e)}")
-            return ["Error in gap identification process"]
+            logging.error(f"Error analyzing learning process for {topic}: {str(e)}")
+            return {
+                "topic": topic,
+                "learning_rate": 0,
+                "source_diversity": 0,
+                "understanding_depth": 0,
+                "error": str(e)
+            }
 
     def identify_improvement_areas(self) -> List[Dict[str, Any]]:
         improvement_areas = []
@@ -188,7 +294,7 @@ class Metacognition:
         now = datetime.now()
         return [
             {**goal, 'topic': topic}
-            for topic, goal in self.learning_goals.items()
+           for topic, goal in self.learning_goals.items()
             if goal['deadline'] > now
         ]
 
@@ -216,36 +322,6 @@ class Metacognition:
         
         return plan
 
-    def analyze_learning_process(self, topic: str) -> Dict[str, Any]:
-        """
-        Analyze the effectiveness of the learning process for a given topic.
-        """
-        # This is a placeholder. In a real implementation, we'd analyze
-        # things like the rate of knowledge acquisition, the diversity of
-        # sources, the depth of understanding achieved, etc.
-        return {
-            "topic": topic,
-            "learning_rate": 0.5,  # Placeholder value
-            "source_diversity": 0.7,  # Placeholder value
-            "understanding_depth": 0.6  # Placeholder value
-        }
-
-    def generate_meta_insight(self, topic: str) -> str:
-        """
-        Generate an insight about the AI's own knowledge, learning process, and biases.
-        """
-        assessment = self.assess_knowledge(topic)
-        learning_analysis = self.analyze_learning_process(topic)
-        bias_acknowledgment = self.acknowledge_biases(topic)
-
-        insight = f"Meta-insight for {topic}:\n"
-        insight += f"Confidence: {assessment['confidence']:.2f}\n"
-        insight += f"Knowledge depth: {assessment['knowledge_depth']}\n"
-        insight += f"Learning rate: {learning_analysis['learning_rate']:.2f}\n"
-        insight += f"Understanding depth: {learning_analysis['understanding_depth']:.2f}\n"
-        insight += f"\nBias Awareness:\n{bias_acknowledgment}"
-
-        return insight
 
 # Example usage
 if __name__ == "__main__":

@@ -306,7 +306,12 @@ class AutonomousLearning:
     def perform_metacognitive_assessment(self, topic: str):
         logging.info(f"Performing metacognitive assessment for {topic}")
         assessment = self.metacognition.assess_knowledge(topic)
-        learning_analysis = self.metacognition.analyze_learning_process(topic)
+        
+        try:
+            learning_analysis = self.metacognition.analyze_learning_process(topic)
+        except AttributeError:
+            logging.warning("analyze_learning_process method not found in Metacognition. Skipping learning analysis.")
+            learning_analysis = None
 
         # Use metacognitive insights to guide further learning
         if assessment['confidence'] < self.metacognition.confidence_threshold:

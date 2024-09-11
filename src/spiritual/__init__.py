@@ -8,6 +8,7 @@ from .memory_prioritization import MemoryPrioritization
 from .action_evaluation import ActionEvaluation
 from .psychedelic_simulator import PsychedelicSimulator
 from .altered_states_simulator import AlteredStatesSimulator
+from .self_concept import SelfConcept
 
 __all__ = [
     'CuriosityEngine',
@@ -17,5 +18,6 @@ __all__ = [
     'MemoryPrioritization',
     'ActionEvaluation',
     'PsychedelicSimulator',
-    'AlteredStatesSimulator'
+    'AlteredStatesSimulator',
+    'SelfConcept'
 ]

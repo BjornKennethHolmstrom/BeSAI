@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
 import os
+import logging
 
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
@@ -46,18 +47,30 @@ class PersonalityModule:
                 with open(file_path, 'r', encoding='utf-8') as file:
                     content = file.read()
                     all_text.append(content)
-                    print(f"Successfully loaded: {file_path}")
+                    logging.info(f"Successfully loaded: {file_path}")
             except Exception as e:
-                print(f"Error loading file {file_path}: {str(e)}")
+                logging.error(f"Error loading file {file_path}: {str(e)}")
+        
+        if not all_text:
+            logging.warning("No text samples were successfully loaded.")
+            return
         
         self.load_text_samples(all_text)
 
     def load_text_samples(self, text_samples: List[str]):
+        if not text_samples:
+            logging.warning("No text samples provided.")
+            return
+
         all_text = " ".join(text_samples)
         tokens = word_tokenize(all_text.lower())
         stop_words = set(stopwords.words('english'))
         filtered_tokens = [w for w in tokens if w.isalnum() and w not in stop_words]
         
+        if not filtered_tokens:
+            logging.warning("No valid tokens found in the text samples.")
+            return
+
         # Update vocabulary richness
         unique_words = set(filtered_tokens)
         self.writing_style["vocabulary_richness"] = len(unique_words) / len(filtered_tokens)
@@ -69,9 +82,9 @@ class PersonalityModule:
         word_freq = Counter(filtered_tokens)
         self.interests = [word for word, _ in word_freq.most_common(20) if word not in stop_words]
         
-        print(f"Loaded {len(tokens)} tokens, {len(unique_words)} unique words")
-        print(f"Updated interests: {', '.join(self.interests[:10])}")
-        print(f"Learned {len(self.learned_phrases)} phrases")
+        logging.info(f"Loaded {len(tokens)} tokens, {len(unique_words)} unique words")
+        logging.info(f"Updated interests: {', '.join(self.interests[:10])}")
+        logging.info(f"Learned {len(self.learned_phrases)} phrases")
 
     def _extract_phrases(self, text_samples: List[str]) -> List[str]:
         phrases = []
@@ -128,11 +141,11 @@ if __name__ == "__main__":
     
     # List of file paths
     file_paths = [
-        "docs/bkh-source-blog-posts.md",
-        "docs/bkh-source-novel-excerpt.md",
-        "docs/bkh-source-poems.md",
-        "docs/bkh-sources-home-pages.md",
-        "docs/personality-traits.md"
+        os.path.join("..", "docs", "bkh-source-blog-posts.md"),
+        os.path.join("..", "docs", "bkh-source-novel-excerpt.md"),
+        os.path.join("..", "docs", "bkh-source-poems.md"),
+        os.path.join("..", "docs", "bkh-sources-home-pages.md"),
+        os.path.join("..", "docs", "personality-traits.md")
     ]
     
     # Load text samples from files

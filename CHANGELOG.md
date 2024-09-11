@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Version 0.11.0 (Current)
+
+- Implemented SelfConcept module for BeSAI's sense of self, including beliefs, goals, and memories
+- Enhanced SelfReflection module to incorporate the new SelfConcept
+- Developed goal-setting capabilities based on BeSAI's personality traits
+- Implemented goal progression analysis and reassessment functionality
+- Integrated goal progression analysis into decision-making processes
+- Updated AutonomousLearning module to use goal progression in learning strategy and topic selection
+- Added new console commands for interacting with self-concept and goal-related functions
+- Improved overall introspective capabilities and self-awareness
+
 ## Version 0.10.0 (Current)
 
 - Implemented PersonalityModule for more human-like and diverse interactions

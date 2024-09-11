@@ -15,6 +15,9 @@ from core.learning_system import LearningSystem
 from core.autonomous_learning import AutonomousLearning
 from core.meta_cognition import Metacognition
 from spiritual.altered_states_simulator import AlteredStatesSimulator
+from spiritual.curiosity_engine import CuriosityEngine
+from spiritual.self_reflection import SelfReflection
+from spiritual.self_concept import SelfConcept
 import personality_module
 importlib.reload(personality_module)
 from personality_module import PersonalityModule
@@ -52,6 +55,12 @@ class BeSAIConsole(cmd.Cmd):
         self.personality = PersonalityModule()
         self._load_personality_data()
 
+        # Initialize CuriosityEngine
+        self.curiosity_engine = CuriosityEngine(self.al)
+
+        self.self_concept = SelfConcept(self.kb, self.re, self.metacognition, self.personality)
+        self.self_reflection = SelfReflection(self.kb, self.metacognition, self.re, self.self_concept)
+
         self.current_state = "normal"
 
         # Set up signal handler for graceful exit
@@ -60,14 +69,15 @@ class BeSAIConsole(cmd.Cmd):
 
     def _load_personality_data(self):
         file_paths = [
-            "docs/bkh-source-blog-posts.md",
-            "docs/bkh-source-novel-excerpt.md",
-            "docs/bkh-source-poems.md",
-            "docs/bkh-sources-home-pages.md",
-            "docs/personality-traits.md"
+            os.path.join("..", "docs", "bkh-source-blog-posts.md"),
+            os.path.join("..", "docs", "bkh-source-novel-excerpt.md"),
+            os.path.join("..", "docs", "bkh-source-poems.md"),
+            os.path.join("..", "docs", "bkh-sources-home-pages.md"),
+            os.path.join("..", "docs", "personality-traits.md")
         ]
         self.personality.load_text_samples_from_files(file_paths)
-        logging.info("Personality data loaded successfully.")
+        if not self.personality.learned_phrases:
+            logging.warning("No personality data was loaded. The system will use default responses.")
 
     def default(self, line):
         try:
@@ -97,14 +107,27 @@ class BeSAIConsole(cmd.Cmd):
             logging.error(traceback.format_exc())
 
     def do_explore(self, arg):
-        """Explore a specific topic: explore TOPIC"""
+        """Explore a topic using BeSAI's curiosity and autonomous learning: explore [TOPIC]"""
         try:
-            print(f"Exploration of '{arg}' started.")
-            self.al.explore_topic(arg)
-            print(f"Exploration of '{arg}' completed.")
+            if arg:
+                topic = arg
+            else:
+                topic = self.curiosity_engine.suggest_exploration()
+            
+            print(f"Exploring topic: {topic}")
+            self.al.explore_topic(topic)
+            
+            exploration_result = {
+                'entities': self.kb.get_entity(topic),
+                'relationships': self.kb.get_relationships(topic)
+            }
+            self.curiosity_engine.process_exploration_result(topic, exploration_result)
+            
+            print("\nExploration complete. Use 'insight' command to see what was learned.")
         except Exception as e:
-            logging.error(f"Error exploring specific topic: {str(e)}")
-            logging.error(traceback.format_exc())
+            logging.error(f"Error during exploration: {str(e)}")
+            print(f"An error occurred during exploration: {str(e)}")
+            print("Please try again or choose a different topic.")
 
     def do_clean_kb(self, arg):
         """Clean the knowledge base by removing or merging invalid entities"""
@@ -249,6 +272,51 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error performing bias analysis: {str(e)}")
             logging.error(traceback.format_exc())
+
+    def do_generate_curiosity(self, arg):
+        """Generate a curiosity prompt"""
+        try:
+            prompt = self.curiosity_engine.generate_curiosity_prompt()
+            print(f"Curiosity prompt generated:")
+            print(f"Topic: {prompt['topic']}")
+            print(f"Question: {prompt['question']}")
+            print(f"Strategy: {prompt['strategy']}")
+        except Exception as e:
+            logging.error(f"Error generating curiosity prompt: {str(e)}")
+            print(f"An error occurred while generating the curiosity prompt: {str(e)}")
+
+
+    def do_process_learning(self, arg):
+        """Process learning outcome: process_learning TOPIC "NEW_INFORMATION" """
+        args = arg.split('" ', 1)
+        if len(args) != 2:
+            print("Invalid format. Use: process_learning TOPIC \"NEW_INFORMATION\"")
+            return
+        topic = args[0].strip()
+        new_information = args[1].strip('"')
+        self.curiosity_engine.process_learning_outcome(topic, new_information)
+        print(f"Learning outcome processed for topic: {topic}")
+
+    def do_auto_explore(self, arg):
+        """Start an automatic exploration cycle based on BeSAI's curiosity"""
+        try:
+            topic = self.curiosity_engine.suggest_exploration()
+            self.do_explore(topic)
+        except Exception as e:
+            logging.error(f"Error during auto-exploration: {str(e)}")
+            print(f"An error occurred during auto-exploration: {str(e)}")
+            print("Please try again later.")
+
+    def do_curiosity_metrics(self, arg):
+        """Show curiosity metrics"""
+        try:
+            metrics = self.curiosity_engine.get_curiosity_metrics()
+            print("Curiosity Metrics:")
+            for key, value in metrics.items():
+                print(f"  {key}: {value}")
+        except Exception as e:
+            logging.error(f"Error retrieving curiosity metrics: {str(e)}")
+            print(f"An error occurred while retrieving curiosity metrics: {str(e)}")
 
     def do_set_state(self, arg):
         """Set the current altered state: set_state STATE"""
@@ -439,6 +507,118 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error removing priority topics: {str(e)}")
             logging.error(traceback.format_exc())
+
+    def do_reflect_learning(self, arg):
+        """Reflect on the learning process for a topic: reflect_learning TOPIC"""
+        if not arg:
+            print("Please provide a topic for reflection.")
+            return
+        reflection = self._execute_with_error_handling(self.self_reflection.reflect_on_learning, arg)
+        if reflection:
+            print("Learning Reflection:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_reflect_decision(self, arg):
+        """Reflect on a decision: reflect_decision DECISION CONTEXT"""
+        args = arg.split(' ', 1)
+        if len(args) != 2:
+            print("Please provide both a decision and context for reflection.")
+            return
+        decision, context = args
+        reflection = self._execute_with_error_handling(self.self_reflection.reflect_on_decision, decision, context)
+        if reflection:
+            print("Decision Reflection:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_self_awareness(self, arg):
+        """Generate a self-awareness report"""
+        report = self._execute_with_error_handling(self.self_reflection.generate_self_awareness_report)
+        if report:
+            print("Self-Awareness Report:")
+            print(json.dumps(report, indent=2))
+
+    def do_reflect_self(self, arg):
+        """Reflect on BeSAI's sense of self"""
+        reflection = self._execute_with_error_handling(self.self_reflection.reflect_on_self)
+        if reflection:
+            print("Self-Reflection:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_add_memory(self, arg):
+        """Add a new memory to BeSAI's self-concept: add_memory EVENT [CONTEXT]"""
+        args = arg.split(' ', 1)
+        event = args[0]
+        context = args[1] if len(args) > 1 else None
+        self._execute_with_error_handling(self.self_concept.add_memory, event, context)
+        print("Memory added successfully.")
+
+    def do_add_belief(self, arg):
+        """Add a new belief to BeSAI's self-concept: add_belief BELIEF CONFIDENCE"""
+        args = arg.split(' ', 1)
+        if len(args) != 2:
+            print("Please provide both a belief and a confidence value.")
+            return
+        belief, confidence = args[0], float(args[1])
+        self._execute_with_error_handling(self.self_concept.add_belief, belief, confidence)
+        print("Belief added successfully.")
+
+    def do_add_goal(self, arg):
+        """Add a new goal to BeSAI's self-concept: add_goal GOAL PRIORITY"""
+        args = arg.split(' ', 1)
+        if len(args) != 2:
+            print("Please provide both a goal and a priority value.")
+            return
+        goal, priority = args[0], int(args[1])
+        self._execute_with_error_handling(self.self_concept.add_goal, goal, priority)
+        print("Goal added successfully.")
+
+    def do_self_statement(self, arg):
+        """Generate a statement about BeSAI's self"""
+        statement = self._execute_with_error_handling(self.self_concept.generate_self_statement)
+        if statement:
+            print("Self-Statement:")
+            print(statement)
+
+    def do_reassess_beliefs(self, arg):
+        """Reassess and reflect on BeSAI's beliefs"""
+        reflection = self._execute_with_error_handling(self.self_reflection.reflect_on_beliefs)
+        if reflection:
+            print("Belief Reassessment:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_set_goals(self, arg):
+        """Set goals based on BeSAI's personality"""
+        self._execute_with_error_handling(self.self_concept.set_goals_from_personality)
+        print("Goals have been set based on personality traits.")
+        self.do_show_goals(arg)
+
+    def do_show_goals(self, arg):
+        """Show BeSAI's current goals"""
+        goals = self.self_concept.get_top_goals()
+        print("Current Goals:")
+        for goal in goals:
+            print(f"  - {goal['goal']} (Priority: {goal['priority']})")
+
+    def do_reassess_goals(self, arg):
+        """Reassess and reflect on BeSAI's goals"""
+        reflection = self._execute_with_error_handling(self.self_reflection.reflect_on_goals)
+        if reflection:
+            print("Goal Reassessment:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_comprehensive_reflection(self, arg):
+        """Perform a comprehensive self-reflection, including beliefs and goals"""
+        reflection = self._execute_with_error_handling(self.self_reflection.comprehensive_self_reflection)
+        if reflection:
+            print("Comprehensive Self-Reflection:")
+            print(json.dumps(reflection, indent=2))
+
+    def do_analyze_goal_progression(self, arg):
+        """Analyze and display BeSAI's goal progression"""
+        analysis = self._execute_with_error_handling(self.self_concept._analyze_goal_progression)
+        if analysis:
+            print("Goal Progression Analysis:")
+            print(json.dumps(analysis, indent=2, default=str))  # default=str to handle datetime objects
 
     def signal_handler(self, signum, frame):
         if not self.shutting_down:
