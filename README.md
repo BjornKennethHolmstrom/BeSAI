@@ -290,13 +290,52 @@ Our development process is divided into five main phases:
 
 2. Create and activate a virtual environment:
    ```
-   python3 -m venv env
-   source venv/bin/activate
+   python3 -m venv besai_env
+   source besai_env/bin/activate
    ```
 
-3. Install required packages:
+3. Install core dependencies:
+   ```
+   pip install grpcio grpcio-tools kafka-python avro-python3 protobuf==3.20.3
+   ```
+
+4. Install BeSAI-specific dependencies:
    ```
    pip install -r requirements.txt
+   ```
+
+5. Install Kafka:
+   ```
+   # Download Kafka
+   tar -xzf kafka_2.13-3.8.0.tgz
+   cd kafka_2.13-3.8.0
+
+   # Start ZooKeeper
+   bin/zookeeper-server-start.sh config/zookeeper.properties &
+
+   # Start Kafka
+   bin/kafka-server-start.sh config/server.properties &
+   ```
+
+6. Set up environment variables:
+   ```
+   echo "export KAFKA_BOOTSTRAP_SERVERS=localhost:9092" >> ~/.bashrc
+   echo "export GRPC_SERVER_ADDRESS=localhost:50051" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+7. Create initial project structure (if not already present):
+   ```
+   mkdir -p src/besai/integration tests/integration
+   touch src/besai/integration/__init__.py
+   touch tests/integration/__init__.py
+   ```
+
+Note: When you're done working, you can stop Kafka and ZooKeeper with these commands:
+```
+bin/kafka-server-stop.sh
+bin/zookeeper-server-stop.sh
+```
    ```
 
 ## File & folder structure

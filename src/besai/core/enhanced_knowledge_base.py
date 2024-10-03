@@ -18,25 +18,74 @@ class EnhancedKnowledgeBase:
         self.entity_types = {}
         self.version = 1
         self.metadata = {}
+        self.hierarchical_relationships = {"is_a", "part_of", "subclass_of"}
 
-    def add_entity(self, entity: str, attributes: Dict[str, Any] = None, entity_type: str = None, source: str = None, certainty: float = 1.0):
-        if attributes is None:
-            attributes = {}
-        
-        metadata = {
-            "source": source,
-            "acquisition_date": datetime.now().isoformat(),
-            "version": self.version,
-            "certainty": certainty
-        }
-        
-        attributes["metadata"] = metadata
-        self.graph.add_node(entity, **attributes)
-        
+    def add_entity(self, entity: str, attributes: Dict[str, Any], source: str = "Unknown", certainty: float = 1.0, entity_type: str = None):
+        cleaned_entity = self._clean_entity_name(entity)
+        if cleaned_entity in self.graph.nodes:
+            existing_attrs = self.graph.nodes[cleaned_entity]
+            if 'metadata' not in existing_attrs:
+                existing_attrs['metadata'] = {
+                    'source': source,
+                    'acquisition_date': datetime.now(),
+                    'version': 1,
+                    'certainty': certainty,
+                    'first_learned': datetime.now(),
+                    'last_updated': datetime.now(),
+                    'sources': [source],
+                    'entity_type': entity_type
+                }
+            else:
+                existing_attrs['metadata']['version'] += 1
+                existing_attrs['metadata']['last_updated'] = datetime.now()
+                if source not in existing_attrs['metadata']['sources']:
+                    existing_attrs['metadata']['sources'].append(source)
+            
+            # Update attributes
+            for key, value in attributes.items():
+                if key != 'metadata':
+                    existing_attrs[key] = value
+        else:
+            self.graph.add_node(cleaned_entity, **attributes)
+            self.graph.nodes[cleaned_entity]['metadata'] = {
+                'source': source,
+                'acquisition_date': datetime.now(),
+                'version': 1,
+                'certainty': certainty,
+                'first_learned': datetime.now(),
+                'last_updated': datetime.now(),
+                'sources': [source],
+                'entity_type': entity_type
+            }
         if entity_type:
             if entity_type not in self.entity_types:
                 self.entity_types[entity_type] = set()
-            self.entity_types[entity_type].add(entity)
+            self.entity_types[entity_type].add(cleaned_entity)
+        logging.info(f"Added/Updated entity: {cleaned_entity}")
+
+    def add_hierarchical_relationship(self, child: str, parent: str, relationship_type: str):
+        if relationship_type not in self.hierarchical_relationships:
+            raise ValueError(f"Invalid hierarchical relationship type: {relationship_type}")
+        
+        self.add_relationship(child, parent, relationship_type)
+        self._propagate_attributes(child, parent)
+
+    def _propagate_attributes(self, child: str, parent: str):
+        parent_attrs = self.get_entity(parent)
+        child_attrs = self.get_entity(child)
+        
+        for key, value in parent_attrs.items():
+            if key not in child_attrs:
+                self.update_entity(child, {key: value}, certainty=0.8)  # Lower certainty for inherited attributes
+
+    def get_inherited_attributes(self, entity: str) -> Dict[str, Any]:
+        inherited_attrs = {}
+        for parent in self.graph.successors(entity):
+            edge_data = self.graph.get_edge_data(entity, parent)
+            if any(rel in self.hierarchical_relationships for rel in edge_data):
+                parent_attrs = self.get_entity(parent)
+                inherited_attrs.update(parent_attrs)
+        return inherited_attrs
 
     def add_relationship(self, entity1: str, entity2: str, relationship: str, attributes: Dict[str, Any] = None, source: str = None, certainty: float = 1.0):
         if attributes is None:
@@ -143,10 +192,9 @@ class EnhancedKnowledgeBase:
     def get_entity(self, entity: str) -> Dict[str, Any]:
         try:
             if entity in self.graph.nodes:
-                return self.graph.nodes[entity]
-            return {}
-        except KeyError as e:
-            logging.error(f"KeyError in get_entity: {str(e)}")
+                entity_attrs = dict(self.graph.nodes[entity])
+                inherited_attrs = self.get_inherited_attributes(entity)
+                return {**inherited_attrs, **entity_attrs}  # Entity's own attributes override inherited ones
             return {}
         except Exception as e:
             logging.exception(f"Unexpected error in get_entity: {str(e)}")

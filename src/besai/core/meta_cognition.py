@@ -203,46 +203,33 @@ class Metacognition:
         return acknowledgment
 
 
-    def analyze_learning_process(self, topic: str) -> Dict[str, Any]:
-        """
-        Analyze the effectiveness of the learning process for a given topic.
-        """
-        logging.info(f"Analyzing learning process for topic: {topic}")
-        try:
-            # Get the entity and its relationships
-            entity = self.kb.get_entity(topic)
-            relationships = self.kb.get_relationships(topic)
-
-            # Calculate learning rate based on the growth of knowledge over time
-            initial_knowledge = len(entity.get('initial_attributes', {}))
-            current_knowledge = len(entity)
-            time_diff = (datetime.now() - entity.get('creation_date', datetime.now())).days + 1
-            learning_rate = (current_knowledge - initial_knowledge) / time_diff
-
-            # Calculate source diversity
-            sources = [entity.get('metadata', {}).get('source', 'unknown')]
-            sources.extend([r[2].get('metadata', {}).get('source', 'unknown') for r in relationships])
-            source_diversity = len(set(sources)) / len(sources) if sources else 0
-
-            # Calculate understanding depth based on the complexity of relationships
-            understanding_depth = min(len(relationships) / 10, 1.0)  # Cap at 1.0
-
-            return {
-                "topic": topic,
-                "learning_rate": learning_rate,
-                "source_diversity": source_diversity,
-                "understanding_depth": understanding_depth
-            }
-
-        except Exception as e:
-            logging.error(f"Error analyzing learning process for {topic}: {str(e)}")
-            return {
-                "topic": topic,
-                "learning_rate": 0,
-                "source_diversity": 0,
-                "understanding_depth": 0,
-                "error": str(e)
-            }
+    def analyze_learning_process(self, topic: str) -> Dict[str, float]:
+        # Get the entity's metadata
+        entity = self.kb.get_entity(topic)
+        if not entity:
+            return {"learning_rate": 0.0, "source_diversity": 0.0, "understanding_depth": 0.0}
+        
+        metadata = entity.get('metadata', {})
+        
+        # Calculate learning rate
+        first_learned = metadata.get('first_learned', datetime.now())
+        last_updated = metadata.get('last_updated', datetime.now())
+        time_diff = (last_updated - first_learned).total_seconds()
+        learning_rate = 1.0 if time_diff == 0 else min(1.0, (metadata.get('version', 1) - 1) / time_diff)
+        
+        # Calculate source diversity
+        sources = metadata.get('sources', [])
+        source_diversity = min(1.0, len(set(sources)) / 5)  # Normalize to 5 sources
+        
+        # Calculate understanding depth
+        relationships = self.kb.get_relationships(topic)
+        understanding_depth = min(1.0, len(relationships) / 10)  # Normalize to 10 relationships
+        
+        return {
+            "learning_rate": learning_rate,
+            "source_diversity": source_diversity,
+            "understanding_depth": understanding_depth
+        }
 
     def identify_improvement_areas(self) -> List[Dict[str, Any]]:
         improvement_areas = []

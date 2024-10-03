@@ -174,8 +174,27 @@ class ReasoningEngine:
             hypothesis["psychedelic_insight"] = self.psychedelic_simulator.generate_cognitive_insight()
             hypothesis["visual_description"] = self.psychedelic_simulator.generate_visual_description()
 
+        # Check if the hypothesis contains any meaningful information
+        if (not hypothesis["known_attributes"] and 
+            not hypothesis["inferred_attributes"] and 
+            not hypothesis["potential_relationships"] and 
+            "altered_state_insight" not in hypothesis and 
+            "creative_connections" not in hypothesis and 
+            "psychedelic_insight" not in hypothesis and 
+            "visual_description" not in hypothesis):
+            return None
+
+        hypothesis["insight"] = self._generate_insight(entity, hypothesis["known_attributes"], hypothesis["inferred_attributes"])
 
         return hypothesis
+
+    def _generate_insight(self, entity: str, known_attrs: Dict[str, Any], inferred_attrs: Dict[str, Any]) -> str:
+        insight = f"Based on the analysis of {entity}, we can infer that:"
+        for attr, value in known_attrs.items():
+            insight += f"\n- It has a known {attr} of {value}."
+        for attr, value in inferred_attrs.items():
+            insight += f"\n- It likely has a {attr} of {value}."
+        return insight
 
     def _apply_psychedelic_effects(self, text: str) -> str:
         if self.current_state == "psychedelic":

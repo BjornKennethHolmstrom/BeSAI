@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package besai;
+
+service BeSAIService {
+  rpc ProcessInput (InputRequest) returns (OutputResponse) {}
+  rpc ExploreGRPC (ExploreRequest) returns (ExploreResponse) {}
+  rpc GenerateInsight (InsightRequest) returns (InsightResponse) {}
+  rpc PerformReasoning (ReasoningRequest) returns (ReasoningResponse) {}
+}
+
+message InputRequest {
+  string input = 1;
+}
+
+message OutputResponse {
+  string output = 1;
+}
+
+message ExploreRequest {
+  string topic = 1;
+}
+
+message ExploreResponse {
+  string result = 1;
+}
+
+message InsightRequest {
+  string topic = 1;
+}
+
+message InsightResponse {
+  string insight = 1;
+}
+
+message ReasoningRequest {
+  string query = 1;
+}
+
+message ReasoningResponse {
+  string result = 1;
+}

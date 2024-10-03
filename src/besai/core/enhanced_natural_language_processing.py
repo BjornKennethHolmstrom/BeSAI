@@ -50,14 +50,24 @@ class EnhancedNaturalLanguageProcessing:
         return tokens
 
     def extract_entities(self, text: str) -> List[Dict[str, str]]:
+        entities = []
         if self.use_spacy:
             doc = self.nlp(text)
-            entities = [{"text": ent.text, "label": ent.label_} for ent in doc.ents]
+            for ent in doc.ents:
+                entities.append({"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char})
+            
+            # Add noun chunks that aren't already entities
+            for chunk in doc.noun_chunks:
+                if not any(e['start'] <= chunk.start_char < e['end'] for e in entities):
+                    entities.append({"text": chunk.text, "label": "NOUN_CHUNK", "start": chunk.start_char, "end": chunk.end_char})
         else:
-            # Fallback to basic NER using NLTK
+            # Improved fallback NER using NLTK
             tokens = word_tokenize(text)
             pos_tags = pos_tag(tokens)
-            entities = [{"text": word, "label": tag} for word, tag in pos_tags if tag.startswith('NN')]
+            for i, (word, tag) in enumerate(pos_tags):
+                if tag.startswith('NN'):
+                    start = text.index(word, sum(len(t[0]) for t in pos_tags[:i]))
+                    entities.append({"text": word, "label": tag, "start": start, "end": start + len(word)})
 
         # Enhance entities with knowledge base information
         for entity in entities:
@@ -73,33 +83,38 @@ class EnhancedNaturalLanguageProcessing:
         return entities
 
     def extract_relationships(self, text: str) -> List[Dict[str, str]]:
+        relationships = []
         if self.use_spacy:
             doc = self.nlp(text)
-            relationships = []
-            for token in doc:
-                if token.dep_ in ("nsubj", "nsubjpass") and token.head.pos_ == "VERB":
-                    subject = token.text
-                    verb = token.head.text
-                    for child in token.head.children:
-                        if child.dep_ in ("dobj", "pobj"):
-                            object = child.text
-                            relationships.append({
-                                "subject": subject,
-                                "predicate": verb,
-                                "object": object
-                            })
+            for sent in doc.sents:
+                for token in sent:
+                    if token.dep_ in ("nsubj", "nsubjpass") and token.head.pos_ == "VERB":
+                        subject = token.text
+                        verb = token.head.text
+                        for child in token.head.children:
+                            if child.dep_ in ("dobj", "pobj", "attr"):
+                                object = child.text
+                                relationships.append({
+                                    "subject": subject,
+                                    "predicate": verb,
+                                    "object": object,
+                                    "sentence": sent.text
+                                })
         else:
-            # Fallback to a simple subject-verb-object extraction
+            # Improved fallback to a rule-based subject-verb-object extraction
             tokens = word_tokenize(text)
             pos_tags = pos_tag(tokens)
-            relationships = []
             for i in range(len(pos_tags) - 2):
-                if pos_tags[i][1].startswith('NN') and pos_tags[i+1][1].startswith('VB') and pos_tags[i+2][1].startswith('NN'):
-                    relationships.append({
-                        "subject": pos_tags[i][0],
-                        "predicate": pos_tags[i+1][0],
-                        "object": pos_tags[i+2][0]
-                    })
+                if pos_tags[i][1].startswith('NN') and pos_tags[i+1][1].startswith('VB'):
+                    for j in range(i+2, len(pos_tags)):
+                        if pos_tags[j][1].startswith('NN'):
+                            relationships.append({
+                                "subject": pos_tags[i][0],
+                                "predicate": pos_tags[i+1][0],
+                                "object": pos_tags[j][0],
+                                "sentence": ' '.join([t[0] for t in pos_tags[i:j+1]])
+                            })
+                            break
 
         # Enhance relationships with knowledge base information
         for rel in relationships:
@@ -116,32 +131,46 @@ class EnhancedNaturalLanguageProcessing:
         return relationships
 
     def extract_attributes(self, text: str) -> List[Dict[str, str]]:
+        attributes = []
         if self.use_spacy:
             doc = self.nlp(text)
-            attributes = []
-            for token in doc:
-                if token.dep_ == "attr" and token.head.pos_ == "VERB":
-                    entity = ""
-                    for child in token.head.children:
-                        if child.dep_ == "nsubj":
-                            entity = child.text
-                            break
-                    if entity:
-                        attributes.append({
-                            "entity": entity,
-                            "attribute": token.text
-                        })
+            for sent in doc.sents:
+                for token in sent:
+                    if token.dep_ in ["acomp", "attr", "dobj"] and token.head.pos_ == "VERB":
+                        entity = next((child for child in token.head.children if child.dep_ == "nsubj"), None)
+                        if entity:
+                            attribute = token.text
+                            value = None
+                            for child in token.children:
+                                if child.dep_ in ["amod", "compound"]:
+                                    attribute = f"{child.text} {attribute}"
+                                elif child.dep_ in ["prep", "agent"]:
+                                    value = child.text
+                            attributes.append({
+                                "entity": entity.text,
+                                "attribute": attribute.strip(),
+                                "value": value
+                            })
         else:
-            # Fallback to a simple noun-adjective pair extraction
+            # Fallback to a more sophisticated noun-adjective pair extraction
             tokens = word_tokenize(text)
             pos_tags = pos_tag(tokens)
-            attributes = []
             for i in range(len(pos_tags) - 1):
                 if pos_tags[i][1].startswith('JJ') and pos_tags[i+1][1].startswith('NN'):
                     attributes.append({
                         "entity": pos_tags[i+1][0],
-                        "attribute": pos_tags[i][0]
+                        "attribute": pos_tags[i][0],
+                        "value": None
                     })
+                elif pos_tags[i][1].startswith('NN') and pos_tags[i+1][1].startswith('VB'):
+                    for j in range(i+2, len(pos_tags)):
+                        if pos_tags[j][1].startswith('JJ') or pos_tags[j][1].startswith('NN'):
+                            attributes.append({
+                                "entity": pos_tags[i][0],
+                                "attribute": pos_tags[i+1][0],
+                                "value": pos_tags[j][0]
+                            })
+                            break
 
         # Enhance attributes with knowledge base information
         for attr in attributes:
@@ -156,6 +185,56 @@ class EnhancedNaturalLanguageProcessing:
 
         return attributes
 
+    def resolve_coreferences(self, text: str) -> str:
+        if self.use_spacy:
+            return self.simple_coref_resolution(text)
+        else:
+            return self.fallback_coref_resolution(text)
+
+    def simple_coref_resolution(self, text: str) -> str:
+        doc = self.nlp(text)
+        
+        # Store mentions
+        mentions = {}
+        for ent in doc.ents:
+            if ent.label_ in ['PERSON', 'ORG', 'GPE']:
+                mentions[ent.text] = ent
+        
+        # Resolve pronouns
+        resolved_text = []
+        for token in doc:
+            if token.pos_ == 'PRON' and token.text.lower() in ['he', 'she', 'it', 'they']:
+                # Find the nearest preceding entity
+                for ent in reversed(doc.ents):
+                    if ent.end < token.i:
+                        resolved_text.append(ent.text)
+                        break
+                else:
+                    resolved_text.append(token.text)
+            else:
+                resolved_text.append(token.text)
+        
+        return ' '.join(resolved_text)
+
+    def fallback_coref_resolution(self, text: str) -> str:
+        sentences = self.tokenize_sentences(text)
+        resolved_sentences = []
+        current_entity = None
+        for sentence in sentences:
+            tokens = word_tokenize(sentence)
+            pos_tags = pos_tag(tokens)
+            resolved_tokens = []
+            for i, (word, tag) in enumerate(pos_tags):
+                if tag.startswith('PRP') and current_entity:
+                    resolved_tokens.append(current_entity)
+                elif tag.startswith('NN'):
+                    current_entity = word
+                    resolved_tokens.append(word)
+                else:
+                    resolved_tokens.append(word)
+            resolved_sentences.append(' '.join(resolved_tokens))
+        return ' '.join(resolved_sentences)
+
     def analyze_text(self, text: str) -> Dict[str, Any]:
         logging.info("Starting text analysis")
         try:
@@ -163,16 +242,19 @@ class EnhancedNaturalLanguageProcessing:
                 logging.warning("Invalid input text for analysis")
                 return {}
 
-            preprocessed_text = self.preprocess_text(text)
+            resolved_text = self.resolve_coreferences(text)
+            preprocessed_text = self.preprocess_text(resolved_text)
             pos_tagged_text = [self.pos_tag(sentence_tokens) for sentence_tokens in preprocessed_text]
             
             analysis = {
+                'original_text': text,
+                'resolved_text': resolved_text,
                 'sentence_count': len(preprocessed_text),
                 'word_count': sum(len(sentence) for sentence in preprocessed_text),
                 'pos_distribution': self._get_pos_distribution(pos_tagged_text),
-                'entities': self.extract_entities(text),
-                'relationships': self.extract_relationships(text),
-                'attributes': self.extract_attributes(text)
+                'entities': self.extract_entities(resolved_text),
+                'relationships': self.extract_relationships(resolved_text),
+                'attributes': self.extract_attributes(resolved_text)
             }
 
             analysis['inferences'] = self._generate_inferences(analysis)
@@ -184,6 +266,8 @@ class EnhancedNaturalLanguageProcessing:
             logging.error(f"Error during text analysis: {str(e)}", exc_info=True)
             return {
                 'error': str(e),
+                'original_text': text,
+                'resolved_text': text,
                 'sentence_count': 0,
                 'word_count': 0,
                 'pos_distribution': {},

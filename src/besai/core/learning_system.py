@@ -10,6 +10,10 @@ from core.enhanced_knowledge_base import EnhancedKnowledgeBase
 from typing import List, Dict, Any, Tuple, Optional
 
 import logging
+from besai.logging_config import setup_logging
+
+setup_logging()
+logger = logging.getLogger(__name__)
 
 class LearningSystem:
     def __init__(self, knowledgebase, nlp, reasoning_engine, metacognition):
@@ -117,20 +121,43 @@ class LearningSystem:
         
         # Add entities and relationships to knowledge base
         for entity in analysis['entities']:
-            self.kb.add_entity(entity['text'], {"type": entity['label']}, entity_type=entity['label'], source="NLP Analysis", certainty=0.8)
+            self.kb.add_entity(
+                entity.get('text', ''),
+                {"type": entity.get('label', 'unknown')},
+                source="NLP Analysis",
+                certainty=0.8,
+                entity_type=entity.get('label', 'unknown')
+            )
         
         for relationship in analysis['relationships']:
             self.kb.add_relationship(
-                relationship['subject'],
-                relationship['object'],
-                relationship['predicate'],
+                relationship.get('subject', ''),
+                relationship.get('object', ''),
+                relationship.get('predicate', ''),
                 source="NLP Analysis",
                 certainty=0.7
             )
         
-        # Add attributes
-        for attribute in analysis['attributes']:
-            self.kb.update_entity(attribute['entity'], {attribute['attribute']: attribute['value']}, certainty=0.6)
+        try:
+            attributes = self.nlp.extract_attributes(text)
+            for attribute in attributes:
+                entity = attribute.get('entity')
+                attr = attribute.get('attribute')
+                value = attribute.get('value')
+                
+                if entity and (attr or value):
+                    if attr and value:
+                        self.kb.update_entity(entity, {attr: value}, certainty=0.6)
+                    elif attr:
+                        self.kb.update_entity(entity, {attr: "Unknown"}, certainty=0.4)
+                    elif value:
+                        self.kb.update_entity(entity, {"unknown_attribute": value}, certainty=0.4)
+                    
+                    logger.info(f"Added/Updated attribute for entity '{entity}': {attr if attr else 'unknown_attribute'} = {value if value else 'Unknown'}")
+                else:
+                    logger.warning(f"Skipping incomplete attribute: {attribute}")
+        except Exception as e:
+            logger.error(f"Error in learn_from_text: {str(e)}", exc_info=True)
         
         self.learning_history.append(f"Learned from text: {text[:50]}...")
 

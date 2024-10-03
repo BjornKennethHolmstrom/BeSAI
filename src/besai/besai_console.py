@@ -1,4 +1,3 @@
-import logging
 import os
 from logging.handlers import RotatingFileHandler
 import threading
@@ -8,21 +7,25 @@ import time
 import traceback
 import signal
 import importlib
-from core.enhanced_knowledge_base import EnhancedKnowledgeBase
-from core.reasoning_engine import ReasoningEngine
-from core.enhanced_natural_language_processing import EnhancedNaturalLanguageProcessing
-from core.learning_system import LearningSystem
-from core.autonomous_learning import AutonomousLearning
-from core.meta_cognition import Metacognition
-from spiritual.altered_states_simulator import AlteredStatesSimulator
-from spiritual.curiosity_engine import CuriosityEngine
-from spiritual.self_reflection import SelfReflection
-from spiritual.self_concept import SelfConcept
+from besai.core.enhanced_knowledge_base import EnhancedKnowledgeBase
+from besai.core.reasoning_engine import ReasoningEngine
+from besai.core.enhanced_natural_language_processing import EnhancedNaturalLanguageProcessing
+from besai.core.learning_system import LearningSystem
+from besai.core.autonomous_learning import AutonomousLearning
+from besai.core.meta_cognition import Metacognition
+from besai.spiritual.altered_states_simulator import AlteredStatesSimulator
+from besai.spiritual.curiosity_engine import CuriosityEngine
+from besai.spiritual.self_reflection import SelfReflection
+from besai.spiritual.self_concept import SelfConcept
 import personality_module
 importlib.reload(personality_module)
-from personality_module import PersonalityModule
+from besai.personality_module import PersonalityModule
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+import logging
+from besai.logging_config import setup_logging
+
+setup_logging()
+logger = logging.getLogger(__name__)
 
 class BeSAIConsole(cmd.Cmd):
     intro = "Welcome to the BeSAI console. Type 'help' for a list of commands."
@@ -69,11 +72,11 @@ class BeSAIConsole(cmd.Cmd):
 
     def _load_personality_data(self):
         file_paths = [
-            os.path.join("..", "docs", "bkh-source-blog-posts.md"),
-            os.path.join("..", "docs", "bkh-source-novel-excerpt.md"),
-            os.path.join("..", "docs", "bkh-source-poems.md"),
-            os.path.join("..", "docs", "bkh-sources-home-pages.md"),
-            os.path.join("..", "docs", "personality-traits.md")
+            os.path.join(".", "docs/inheritance-sources", "bkh-source-blog-posts.md"),
+            os.path.join(".", "docs/inheritance-sources", "bkh-source-novel-excerpt.md"),
+            os.path.join(".", "docs/inheritance-sources", "bkh-source-poems.md"),
+            os.path.join(".", "docs/inheritance-sources", "bkh-source-home-pages.md"),
+            os.path.join(".", "docs/inheritance-sources", "personality-traits.md")
         ]
         self.personality.load_text_samples_from_files(file_paths)
         if not self.personality.learned_phrases:
@@ -81,53 +84,68 @@ class BeSAIConsole(cmd.Cmd):
 
     def default(self, line):
         try:
-            # Generate a response using the personality module
             personality_response = self.personality.generate_response(line)
-            
-            # Generate a response using the existing reasoning engine
-            try:
-                reasoning_response = self.re.reason(line)
-            except AttributeError:
-                reasoning_response = "I'm still learning how to reason about this."
-            
-            # Combine the responses
+            reasoning_response = self.re.reason(line)
             combined_response = f"Personality: {personality_response}\nReasoning: {reasoning_response}"
-            
-            print(combined_response)
-            
-            # Update personality based on interaction
-            self.personality.update_from_interaction({
-                "user_input": line,
-                "besai_response": combined_response,
-                "topic": self.nlp.extract_main_topic(line) if hasattr(self.nlp, 'extract_main_topic') else line
-            })
+            return combined_response
         except Exception as e:
             logging.error(f"An error occurred while processing the input: {line}")
             logging.error(f"Error details: {str(e)}")
             logging.error(traceback.format_exc())
+            return f"Error: {str(e)}"
 
     def do_explore(self, arg):
-        """Explore a topic using BeSAI's curiosity and autonomous learning: explore [TOPIC]"""
-        try:
-            if arg:
-                topic = arg
-            else:
-                topic = self.curiosity_engine.suggest_exploration()
-            
-            print(f"Exploring topic: {topic}")
-            self.al.explore_topic(topic)
-            
-            exploration_result = {
-                'entities': self.kb.get_entity(topic),
-                'relationships': self.kb.get_relationships(topic)
-            }
-            self.curiosity_engine.process_exploration_result(topic, exploration_result)
-            
-            print("\nExploration complete. Use 'insight' command to see what was learned.")
-        except Exception as e:
-            logging.error(f"Error during exploration: {str(e)}")
-            print(f"An error occurred during exploration: {str(e)}")
-            print("Please try again or choose a different topic.")
+        logger.info(f"do_explore called with arg: {arg}")
+        if not arg:
+            arg = self.curiosity_engine.suggest_exploration()
+        logger.info(f"Exploring topic: {arg}")
+        result = self.al.explore_topic(arg)
+        logger.info(f"Exploration result: {result}")
+        return f"Explored topic: {arg}. Result: {result}"
+
+    def do_insight(self, arg):
+        logger.info(f"do_insight called with arg: {arg}")
+        if not arg:
+            return "Please provide a topic to get insight on."
+        logger.info(f"Generating insight for: {arg}")
+        insight = self.al.get_insight(arg)
+        if "No information available" in insight:
+            logger.info(f"No information available for the topic: {arg}. Exploring...")
+            exploration_result = self.al.explore_topic(arg)
+            logger.info(f"Exploration result: {exploration_result}")
+            insight = self.al.get_insight(arg)
+        logger.info(f"Insight: {insight}")
+        return insight
+
+    def do_reason(self, arg):
+        logger.info(f"do_reason called with arg: {arg}")
+        if not arg:
+            return "Please provide a query for reasoning."
+        logger.info(f"Reasoning about: {arg}")
+        result = self.re.generate_hypothesis(arg)
+        if not result:
+            logger.info(f"No information available for reasoning about: {arg}. Exploring...")
+            self.do_explore(arg)
+            result = self.re.generate_hypothesis(arg)
+        logger.info(f"Reasoning result: {result}")
+        if result:
+            output = f"Reasoning about: {arg}\n"
+            output += f"Entity: {result['entity']}\n"
+            if result['known_attributes']:
+                output += "Known attributes:\n"
+                for key, value in result['known_attributes'].items():
+                    output += f"  - {key}: {value}\n"
+            if result['inferred_attributes']:
+                output += "Inferred attributes:\n"
+                for key, value in result['inferred_attributes'].items():
+                    output += f"  - {key}: {value}\n"
+            if result['potential_relationships']:
+                output += "Potential relationships:\n"
+                for rel in result['potential_relationships']:
+                    output += f"  - {rel['entity1']} {rel['suggested_relationship']} {rel['entity2']} (certainty: {rel['certainty']:.2f})\n"
+            return output
+        else:
+            return f"Unable to generate a hypothesis for the query: {arg} even after exploration."
 
     def do_clean_kb(self, arg):
         """Clean the knowledge base by removing or merging invalid entities"""
@@ -141,72 +159,6 @@ class BeSAIConsole(cmd.Cmd):
         except Exception as e:
             logging.error(f"Error cleaning knowledge base: {str(e)}")
             logging.error(traceback.format_exc())
-
-    def do_insight(self, arg):
-        """Get insight on a specific topic: insight TOPIC"""
-        if not arg:
-            print("Please provide a topic to get insight on.")
-            return
-        try:
-            insight = self.al.get_insight(arg)
-            print(insight)
-        except Exception as e:
-            logging.error(f"Error getting insight on topic '{arg}': {str(e)}")
-            logging.error(traceback.format_exc())
-
-    def do_reason(self, arg):
-        """Perform reasoning on a query: reason QUERY"""
-        if not arg:
-            print("Error: Please provide a query for reasoning.")
-            return
-        
-        # Apply state effects to the query
-        if self.re.current_state != "normal":
-            modified_query = self.altered_states_simulator.apply_state_effects(self.re.current_state, arg)
-            print(f"Modified query: {modified_query}")
-        else:
-            modified_query = arg
-        
-        result = self.re.generate_hypothesis(modified_query)
-        if result:
-            print("\nReasoning result:")
-            print(f"Entity: {self.re._apply_psychedelic_effects(result['entity'])}")
-            if result['known_attributes']:
-                print("Known attributes:")
-                for key, value in result['known_attributes'].items():
-                    print(f"  - {key}: {value}")
-            else:
-                print("No known attributes.")
-            
-            if result['inferred_attributes']:
-                print("Inferred attributes:")
-                for key, value in result['inferred_attributes'].items():
-                    print(f"  - {key}: {value}")
-            else:
-                print("No inferred attributes.")
-            
-            if result['potential_relationships']:
-                print("Potential relationships:")
-                for rel in result['potential_relationships']:
-                    print(f"  - {rel['entity1']} {rel['suggested_relationship']} {rel['entity2']} (certainty: {rel['certainty']:.2f})")
-            else:
-                print("No potential relationships found.")
-            
-            if 'altered_state_insight' in result:
-                print(f"\nAltered state insight: {result['altered_state_insight']}")
-            
-            if 'creative_connections' in result:
-                print("\nCreative connections:")
-                for connection in result['creative_connections']:
-                    print(f"  - {connection}")
-
-            if 'psychedelic_insight' in result:
-                print(f"\nPsychedelic insight: {result['psychedelic_insight']}")
-            if 'visual_description' in result:
-                print(f"\nVisual perception: {result['visual_description']}")
-
-        else:
-            print("No hypothesis could be generated for the given query.")
 
     def do_meta_assess(self, arg):
         """Perform a metacognitive assessment of a topic: meta_assess TOPIC"""

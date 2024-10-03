@@ -2,7 +2,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 import json
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import sys
 import os
 import time
@@ -12,6 +12,7 @@ import schedule
 import re
 from collections import Counter
 from datetime import datetime, timedelta
+from itertools import combinations
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -20,14 +21,18 @@ from core.enhanced_natural_language_processing import EnhancedNaturalLanguagePro
 from core.learning_system import LearningSystem
 from core.reasoning_engine import ReasoningEngine
 from core.meta_cognition import Metacognition
+from besai.logging_config import setup_logging
+
+setup_logging()
 
 class AutonomousLearning:
-    def __init__(self, kb: EnhancedKnowledgeBase, nlp: EnhancedNaturalLanguageProcessing, ls: LearningSystem, re: ReasoningEngine, metacognition: Metacognition):
+    def __init__(self, kb: EnhancedKnowledgeBase, nlp: EnhancedNaturalLanguageProcessing, ls: LearningSystem, re: ReasoningEngine, me: Metacognition):
+        self.logger = logging.getLogger(__name__)
         self.kb = kb
         self.nlp = nlp
         self.ls = ls
         self.re = re
-        self.metacognition = metacognition
+        self.metacognition = me
         self.explored_topics = set()
         self.storage_file = "persistent_knowledge.json"
         self.priority_topics = [
@@ -52,39 +57,131 @@ class AutonomousLearning:
         self.check_interval = 1 # Check for stop every 1 second
         self.learning_plan_interval = timedelta(days=7)  # Generate a new plan weekly
         self.last_plan_generation = datetime.min
+        self.current_topic = None
 
         self.clean_priority_topics()
 
+    def reset_knowledge_base(self):
+        logger.info("Resetting knowledge base and explored topics")
+        self.kb = EnhancedKnowledgeBase()
+        self.explored_topics = set()
+        self.exploration_count = 0
+        self.last_plan_generation = datetime.min
+
+    def _retrieve_content(self, topic: str) -> str:
+        content = self._scrape_wikipedia(topic)
+        if not content:
+            content = self._scrape_iep(topic)
+        if not content:
+            content = self._search_and_scrape(topic)  # New method to search and scrape other sources
+        return content
+
+    def _search_and_scrape(self, topic: str) -> str:
+        search_url = f"https://www.google.com/search?q={topic.replace(' ', '+')}"
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        
+        try:
+            response = requests.get(search_url, headers=headers)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Extract and visit the first few search result links
+            links = soup.select('.yuRUbf > a')[:3]  # Adjust the number of links as needed
+            content = ""
+            
+            for link in links:
+                url = link['href']
+                try:
+                    page_response = requests.get(url, headers=headers, timeout=5)
+                    page_response.raise_for_status()
+                    page_soup = BeautifulSoup(page_response.text, 'html.parser')
+                    paragraphs = page_soup.find_all('p')
+                    content += ' '.join([p.get_text() for p in paragraphs[:10]])  # Increased from 5 to 10
+                except Exception as e:
+                    logger.error(f"Error scraping {url}: {str(e)}")
+            
+            if not content:
+                logger.warning(f"No content found for topic: {topic}")
+                content = f"No detailed information found for {topic}. This topic may require further research."
+            
+            return content.strip()
+        except Exception as e:
+            logger.error(f"Error searching for {topic}: {str(e)}")
+            return f"Error occurred while searching for information on {topic}."
+
+    def _smart_group_tokens(self, tokens: List[str]) -> List[str]:
+        grouped_tokens = []
+        for i in range(1, len(tokens) + 1):
+            grouped_tokens.extend([' '.join(combo) for combo in combinations(tokens, i)])
+        return sorted(grouped_tokens, key=len, reverse=True)
+
     def explore_topic(self, topic: str, depth: int = 0):
+        if depth == 0:
+            self.reset_knowledge_base()
+
         start_time = time.time()
-        logging.info(f"Starting exploration of topic: {topic} (depth: {depth})")
+        logger.info(f"Starting exploration of topic: {topic} (depth: {depth})")
 
         try:
             if depth >= self.max_exploration_depth or self.exploration_count >= self.max_explorations:
-                logging.info(f"Stopping exploration of {topic} at depth {depth}. Max depth or max explorations reached.")
+                logger.info(f"Stopping exploration of {topic} at depth {depth}. Max depth or max explorations reached.")
                 return
 
-            topic = self._clean_topic(topic)
-            if not topic or topic in self.explored_topics:
-                logging.info(f"Skipping topic {topic} (depth: {depth}). Already explored or invalid.")
+            cleaned_topic = self._clean_topic(topic)
+            self.current_topic = cleaned_topic
+            if not cleaned_topic:
+                logger.info(f"Skipping invalid topic: {topic}")
+                return
+
+            if cleaned_topic in self.explored_topics:
+                logger.info(f"Topic {cleaned_topic} already explored. Skipping.")
                 return
 
             self.exploration_count += 1
-            self.explored_topics.add(topic)
+            self.explored_topics.add(cleaned_topic)
+            content = self._retrieve_content(cleaned_topic)
+            if not content:
+                logger.warning(f"No content found for topic: {cleaned_topic}")
+                content = f"No detailed information found for {cleaned_topic}. This topic may require further research."
 
-            wiki_content = self._scrape_wikipedia(topic)
-            iep_content = self._scrape_iep(topic)
-            combined_content = f"{wiki_content}\n\n{iep_content}".strip()
+            logger.info(f"Content found for topic: {cleaned_topic}. Length: {len(content)}")
 
-            if not combined_content:
-                logging.warning(f"No content found for topic: {topic}")
-                return
+            if content:
+                analysis = self.nlp.analyze_text(content)
+                self.ls.learn_from_text(content)
+                
+                # Add knowledge to the knowledge base
+                self.kb.add_entity(cleaned_topic, {"content": content}, source="Web Exploration")
+                
+                for entity in analysis.get('entities', []):
+                    self.kb.add_entity(entity['text'], {"type": entity.get('label', 'unknown')}, source="NLP Analysis")
+                
+                for relationship in analysis.get('relationships', []):
+                    self.kb.add_relationship(
+                        relationship.get('subject', ''), 
+                        relationship.get('object', ''), 
+                        relationship.get('predicate', ''), 
+                        source="NLP Analysis"
+                    )
 
-            analysis = self.nlp.analyze_text(combined_content)
-            self.ls.learn_from_text(combined_content)
+                # Use metacognition to assess knowledge and generate insights
+                self.perform_metacognitive_assessment(cleaned_topic)
+
+                # Generate and store hypothesis
+                hypothesis = self.ls.generate_hypothesis(cleaned_topic)
+                if hypothesis:
+                    self.kb.add_entity(f"hypothesis_{cleaned_topic}", {"content": hypothesis}, source="Hypothesis Generation")
+
+                # Use metacognition to set learning goals
+                self.set_learning_goals(cleaned_topic)
+
+            analysis = self.nlp.analyze_text(content)
+            self.ls.learn_from_text(content)
+
+            logger.info(f"Analysis complete. Entities found: {len(analysis.get('entities', []))}, Relationships found: {len(analysis.get('relationships', []))}")
 
             # Add knowledge to the knowledge base
-            self.kb.add_entity(topic, {"content": combined_content}, source="Wikipedia and IEP")
+            self.kb.add_entity(cleaned_topic, {"content": content}, source="Web Exploration")
             
             for entity in analysis.get('entities', []):
                 self.kb.add_entity(entity['text'], {"type": entity.get('label', 'unknown')}, source="NLP Analysis")
@@ -97,47 +194,109 @@ class AutonomousLearning:
                     source="NLP Analysis"
                 )
 
-            self.perform_metacognitive_assessment(topic)
+            self.perform_metacognitive_assessment(cleaned_topic)
 
-            hypothesis = self.ls.generate_hypothesis(topic)
+            hypothesis = self.ls.generate_hypothesis(cleaned_topic)
             if hypothesis:
-                self.kb.add_entity(f"hypothesis_{topic}", {"content": hypothesis}, source="Hypothesis Generation")
+                self.kb.add_entity(f"hypothesis_{cleaned_topic}", {"content": hypothesis}, source="Hypothesis Generation")
 
             if depth < self.max_exploration_depth - 1:
-                related_topics = [
-                    self._clean_topic(entity['text']) 
-                    for entity in analysis.get('entities', []) 
-                    if entity['text'].lower() != topic.lower()
-                ]
-                related_topics = [t for t in related_topics if t and t not in self.explored_topics]
-                prioritized_topics = self._prioritize_topics(related_topics, topic)
+                related_topics = self._extract_related_topics(analysis)
+                prioritized_topics = self._prioritize_topics(related_topics, cleaned_topic)
 
                 for related_topic in prioritized_topics[:self.max_topics_per_level]:
                     if self.exploration_count < self.max_explorations and not self.stop_event.is_set():
                         time.sleep(random.uniform(1, 3))
                         self.explore_topic(related_topic, depth + 1)
                     else:
-                        logging.info("Maximum explorations reached or stop event set. Stopping further exploration.")
-                        return
+                        logger.info("Maximum explorations reached or stop event set. Stopping further exploration.")
+                        break
 
-            self.metacognition.update_goal_progress(topic)
-            self.save_knowledge()
+            return f"Explored topic: {cleaned_topic}. Added knowledge to the knowledge base."
 
         except Exception as e:
-            logging.error(f"Error exploring topic {topic}: {str(e)}", exc_info=True)
-            self.kb.flag_improvement(topic, f"Error during exploration: {str(e)}")
+            logger.error(f"Error exploring topic {topic}: {str(e)}", exc_info=True)
+            return f"Error during exploration: {str(e)}"
+
         finally:
             end_time = time.time()
-            logging.info(f"Exploration of {topic} completed in {end_time - start_time:.2f} seconds")
+            logger.info(f"Exploration of {topic} completed in {end_time - start_time:.2f} seconds")
+
+    def set_learning_goals(self, topic: str):
+        plan = self.metacognition.generate_learning_plan()
+        logging.info(f"Generated learning plan for {topic}: {plan}")
+
+        # Implement the learning plan
+        for goal in self.metacognition.get_active_goals():
+            if goal['topic'] == topic:
+                self.prioritize_topic(topic)
+                # You can add more specific actions based on the goal type
+
+    def _explore_subtopic(self, subtopic: str, depth: int) -> Optional[str]:
+        logger.info(f"Exploring subtopic: {subtopic} (depth: {depth})")
+
+        content = self._retrieve_content(subtopic)
+        if not content:
+            logger.warning(f"No content found for subtopic: {subtopic}")
+            return None
+
+        logger.info(f"Content found for subtopic: {subtopic}. Length: {len(content)}")
+
+        self.current_topic = cleaned_topic  # Add this line
+        analysis = self.nlp.analyze_text(content)
+        self.ls.learn_from_text(content)
+
+        logger.info(f"Analysis complete. Entities found: {len(analysis.get('entities', []))}, Relationships found: {len(analysis.get('relationships', []))}")
+
+        # Add knowledge to the knowledge base
+        self.kb.add_entity(subtopic, {"content": content}, source="Web Exploration")
+        
+        for entity in analysis.get('entities', []):
+            self.kb.add_entity(entity['text'], {"type": entity.get('label', 'unknown')}, source="NLP Analysis")
+        
+        for relationship in analysis.get('relationships', []):
+            self.kb.add_relationship(
+                relationship.get('subject', ''), 
+                relationship.get('object', ''), 
+                relationship.get('predicate', ''), 
+                source="NLP Analysis"
+            )
+
+        self.perform_metacognitive_assessment(subtopic)
+
+        hypothesis = self.ls.generate_hypothesis(subtopic)
+        if hypothesis:
+            self.kb.add_entity(f"hypothesis_{subtopic}", {"content": hypothesis}, source="Hypothesis Generation")
+
+        if depth < self.max_exploration_depth - 1:
+            related_topics = self._extract_related_topics(analysis)
+            prioritized_topics = self._prioritize_topics(related_topics, cleaned_topic)
+
+            for related_topic in prioritized_topics[:self.max_topics_per_level]:
+                if self.exploration_count < self.max_explorations and not self.stop_event.is_set():
+                    time.sleep(random.uniform(1, 3))
+                    self.explore_topic(related_topic, depth + 1)
+                else:
+                    logger.info("Maximum explorations reached or stop event set. Stopping further exploration.")
+                    break
+
+        return f"Explored subtopic: {subtopic}"
+
+    def _extract_related_topics(self, analysis: Dict) -> List[str]:
+        entities = analysis.get('entities', [])
+        related_topics = [
+            self._clean_topic(entity['text']) 
+            for entity in entities 
+            if entity['text'].lower() != self.current_topic.lower()
+        ]
+        return list(set([topic for topic in related_topics if topic]))
 
     def autonomous_exploration(self):
         while not self.stop_event.is_set():
-            self.check_and_generate_learning_plan()
-            self.pursue_learning_goals()
-            
             topic = self.select_next_topic()
             if topic:
                 self.explore_topic(topic)
+                self.metacognition.update_goal_progress(topic)
             else:
                 logging.info("No unexplored topics found. Waiting for new information...")
                 self.wait(self.exploration_interval)
@@ -194,18 +353,14 @@ class AutonomousLearning:
 
     def _clean_topic(self, topic: str) -> str:
         # Remove special characters but keep spaces and common punctuation
-        topic = re.sub(r'[^\w\s\-.,;:!?()]', '', topic)
+        cleaned = re.sub(r'[^\w\s\-.,;:!?()]', '', topic)
         # Remove extra whitespace
-        topic = ' '.join(topic.split())
-        # Convert to title case
-        topic = topic.title()
-        # Remove any numbers or common words at the beginning or end of the topic
-        topic = re.sub(r'^[\d\s]+|[\d\s]+$', '', topic)
-        topic = re.sub(r'^(The|A|An|Of|In|On|At|To|For|And|Or|But)\s+|\s+(The|A|An|Of|In|On|At|To|For|And|Or|But)$', '', topic, flags=re.IGNORECASE)
-        # Ignore topics that are too short, only contain numbers, or are common words
-        if len(topic) < 3 or topic.isdigit() or topic.lower() in {'the', 'and', 'or', 'of', 'in', 'on', 'at', 'to', 'a', 'an', 'for', 'web'}:
-            return ''
-        return topic.strip()
+        cleaned = ' '.join(cleaned.split())
+        # If the cleaned topic is too short, return the original topic
+        return cleaned if len(cleaned) >= 3 else topic
+
+    def _tokenize_topic(self, topic: str) -> List[str]:
+        return [token.lower() for token in re.findall(r'\b\w+\b', topic)]
 
     def clean_priority_topics(self):
         self.priority_topics = [topic for topic in self.priority_topics if self._is_valid_unexplored_topic(topic)]
@@ -304,32 +459,23 @@ class AutonomousLearning:
         print(f"Pruned {len(entities_to_remove)} entities from the knowledge base.")
 
     def perform_metacognitive_assessment(self, topic: str):
-        logging.info(f"Performing metacognitive assessment for {topic}")
         assessment = self.metacognition.assess_knowledge(topic)
+        insight = self.metacognition.generate_meta_insight(topic)
         
-        try:
-            learning_analysis = self.metacognition.analyze_learning_process(topic)
-        except AttributeError:
-            logging.warning("analyze_learning_process method not found in Metacognition. Skipping learning analysis.")
-            learning_analysis = None
+        logging.info(f"Metacognitive assessment for {topic}: {assessment}")
+        logging.info(f"Meta-insight for {topic}: {insight}")
 
-        # Use metacognitive insights to guide further learning
+        # Use the assessment to guide further learning
         if assessment['confidence'] < self.metacognition.confidence_threshold:
-            logging.info(f"Confidence in {topic} is low. Prioritizing further exploration.")
             self.prioritize_topic(topic)
 
         if assessment['gaps']:
-            logging.info(f"Identified knowledge gaps for {topic}: {', '.join(assessment['gaps'])}")
             self.address_knowledge_gaps(topic, assessment['gaps'])
-
-        # Generate and store meta-insight
-        meta_insight = self.metacognition.generate_meta_insight(topic)
-        self.kb.add_entity(f"meta_insight_{topic}", {"content": meta_insight}, source="Metacognition")
 
     def get_insight(self, topic: str) -> str:
         entity = self.kb.get_entity(topic)
         if not entity:
-            return f"No information available for the topic: {topic}. This topic has not been explored yet."
+            return f"No information available for the topic: {topic}. Initiating exploration..."
 
         insight = f"Insight on {topic}:\n"
         
@@ -357,18 +503,13 @@ class AutonomousLearning:
         hypothesis_entity = self.kb.get_entity(f"hypothesis_{topic}")
         if hypothesis_entity:
             hypothesis = hypothesis_entity.get("content", "No hypothesis available.")
-            insight += f"\n\nHypothesis:\n{hypothesis}"
-     
-        if not attributes and not relationships and relevance <= 0:
-            insight += "\nNote: This topic exists in our knowledge base, but we don't have much meaningful information about it yet. Further exploration may be needed."
-
+            insight += f"\nHypothesis:\n{hypothesis}"
+        
         # Add meta-insight
         meta_insight_entity = self.kb.get_entity(f"meta_insight_{topic}")
         if meta_insight_entity:
             meta_insight = meta_insight_entity.get("content", "No meta-insight available.")
-            insight += f"\n\nMeta Insight:\n{meta_insight}"
-        else:
-            insight += "\n\nNo meta-insight available for this topic yet."
+            insight += f"\nMeta Insight:\n{meta_insight}"
 
         return insight
 
@@ -401,17 +542,28 @@ class AutonomousLearning:
         }
 
         for entity in self.kb.get_all_entities():
-            data["entities"][entity] = self.kb.get_entity(entity)
+            entity_data = self.kb.get_entity(entity)
+            # Ensure all values are JSON serializable
+            data["entities"][entity] = {k: (str(v) if not isinstance(v, (int, float, bool, type(None))) else v) 
+                                        for k, v in entity_data.items()}
+            
             for related_entity, relationship, attrs in self.kb.get_relationships(entity):
+                # Ensure all values in attrs are JSON serializable
+                serializable_attrs = {k: (str(v) if not isinstance(v, (int, float, bool, type(None))) else v) 
+                                      for k, v in attrs.items()}
                 data["relationships"].append({
                     "entity1": entity,
                     "entity2": related_entity,
                     "relationship": relationship,
-                    "attributes": attrs
+                    "attributes": serializable_attrs
                 })
 
-        with open(self.storage_file, 'w') as f:
-            json.dump(data, f, indent=2)
+        try:
+            with open(self.storage_file, 'w') as f:
+                json.dump(data, f, indent=2)
+            logging.info(f"Successfully saved knowledge to {self.storage_file}")
+        except Exception as e:
+            logging.error(f"Error saving knowledge to {self.storage_file}: {str(e)}")
 
     def save_knowledge_periodically(self):
         self.kb.increment_version()
@@ -431,15 +583,42 @@ class AutonomousLearning:
     def load_knowledge(self):
         """Load the knowledge base from a file."""
         if os.path.exists(self.storage_file):
+            try:
+                with open(self.storage_file, 'r') as f:
+                    data = json.load(f)
+
+                for entity, attributes in data.get("entities", {}).items():
+                    self.kb.add_entity(entity, attributes)
+
+                for rel in data.get("relationships", []):
+                    self.kb.add_relationship(rel.get("entity1"), rel.get("entity2"), rel.get("relationship"), rel.get("attributes", {}))
+
+                logging.info(f"Successfully loaded knowledge from {self.storage_file}")
+            except json.JSONDecodeError as e:
+                logging.error(f"Error decoding JSON in {self.storage_file}: {str(e)}")
+                logging.info("Attempting to repair the JSON file...")
+                self._repair_json_file()
+            except Exception as e:
+                logging.error(f"Unexpected error loading knowledge from {self.storage_file}: {str(e)}")
+        else:
+            logging.info(f"No existing knowledge file found at {self.storage_file}")
+
+    def _repair_json_file(self):
+        """Attempt to repair the JSON file by removing the problematic line."""
+        try:
             with open(self.storage_file, 'r') as f:
-                data = json.load(f)
+                lines = f.readlines()
 
-            for entity, attributes in data["entities"].items():
-                self.kb.add_entity(entity, attributes)
+            # Remove the problematic line (line 7 in this case)
+            del lines[6]  # Python uses 0-based indexing
 
-            for rel in data["relationships"]:
-                self.kb.add_relationship(rel["entity1"], rel["entity2"], rel["relationship"], rel["attributes"])
+            # Write the repaired content back to the file
+            with open(self.storage_file, 'w') as f:
+                f.writelines(lines)
 
+            logging.info(f"Attempted to repair {self.storage_file}. Please try loading the knowledge again.")
+        except Exception as e:
+            logging.error(f"Error attempting to repair {self.storage_file}: {str(e)}")
     def clear_knowledge(self):
         """Clear the current knowledge base and remove the persistent storage file."""
         self.kb = EnhancedKnowledgeBase()  # Reinitialize the knowledge base

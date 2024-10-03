@@ -18,3 +18,7 @@ persistent_knowledge.json
 
 # Ignore new docs
 docs/
+
+kafka_2.13-3.8.0/
+
+besai.egg-info/
