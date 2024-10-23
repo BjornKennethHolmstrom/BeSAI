@@ -19,49 +19,109 @@ class EnhancedKnowledgeBase:
         self.version = 1
         self.metadata = {}
         self.hierarchical_relationships = {"is_a", "part_of", "subclass_of"}
+        self.conflict_resolution_strategies = {
+            "override": self._resolve_conflict_override,
+            "keep_both": self._resolve_conflict_keep_both,
+            "merge": self._resolve_conflict_merge
+        }
 
     def add_entity(self, entity: str, attributes: Dict[str, Any], source: str = "Unknown", certainty: float = 1.0, entity_type: str = None):
         cleaned_entity = self._clean_entity_name(entity)
         if cleaned_entity in self.graph.nodes:
-            existing_attrs = self.graph.nodes[cleaned_entity]
-            if 'metadata' not in existing_attrs:
-                existing_attrs['metadata'] = {
-                    'source': source,
-                    'acquisition_date': datetime.now(),
-                    'version': 1,
-                    'certainty': certainty,
-                    'first_learned': datetime.now(),
-                    'last_updated': datetime.now(),
-                    'sources': [source],
-                    'entity_type': entity_type
-                }
-            else:
-                existing_attrs['metadata']['version'] += 1
-                existing_attrs['metadata']['last_updated'] = datetime.now()
-                if source not in existing_attrs['metadata']['sources']:
-                    existing_attrs['metadata']['sources'].append(source)
-            
-            # Update attributes
-            for key, value in attributes.items():
-                if key != 'metadata':
-                    existing_attrs[key] = value
+            self._resolve_entity_conflict(cleaned_entity, attributes, source, certainty, entity_type)
         else:
-            self.graph.add_node(cleaned_entity, **attributes)
-            self.graph.nodes[cleaned_entity]['metadata'] = {
-                'source': source,
-                'acquisition_date': datetime.now(),
-                'version': 1,
-                'certainty': certainty,
-                'first_learned': datetime.now(),
-                'last_updated': datetime.now(),
-                'sources': [source],
-                'entity_type': entity_type
-            }
+            self._add_new_entity(cleaned_entity, attributes, source, certainty, entity_type)
+
+    def _resolve_entity_conflict(self, entity: str, new_attributes: Dict[str, Any], source: str, certainty: float, entity_type: str):
+        existing_attrs = self.graph.nodes[entity]
+        existing_metadata = existing_attrs.get('metadata', {})
+        
+        # Compare certainties
+        if certainty > existing_metadata.get('certainty', 0):
+            # New information has higher certainty, update the entity
+            self._update_entity_attributes(entity, new_attributes, source, certainty, entity_type)
+        elif certainty == existing_metadata.get('certainty', 0):
+            # Equal certainty, merge the information
+            self._merge_entity_attributes(entity, new_attributes, source, certainty, entity_type)
+        else:
+            # New information has lower certainty, keep the existing information
+            logging.info(f"New information for entity '{entity}' has lower certainty. Keeping existing information.")
+
+    def _update_entity_attributes(self, entity: str, new_attributes: Dict[str, Any], source: str, certainty: float, entity_type: str):
+        existing_attrs = self.graph.nodes[entity]
+        existing_metadata = existing_attrs.get('metadata', {})
+        
+        # Update attributes
+        for key, value in new_attributes.items():
+            if key != 'metadata':
+                existing_attrs[key] = value
+        
+        # Update metadata
+        existing_metadata['version'] += 1
+        existing_metadata['last_updated'] = datetime.now()
+        existing_metadata['certainty'] = certainty
+        if source not in existing_metadata['sources']:
+            existing_metadata['sources'].append(source)
+        if entity_type:
+            existing_metadata['entity_type'] = entity_type
+        
+        existing_attrs['metadata'] = existing_metadata
+        
+        # Update entity type
         if entity_type:
             if entity_type not in self.entity_types:
                 self.entity_types[entity_type] = set()
-            self.entity_types[entity_type].add(cleaned_entity)
-        logging.info(f"Added/Updated entity: {cleaned_entity}")
+            self.entity_types[entity_type].add(entity)
+
+    def _merge_entity_attributes(self, entity: str, new_attributes: Dict[str, Any], source: str, certainty: float, entity_type: str):
+        existing_attrs = self.graph.nodes[entity]
+        existing_metadata = existing_attrs.get('metadata', {})
+        
+        # Merge attributes
+        for key, value in new_attributes.items():
+            if key != 'metadata':
+                if key in existing_attrs:
+                    # If the attribute already exists, keep both values
+                    if isinstance(existing_attrs[key], list):
+                        if value not in existing_attrs[key]:
+                            existing_attrs[key].append(value)
+                    else:
+                        existing_attrs[key] = [existing_attrs[key], value]
+                else:
+                    existing_attrs[key] = value
+        
+        # Update metadata
+        existing_metadata['version'] += 1
+        existing_metadata['last_updated'] = datetime.now()
+        if source not in existing_metadata['sources']:
+            existing_metadata['sources'].append(source)
+        if entity_type:
+            existing_metadata['entity_type'] = entity_type
+        
+        existing_attrs['metadata'] = existing_metadata
+        
+        # Update entity type
+        if entity_type:
+            if entity_type not in self.entity_types:
+                self.entity_types[entity_type] = set()
+            self.entity_types[entity_type].add(entity)
+
+    def _add_new_entity(self, entity: str, attributes: Dict[str, Any], source: str, certainty: float, entity_type: str):
+        self.graph.add_node(entity, **attributes)
+        self.graph.nodes[entity]['metadata'] = {
+            'source': source,
+            'acquisition_date': datetime.now(),
+            'version': 1,
+            'certainty': certainty,
+            'first_learned': datetime.now(),
+            'last_updated': datetime.now(),
+            'sources': [source],
+            'entity_type': entity_type
+        }
+        if entity_type:
+            if entity_type not in self.entity_types:
+                self.entity_types[entity_type] = set()
+            self.entity_types[entity_type].add(entity)
 
     def add_hierarchical_relationship(self, child: str, parent: str, relationship_type: str):
         if relationship_type not in self.hierarchical_relationships:
@@ -94,18 +154,104 @@ class EnhancedKnowledgeBase:
         metadata = {
             "source": source,
             "acquisition_date": datetime.now().isoformat(),
-            "version": self.version,
+            "version": 1,
             "certainty": certainty
         }
         
         attributes["metadata"] = metadata
-        
-        # Ensure the 'key' is set in the attributes
         attributes["key"] = relationship
         
+        # Check for existing relationship
+        existing_edges = self.graph.get_edge_data(entity1, entity2)
+        if existing_edges:
+            for key, edge_data in existing_edges.items():
+                if edge_data.get('key') == relationship:
+                    # Relationship already exists, resolve conflict
+                    self._resolve_relationship_conflict(entity1, entity2, key, relationship, attributes, certainty)
+                    return
+        
+        # Add new relationship
         self.graph.add_edge(entity1, entity2, **attributes)
-
         logging.info(f"Added relationship: {entity1} -{relationship}-> {entity2}")
+
+    def _resolve_relationship_conflict(self, entity1: str, entity2: str, key: Any, relationship: str, new_attributes: Dict[str, Any], new_certainty: float):
+        existing_edge = self.graph[entity1][entity2][key]
+        existing_certainty = existing_edge.get('metadata', {}).get('certainty', 0)
+        
+        if new_certainty > existing_certainty:
+            # New relationship has higher certainty, update it
+            self.graph[entity1][entity2][key].update(new_attributes)
+            logging.info(f"Updated relationship: {entity1} -{relationship}-> {entity2} with higher certainty")
+        elif new_certainty == existing_certainty:
+            # Equal certainty, merge the information
+            self._merge_relationship_attributes(entity1, entity2, key, new_attributes)
+            logging.info(f"Merged relationship: {entity1} -{relationship}-> {entity2}")
+        else:
+            # New relationship has lower certainty, keep the existing information
+            logging.info(f"New relationship for {entity1} -{relationship}-> {entity2} has lower certainty. Keeping existing information.")
+
+    def resolve_conflicts(self, entity: str, strategy: str = "merge"):
+        if strategy not in self.conflict_resolution_strategies:
+            raise ValueError(f"Invalid conflict resolution strategy: {strategy}")
+        
+        resolver = self.conflict_resolution_strategies[strategy]
+        resolver(entity)
+
+    def _resolve_conflict_override(self, entity: str):
+        # Keep the information with the highest certainty
+        attributes = self.graph.nodes[entity]
+        if 'conflicting_info' in attributes:
+            highest_certainty_info = max(attributes['conflicting_info'], key=lambda x: x['metadata']['certainty'])
+            for key, value in highest_certainty_info.items():
+                if key != 'metadata':
+                    attributes[key] = value
+            del attributes['conflicting_info']
+
+    def _resolve_conflict_keep_both(self, entity: str):
+        # Keep all conflicting information
+        attributes = self.graph.nodes[entity]
+        if 'conflicting_info' in attributes:
+            for info in attributes['conflicting_info']:
+                for key, value in info.items():
+                    if key != 'metadata':
+                        if key not in attributes:
+                            attributes[key] = [value]
+                        elif isinstance(attributes[key], list):
+                            attributes[key].append(value)
+                        else:
+                            attributes[key] = [attributes[key], value]
+            del attributes['conflicting_info']
+
+    def _resolve_conflict_merge(self, entity: str):
+        # Merge conflicting information
+        attributes = self.graph.nodes[entity]
+        if 'conflicting_info' in attributes:
+            for info in attributes['conflicting_info']:
+                for key, value in info.items():
+                    if key != 'metadata':
+                        if key not in attributes:
+                            attributes[key] = value
+                        elif isinstance(attributes[key], list):
+                            if value not in attributes[key]:
+                                attributes[key].append(value)
+                        else:
+                            attributes[key] = [attributes[key], value]
+            del attributes['conflicting_info']
+
+    def _merge_relationship_attributes(self, entity1: str, entity2: str, key: Any, new_attributes: Dict[str, Any]):
+        existing_edge = self.graph[entity1][entity2][key]
+        for attr, value in new_attributes.items():
+            if attr not in existing_edge:
+                existing_edge[attr] = value
+            elif isinstance(existing_edge[attr], list):
+                if value not in existing_edge[attr]:
+                    existing_edge[attr].append(value)
+            else:
+                existing_edge[attr] = [existing_edge[attr], value]
+        
+        # Update metadata
+        existing_edge['metadata']['version'] += 1
+        existing_edge['metadata']['last_updated'] = datetime.now()
 
     def get_relationships(self, entity: str) -> List[Tuple[str, str, Dict[str, Any]]]:
         relationships = []

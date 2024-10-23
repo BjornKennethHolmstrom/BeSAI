@@ -1,0 +1,73 @@
+{
+  "types": [
+    {
+      "type": "record",
+      "name": "KnowledgeTransfer",
+      "namespace": "besai.avro",
+      "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "timestamp", "type": "long"},
+        {"name": "source", "type": "string"},
+        {
+          "name": "entities",
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "record",
+              "name": "Entity",
+              "fields": [
+                {"name": "name", "type": "string"},
+                {"name": "type", "type": ["null", "string"]},
+                {"name": "attributes", "type": {"type": "map", "values": "string"}},
+                {"name": "certainty", "type": "double"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "relationships",
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "record",
+              "name": "Relationship",
+              "fields": [
+                {"name": "source_entity", "type": "string"},
+                {"name": "target_entity", "type": "string"},
+                {"name": "type", "type": "string"},
+                {"name": "attributes", "type": {"type": "map", "values": "string"}},
+                {"name": "certainty", "type": "double"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "record",
+      "name": "CognitiveUpdate",
+      "namespace": "besai.avro",
+      "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "timestamp", "type": "long"},
+        {"name": "attention_focus", "type": "string"},
+        {"name": "emotional_state", "type": "string"},
+        {"name": "reasoning_depth", "type": "int"},
+        {
+          "name": "state_params",
+          "type": ["null", {
+            "type": "record",
+            "name": "StateParameters",
+            "fields": [
+              {"name": "creativity_level", "type": "double"},
+              {"name": "perception_shift", "type": "double"},
+              {"name": "focus_level", "type": "double"}
+            ]
+          }]
+        },
+        {"name": "focus_level", "type": "double"},
+        {"name": "associative_thinking", "type": "double"}
+      ]
+    }
+  ]
+}

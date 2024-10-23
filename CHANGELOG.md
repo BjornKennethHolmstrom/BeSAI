@@ -1,6 +1,22 @@
 # CHANGELOG
 
-## Version 0.11.0 (Current)
+## Version 0.12.0 (Current)
+
+- Implemented comprehensive Ethical Framework integration:
+  - Added EthicalOversight gRPC service and client
+  - Implemented ethical decision storage and caching system
+  - Created ethical analytics for monitoring and analyzing ethical decisions
+  - Added ethical hooks for system-wide ethical evaluation
+- Enhanced Kafka integration:
+  - Implemented Avro schema for message serialization
+  - Added conflict resolution and knowledge base update notifications
+  - Improved error handling and retry mechanisms
+- Implemented ethical storage system with SQLite backend for decision tracking
+- Added comprehensive analytics for ethical decision-making and risk assessment
+- Enhanced system metrics reporting with ethical oversight metrics
+- Improved error handling and logging across all components
+
+## Version 0.11.0
 
 - Implemented SelfConcept module for BeSAI's sense of self, including beliefs, goals, and memories
 - Enhanced SelfReflection module to incorporate the new SelfConcept
@@ -11,7 +27,7 @@
 - Added new console commands for interacting with self-concept and goal-related functions
 - Improved overall introspective capabilities and self-awareness
 
-## Version 0.10.0 (Current)
+## Version 0.10.0
 
 - Implemented PersonalityModule for more human-like and diverse interactions
 - Integrated PersonalityModule with BeSAIConsole for personality-influenced responses

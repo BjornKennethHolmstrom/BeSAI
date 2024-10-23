@@ -69,10 +69,16 @@ The AI system consists of several interconnected components:
    - Safety Constraints
    - Explainability Mechanisms
 
-## Current Status
+As of version 0.12.0, we have made significant progress in developing the core AI framework, self-improvement capabilities, ethical framework, and introspective components:
 
-As of version 0.11.0, we have made significant progress in developing the core AI framework, self-improvement capabilities, and introspective components:
-
+- Implemented comprehensive Ethical Framework integration with decision tracking and analytics
+- Added EthicalOversight service for ethical evaluation of system actions
+- Enhanced Kafka integration with Avro schemas and improved error handling
+- Implemented ethical storage system for decision history and analysis
+- Created analytics system for monitoring ethical decision-making patterns
+- Added risk assessment capabilities for ethical decisions
+- Integrated ethical evaluation into the core decision-making process
+- Enhanced system metrics reporting with ethical oversight metrics
 - Implemented a SelfConcept module for BeSAI's sense of self, including beliefs, goals, and memories
 - Enhanced the SelfReflection module to incorporate the new SelfConcept, allowing for more comprehensive self-analysis
 - Developed goal-setting capabilities based on BeSAI's personality traits

@@ -3,18 +3,23 @@ syntax = "proto3";
 package besai;
 
 service BeSAIService {
-  rpc ProcessInput (InputRequest) returns (OutputResponse) {}
+  rpc ProcessInput (InputRequest) returns (ProcessInputResponse) {}
   rpc ExploreGRPC (ExploreRequest) returns (ExploreResponse) {}
   rpc GenerateInsight (InsightRequest) returns (InsightResponse) {}
   rpc PerformReasoning (ReasoningRequest) returns (ReasoningResponse) {}
+  rpc QueryKnowledgeBase (QueryRequest) returns (QueryResponse) {}
+  rpc SetAlteredState (AlteredStateRequest) returns (AlteredStateResponse) {}
+  rpc SetReasoningParameters (ReasoningParametersRequest) returns (ReasoningParametersResponse) {}
 }
 
 message InputRequest {
   string input = 1;
 }
 
-message OutputResponse {
+message ProcessInputResponse {
   string output = 1;
+  string analysis = 2;
+  string hypothesis = 3;
 }
 
 message ExploreRequest {
@@ -23,6 +28,8 @@ message ExploreRequest {
 
 message ExploreResponse {
   string result = 1;
+  string analysis = 2;
+  string insights = 3;
 }
 
 message InsightRequest {
@@ -38,5 +45,30 @@ message ReasoningRequest {
 }
 
 message ReasoningResponse {
+  string result = 1;
+}
+
+message QueryRequest {
+  string query = 1;
+}
+
+message QueryResponse {
+  string result = 1;
+}
+
+message AlteredStateRequest {
+  string state = 1;
+}
+
+message AlteredStateResponse {
+  string result = 1;
+}
+
+message ReasoningParametersRequest {
+  float focus_level = 1;
+  float associative_thinking = 2;
+}
+
+message ReasoningParametersResponse {
   string result = 1;
 }

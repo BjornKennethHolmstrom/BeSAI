@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package besai;
+
+service EthicalOversight {
+  rpc EvaluateAction(ActionRequest) returns (EthicalAssessment) {}
+  rpc GetEthicalGuidelines(GuidelinesRequest) returns (EthicalGuidelines) {}
+  rpc LogEthicalDecision(EthicalDecisionLog) returns (LogResponse) {}
+}
+
+message ActionRequest {
+  string action_type = 1;  // Type of action being evaluated
+  string description = 2;  // Description of the action
+  map<string, string> context = 3;  // Contextual information
+  float certainty = 4;  // Confidence level in the action
+  map<string, string> metadata = 5;  // Additional metadata
+}
+
+message EthicalAssessment {
+  bool is_approved = 1;  // Whether the action is ethically approved
+  float confidence = 2;  // Confidence in the ethical assessment
+  string reasoning = 3;  // Explanation of the ethical decision
+  repeated string violated_guidelines = 4;  // Any ethical guidelines that would be violated
+  repeated string suggested_modifications = 5;  // Suggested modifications to make the action ethical
+}
+
+message GuidelinesRequest {
+  string domain = 1;  // Specific domain for guidelines (optional)
+  string context = 2;  // Context for guidelines retrieval
+}
+
+message EthicalGuidelines {
+  repeated Guideline guidelines = 1;
+  string version = 2;
+  string last_updated = 3;
+}
+
+message Guideline {
+  string id = 1;
+  string description = 2;
+  string rationale = 3;
+  float importance = 4;  // 0.0 to 1.0
+  repeated string examples = 5;
+}
+
+message EthicalDecisionLog {
+  string decision_id = 1;
+  string timestamp = 2;
+  ActionRequest action = 3;
+  EthicalAssessment assessment = 4;
+  string final_outcome = 5;  // What actually happened
+  map<string, string> metadata = 6;
+}
+
+message LogResponse {
+  bool success = 1;
+  string message = 2;
+}

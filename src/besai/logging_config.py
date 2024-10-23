@@ -14,3 +14,19 @@ def setup_logging():
             logging.StreamHandler()
         ]
     )
+    logging.config.dictConfig({
+        'version': 1,
+        'handlers': {
+            'retry_handler': {
+                'class': 'logging.FileHandler',
+                'filename': 'logs/retry_processor.log',
+                'formatter': 'detailed',
+            }
+        },
+        'loggers': {
+            'retry_processor': {
+                'handlers': ['retry_handler'],
+                'level': 'INFO',
+            }
+        }
+    })
